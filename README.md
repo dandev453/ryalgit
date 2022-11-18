@@ -11,13 +11,15 @@
 ## System Point of Sale software 
 ### Focus web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-### - 
-### - 
-### -  
-### - 
-### - 
-### - 
-### - 
+## Feartures
+
+### - add products, across code bar, products tier list
+### - products
+### - categories
+### - money cash vaul
+### - Rol and permission
+### - reports (PDF y Excel)
+### - reports daily, by date range (PDF y Excel)
 
 ### Ryal provide points of sales accessible, powerful, tools required for commerce, applications.
 
@@ -33,6 +35,26 @@
 ### npm run dev
 ### 3) composer install 
 
+## path variables
+
+## for execute the project,do you need add the follow var on **.env files**
+
+
+### DB_DATABASE=your-database
+
+### DB_USERNAME=your-username
+
+### DB_PASSWORD=your-password
+
+### APP_KEY=base64:APP_KEY
+
+## generetae APP_KEY, executing the follow command:
+
+### bash
+###  php artisan key:generate
+###
+
+
 #### If you don't feel like reading, about install we can help. consulting, if we don't response can send video tutorials on a range of topics include pos, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
 ## Sponsors
@@ -41,8 +63,8 @@
 
 ### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
+- **[Prato raul](https://megadreamhosting.com/)**
+- **[Github Dandev.](https://github.com/dandev453/ryalpos)**
 
 ## Contributing
 
@@ -50,7 +72,15 @@
 
 ## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+
+##
+
+
+## test user:
+###    bash
+###    user: admin@example.com
+###    pass: password
+### 
 
 ## Security Vulnerabilities
 
