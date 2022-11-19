@@ -63,7 +63,7 @@
 
 ### Premium Partners
 
-- **[Prato raul](https://megadreamhosting.com/)**
+- **[Prato raul](https://www.megadreamhosting.com/)**
 - **[Github Dandev.](https://github.com/dandev453/ryalpos)**
 
 ## Contributing
