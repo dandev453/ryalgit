@@ -22,12 +22,12 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li class="active">
-                        <a href="Javscript::void(0)">
+                        <a href="Javascript::void(0)">
                             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                         </a>
                     </li>
                     <li class="treeview">
-                        <a href="./">
+                        <a href="Javascript::void(0)">
                             <i class="fa fa-truck"></i> <span>compras</span> <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
@@ -36,18 +36,18 @@
                         </ul>
                     </li>
                     <li class="treeview">
-                        <a href="#">
+                        <a href="Javascript::void(0)">
                             <i class="fa fa-th-large"></i>
                             <span>catalogo</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="charts/morris.html"><i class="glyphicon glyphicon-barcode"></i> Productos</a></li>
-                            <li><a href="charts/flot.html"><i class="fa fa-tags"></i> Categorias</a></li>
+                            <li><a href="Javascript::void(0)"><i class="glyphicon glyphicon-barcode"></i> Productos</a></li>
+                            <li><a href="/categories"><i class="fa fa-tags"></i> Categorias</a></li>
                         </ul>
                     </li>
                     <li class="treeview">
-                        <a href="#">
+                        <a href="Javascript::void(0)">
                             <i class="fa fa-user"></i>
                             <span>contactos</span>
                             <i class="fa fa-angle-left pull-right"></i>
@@ -67,7 +67,7 @@
                         </ul>
                     </li>
                     <li class="treeview">
-                        <a href="#">
+                        <a href="Javascript::void(0)">
                             <i class="glyphicon glyphicon-signal"></i> <span>Reportes</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
