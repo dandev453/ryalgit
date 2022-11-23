@@ -9,7 +9,8 @@
 
 <script>
     $(document).ready(function() {
-        App.init();
+       // App.init();
+        console.log("App init is ready!")
     });
 </script>
 <script src="{{ asset('assets/js/custom.js') }}"></script>
