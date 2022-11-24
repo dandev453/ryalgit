@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Category;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class Categories extends Component
@@ -19,10 +20,11 @@ class Categories extends Component
     {
         $this->pageTitle = 'Listado';
         $this->componentName = 'Categorías';
+        $this->ShowPaginationRows = $this->pagination;
     }
     public function paginationView()
     {
-        return 'vendor.livewire.bootstrap';
+        return 'vendor.livewire.admin-lte';
     }
 
     public function render()
@@ -32,7 +34,7 @@ class Categories extends Component
         else
             $data = Category::orderBy('id', 'desc')->paginate($this->pagination);
         return view('livewire.category.categories', ['categories' => $data])->extends('layouts.theme.app')
-            ->section('content');;
+            ->section('content');
     }
     
     public function Edit($id) {
@@ -99,9 +101,9 @@ class Categories extends Component
         $this->resetUI();
         $this->emit('category-updated', 'Categoría actualizada');
     }
-    public function Destroy(Category $category)
+    public function Destroy(Category $category, $id)
     {
-        //$category = Category::find($id);
+       $category = Category::find($id);
         $imageName = $category->image; //imagen temporal
         $category->delete();
 
