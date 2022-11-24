@@ -91,7 +91,7 @@
                     @endforeach
                     <tr>
                         <td colspan="6">
-                            Mostrando 1 al 4 de 4 registros
+                            Mostrando {{$categories->count()}} de  {{$categories->count()}}  de registros
                             {{$categories->links()}}
                         </td>
                     </tr>
