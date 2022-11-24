@@ -101,9 +101,13 @@ class Categories extends Component
         $this->resetUI();
         $this->emit('category-updated', 'Categoría actualizada');
     }
-    public function Destroy(Category $category, $id)
+
+    protected $listeners = [
+      'deleteRow' => 'Destroy'
+    ];
+    public function Destroy(Category $category)
     {
-       $category = Category::find($id);
+       //$category = Category::find($id);
         $imageName = $category->image; //imagen temporal
         $category->delete();
 
