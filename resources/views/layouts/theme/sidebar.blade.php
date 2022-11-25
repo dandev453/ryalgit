@@ -42,7 +42,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="Javascript::void(0)"><i class="glyphicon glyphicon-barcode"></i> Productos</a></li>
+                <li><a href="/products"><i class="glyphicon glyphicon-barcode"></i> Productos</a></li>
                 <li><a href="/categories"><i class="fa fa-tags"></i> Categorias</a></li>
             </ul>
         </li>

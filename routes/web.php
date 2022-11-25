@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Livewire\Categories;
+use App\Http\Livewire\ProductsComponent;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +34,9 @@ Route::get('/', function () {
 });
 
 Route::get('categories', Categories::class);
+Route::get('products', ProductsComponent::class);
+
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

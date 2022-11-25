@@ -97,7 +97,6 @@
                     </tr>
                 </tbody></table>
             </div>
-
         </div>
         @include('livewire.category.form')
         <div class="box-footer">
