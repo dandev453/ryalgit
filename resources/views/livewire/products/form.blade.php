@@ -17,7 +17,7 @@
 		<div class="box box-primary">
 			<div class="box-body box-profile">
 				<div id="load_img">
-					<img class=" img-responsive" wire:model="" src="{{ asset('./assets/img/product.png')}}" alt="Bussines profile picture">
+					<img class=" img-responsive"  src="{{ asset('./assets/img/product.png')}}" alt="Bussines profile picture">
 				</div>
 				<h3 class="profile-username text-center"></h3>
 				<p class="text-muted text-center mail-text"></p>

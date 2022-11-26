@@ -1,4 +1,4 @@
-    <header class="header">
+    <article>
         <a href="javascript::void(0)" class="logo">
             <!-- Add the class icon to your logo image or logo icon to add the margining -->
             AdminLTE
@@ -244,4 +244,4 @@
                 </ul>
             </div>
         </nav>
-    </header>
+    </article>

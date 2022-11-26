@@ -67,6 +67,12 @@
             </ul>
         </li>
         <li class="treeview">
+            <a id="pos_" href="{{url('/pos')}}" >
+                <i class="fa fa-dollar"></i> <span>POS</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+        </li>
+        <li class="treeview">
             <a href="Javascript::void(0)">
                 <i class="glyphicon glyphicon-signal"></i> <span>Reportes</span>
                 <i class="fa fa-angle-left pull-right"></i>

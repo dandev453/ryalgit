@@ -1,5 +1,4 @@
 <div class="content-wrapper" style="min-height: 557px;">
-<!-- Content Header (Page header) -->
 <section class="content-header" style="position: relative;
   padding: 15px 15px 0 15px;">
 <h3><i class="fa fa-edit"></i>Agregar nuevo producto</h3>
@@ -12,7 +11,7 @@
 	<div class="box box-primary">
 		<div class="box-body box-profile">
 			<div id="load_img">
-				<img class=" img-responsive" wire:model="" src="{{ asset('./assets/img/product.png')}}" alt="Bussines profile picture">
+				<img class=" img-responsive"  src="{{ asset('./assets/img/product.png')}}" alt="Bussines profile picture">
 			</div>
 			<h3 class="profile-username text-center"></h3>
 			<p class="text-muted text-center mail-text"></p>
@@ -118,7 +117,14 @@
 			            @error('image') <span class="text-danger er">{{ $message }}</span>@enderror
 			        </div>
 			    </div>
-					
+			    <div class="btn-group pull-right" style="margin-right:20px;">
+					 <button type="button" wire:click="Store()" class="btn btn-primary btn-md">
+		                GUARDAR
+		       </button>
+		       <a class="btn btn-default btn-md">
+		            <span ><i class="carret-left"></i></span>                REGRESAR
+		       </a>
+		     </div>
 					</div>
 				</div>
 				<!-- /.tab-pane -->

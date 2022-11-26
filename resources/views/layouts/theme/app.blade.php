@@ -31,9 +31,11 @@
             <!-- Content Header (Page header) -->
             
             <!-- Main content -->
+        
             @yield('content')
+           @include('layouts.theme.scripts')
         </aside><!-- /.right-side -->
     </div><!-- ./wrapper -->
-    @include('layouts.theme.scripts')
+   
 </body>
 </html>
