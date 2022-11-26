@@ -1,32 +1,27 @@
 <?php
 
 namespace App\Http\Livewire;
-
 use App\Models\Category;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
-class ProductsComponent extends Component
-{
-    use WithPagination;
+class CreateProductsComponent extends ProductsComponent{
+
+		use WithPagination;
     use WithFileUploads;
-
-     public $name, $barcode, $cost, $price, $stock, $alerts, $category_id, $search, $image, $selected_id, $pageTitle, $componentName;
-    private $pagination = 2;
-
-    public function paginationView()
+    public $name, $barcode, $cost, $price, $stock, $alerts, $category_id, $search, $image, $selected_id, $pageTitle, $componentName;
+  private $pagination = 2;
+	public function mount()
     {
-        return 'vendor.livewire.admin-lte';
-    }
-    public function mount()
-    {
-        $this->pageTitle = 'Listado';
-        $this->componentName = 'Productos';
+        $this->pageTitle = 'Crear';
+        $this->componentName = 'Nuevo productos';
         $this->category_id = 'Seleccione';
     }
-    public function render()
+
+   
+    	 public function render()
     {
         if (strlen($this->search) > 0)
             $products = Product::join('categories as c', 'c.id', 'products.category_id')
@@ -41,13 +36,14 @@ class ProductsComponent extends Component
         ->select('products.*', 'c.name as category')
         ->orderBy('products.name', 'asc')
         ->paginate($this->pagination);
-        return view('livewire.products.component', [
+        return view('livewire.products.create', [
             'data' => $products,
             'categories' => Category::orderBy('name', 'asc')->get()
         ])->extends('layouts.theme.app')
             ->section('content');
     }
-        public function Store()
+
+      public function Store()
     {
         $rules = [
             'name'        => 'required|unique:products|min:3',
@@ -90,20 +86,6 @@ class ProductsComponent extends Component
         $this->resetUI();
         $this->emit('product-added', 'Producto Registrado');
     }
-
-    public function Edit(Product $product)
-    {
-        $this->selected_id = $product->id;
-        $this->name = $product->name;
-        $this->barcode = $product->barcode;
-        $this->cost = $product->cost;
-        $this->alerts = $product->alerts;
-        $this->category_id = $product->category_id;
-        $this->image = null;
-
-        $this->emit('show-modal', 'Show modal');
-    }
-
     public function Update()
     {
         $rules = [

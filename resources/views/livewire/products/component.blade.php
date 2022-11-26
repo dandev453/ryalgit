@@ -14,6 +14,7 @@
 </div>
 <div class="col-xs-10 col-md-5 ">
     <div class="btn-group pull-right">
+        <a href="/add_product" class="btn btn-default"><i class="fa fa-plus"></i> Nuevo</a>
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Mostrar
             <span class="caret"></span>
@@ -97,12 +98,15 @@
 
                 <tr>
                     <td colspan="9">
-                        Mostrando de    de registros
+                        Mostrando {{ $data->count() }} de   {{ $data->count() }} de registros
 
                     </td>
                 </tr>
-              
-            </tbody></table>
+            </tbody>
+        </table>
+        <div class="">
+        {{ $data->links() }}
+        </div>
         </div>
     </div>
     @include('livewire.products.form')

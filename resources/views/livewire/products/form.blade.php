@@ -17,7 +17,7 @@
 		<div class="box box-primary">
 			<div class="box-body box-profile">
 				<div id="load_img">
-					<img class=" img-responsive" src="{{ asset('./assets/img/product.png')}}" alt="Bussines profile picture">
+					<img class=" img-responsive" wire:model="" src="{{ asset('./assets/img/product.png')}}" alt="Bussines profile picture">
 				</div>
 				<h3 class="profile-username text-center"></h3>
 				<p class="text-muted text-center mail-text"></p>
@@ -29,115 +29,104 @@
 	<!-- /.col -->
 	<div class="col-md-9">
 		<form  class="form-horizontal" role="form">
-		
 			<div class="nav-tabs-custom">
 				<ul class="nav nav-tabs">
 					<li class="active"><a href="#details" data-toggle="tab" aria-expanded="false">Detalles del producto</a></li>
 				</ul>
 				<div class="tab-content">
 					<div id="resultados_ajax"></div>
-				<div class="tab-pane active" id="details">
+				<div class="tab-pane active">
 						<div class="form-group ">
-							<label for="product_code" class="col-sm-2 control-label">Código</label>
+							<label for="name" class="col-sm-2 control-label">Nombre:</label>
 							<div class="col-sm-4">
-								<input type="text" class="form-control" wire:model.lazy="barcode" id="barcode"   placeholder="ej: 025974">
-								@error('barcode') <span class="text-danger er">{{ $message }}</span>@enderror
-							</div>
-							<label for="presentation" class="col-sm-2 control-label">Presentación</label>
-							<div class="col-sm-4">
-								<input type="text" class="form-control" id="presentation" name="presentation" maxlength="100">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="product_name" class="col-sm-2 control-label">Nombre</label>
-							<div class="col-sm-10">
-								<input type="text" wire:model.lazy="name" class="form-control"name="name"  placeholder="ej: IMPRESORA.">
+								<input type="text" class="form-control" wire:model.lazy="name" placeholder="ej: Curso Laravel">
 								@error('name') <span class="text-danger er">{{ $message }}</span>@enderror
 							</div>
+							<!-- <label for="presentation" class="col-sm-2 control-label">Presentación</label> -->
+							<div class="col-sm-4">
+							<!--	<input type="text" class="form-control" id="presentation" maxlength="100"> -->
+							</div>
 						</div>
 						<div class="form-group">
-							<label for="note" class="col-sm-2 control-label">Descripción</label>
+							<label for="barcode" class="col-sm-2 control-label">Código</label>
 							<div class="col-sm-10">
-								<textarea class="form-control" name="note" id="note"></textarea>
+								<input type="text" wire:model.lazy="barcode" class="form-control"  pplaceholder="ej: 025974">
+								@error('barcode') <span class="text-danger er">{{ $message }}</span>@enderror
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="category" class="col-sm-2 control-label">Categoría</label>
-							<div class="col-sm-4">
-								<select class="form-control">
-									<option value="Seleccione">Seleccione</option>
-										@foreach($categories as $category)
-										<option value="{{ $category->id }}">{{ $category->name }}</option>
-									 @endforeach
-								</select>
-								@error('category_id') <span class="text-danger er">{{ $message }}</span>@enderror
-							</div>
-							<label for="cost" class="col-sm-2 control-label">Costo</label>
-							<div class="col-sm-4">
-								<div class="input-group">
-									<div class="input-group-addon">
-										<i class="fa fa-usd"></i>
-									</div>
-									<input type="text" class="form-control" name="cost"  pattern="\d+(\.\d{2})?" title="precio con 2 decimales"  >
-										@error('cost') <span class="text-danger er">{{ $message }}</span>@enderror
-								</div>
+							<!--<label for="note" class="col-sm-2 control-label">Descripción</label> -->
+							<div class="col-sm-10">
+							<!--	<textarea class="form-control" name="note" id="note"></textarea> -->
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="profit" class="col-sm-2 control-label">Utilidad</label>
+							<label for="category" class="col-sm-2 control-label">Costo</label>
 							<div class="col-sm-4">
-								<div class="input-group">
-									<div class="input-group-addon">
-										<i class="fa fa-usd"></i>
-									</div>
-									<input type="text" wire:model.lazy="stock" class="form-control" name="stock"  pattern="\d+(\.\d{2})?" title="stock ej: 123" placeholder="ej: 0">
-									@error('stock') <span class="text-danger er">{{ $message }}</span>@enderror
-								</div>
+								<input type="text" data-type="currency" wire:model.lazy="cost" class="form-control" placeholder="ej: 0.00">
+							@error('cost') <span class="text-danger er">{{ $message }}</span>@enderror
 							</div>
-							<label for="selling_price" class="col-sm-2 control-label">Precio de venta</label>
+							<label for="cost" class="col-sm-2 control-label">Precio</label>
 							<div class="col-sm-4">
 								<div class="input-group">
 									<div class="input-group-addon">
 										<i class="fa fa-usd"></i>
 									</div>
-									<input type="text" wire:model="" class="form-control" name="price"  pattern="\d+(\.\d{2})?" title="precio con 2 decimales">
+								  <input type="text" data-type="currency" wire:model.lazy="price" class="form-control" placeholder="ej: 0.00">
 										@error('price') <span class="text-danger er">{{ $message }}</span>@enderror
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="stock" class="col-sm-2 control-label">Stock inicial</label>
+							<label for="profit" class="col-sm-2 control-label">Stock</label>
 							<div class="col-sm-4">
 								<div class="input-group">
 									<div class="input-group-addon">
-										<i class="fa fa-th-large" aria-hidden="true"></i>
+										<i class="fa fa-usd"></i>
 									</div>
-									<input wire:model.lazy="stock" type="text" class="form-control" id="stock" name="stock"  pattern="\d{1,11}" maxlength="11">
+									 <input type="number" wire:model.lazy="stock" class="form-control" placeholder="ej: 0">
+									@error('stock') <span class="text-danger er">{{ $message }}</span>@enderror
 								</div>
 							</div>
-							<label for="status" class="col-sm-2 control-label">Estado</label>
+							<label for="selling_price" class="col-sm-2 control-label">Alertas</label>
 							<div class="col-sm-4">
-								<select class="form-control" name="status" id="status">
-									<option value="1">Activo</option>
-									<option value="0">Inactivo</option>
-								</select>
+								<div class="input-group">
+									<div class="input-group-addon">
+										<i class="fa fa-tasks"></i>
+									</div>
+									<input type="text" wire:model="alerts" class="form-control" pattern="\d+(\.\d{2})?" title="Alertas">
+										@error('alerts') <span class="text-danger er">{{ $message }}</span>@enderror
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="image" class="col-sm-2 control-label">Imagen {{ $image }}</label>
+							<label for="stock" class="col-sm-2 control-label">Categoría</label>
 							<div class="col-sm-4">
-								<input wire:model="image" id="" type="file" class="form-control">
+									 <select wire:model="category_id" class="form-control">
+			                <option value="Seleccione">Seleccione</option>
+			                @foreach($categories as $category)
+			                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+			                @endforeach
+			            </select>
+			            @error('category_id') <span class="text-danger er">{{ $message }}</span>@enderror
+								</div>
 							</div>
-							@error('image') <span class="text-danger er">{{ $message }}</span>@enderror
-						</div><div class="form-group">
-							<div class="col-sm-offset-2 col-sm-6">
 							
-							</div>
 						</div>
+						<div class="form-group">
+							<label for="status" class="col-sm-2 control-label">IMAGEN</label>
+							<div class="col-sm-12 col-md-8">
+				        <div class="form-group custom-file">
+				            <input type="file" class="custom-file-input" wire:model="image"
+				            accept="image/x-png, image/gif, image/jpeg">
+				            <label class="custom-file-label">{{ $image }}</label>
+				            @error('image') <span class="text-danger er">{{ $message }}</span>@enderror
+				        </div>
+				    </div>
 						
+						</div>
 					</div>
 					<!-- /.tab-pane -->
-						
 				</div>
 				<!-- /.tab-content -->
 			</div>
