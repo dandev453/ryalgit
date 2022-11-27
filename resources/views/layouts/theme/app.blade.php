@@ -31,9 +31,9 @@
             <!-- Content Header (Page header) -->
             
             <!-- Main content -->
-        
+            @include('layouts.theme.scripts')
             @yield('content')
-           @include('layouts.theme.scripts')
+         
         </aside><!-- /.right-side -->
     </div><!-- ./wrapper -->
    
