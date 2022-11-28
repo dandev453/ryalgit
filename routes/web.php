@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Livewire\CoinsComponent;
 use App\Http\Livewire\Categories;
 use App\Http\Livewire\ProductsComponent;
 use App\Http\Livewire\PosComponent;
@@ -38,6 +39,7 @@ Route::get('/', function () {
 Route::get('categories', Categories::class);
 Route::get('products', ProductsComponent::class);
 Route::get('pos', PosComponent::class);
+Route::get('coins', CoinsComponent::class);
 Route::get('add_product', CreateProductsComponent::class);
 
 

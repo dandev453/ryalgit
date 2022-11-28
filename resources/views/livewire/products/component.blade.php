@@ -104,9 +104,8 @@
                 </tr>
             </tbody>
         </table>
-        <div class="">
+        <div style="margin: 5px;">
         {{ $data->links() }}
-        </div>
         </div>
     </div>
     @include('livewire.products.form')

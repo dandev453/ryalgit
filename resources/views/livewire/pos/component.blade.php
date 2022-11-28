@@ -353,7 +353,7 @@
 </div>
 </div>
 </form>
-<div class="container">
+<div class="container" style="padding: 0px 15px;">
 <!-- Page-Title -->
 <div class="row">
 <div class="col-sm-12">
