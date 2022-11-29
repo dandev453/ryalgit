@@ -49,7 +49,6 @@ class PosComponent extends Component
         'saveSale' => 'saveSale'
     ];
 
-
     public function ScanCode($barcode, $cant = 1)
     {
         //dd($barcode); //** LLega el barcode OK!!
