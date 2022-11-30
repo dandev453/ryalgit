@@ -95,13 +95,14 @@
                 <li><a href="tables/data.html"><i class="fa fa-align-justify"></i>Impuestos</a></li>
             </ul>
         </li>
-        <li class="treeview">
+
+         <li class="treeview">
             <a href="mailbox.html">
                 <i class="fa fa-lock"></i> <span>Administrar accesos</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="tables/simple.html"><i class="glyphicon glyphicon-briefcase"></i> Grupos de usuarios</a></li>
+                <li><a href="/roles"><i class="glyphicon glyphicon-briefcase"></i> Grupos de usuarios</a></li>
                 <li><a href="tables/simple.html"><i class="fa fa-users"></i> Usuarios</a></li>
             </ul>
         </li>
