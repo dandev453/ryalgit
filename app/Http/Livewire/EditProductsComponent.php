@@ -5,87 +5,26 @@ use App\Models\Category;
 use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Livewire\WithPagination;
 
-class CreateProductsComponent extends ProductsComponent{
-
-	use WithPagination;
+class EditProductsComponent extends ProductsComponent{
     use WithFileUploads;
-    public $name, $barcode, $cost, $price, $stock, $alerts, $category_id, $search, $image, $selected_id, $pageTitle, $componentName;
-    private $pagination = 2;
 	public function mount()
     {
-        $this->pageTitle = 'Crear';
-        $this->componentName = 'Nuevo productos';
+        $this->pageTitle = 'Edit';
+        $this->componentName = 'Editar producto';
         $this->category_id = 'Seleccione';
     }
 
    
     public function render()
     {
-        if (strlen($this->search) > 0)
-            $products = Product::join('categories as c', 'c.id', 'products.category_id')
+        $products = Product::join('categories as c', 'c.id', 'products.category_id')
         ->select('products.*', 'c.name as category')
-        ->where('products.name','like', '%' .$this->search . '%')
-        ->orWhere('products.barcode','like', '%' .$this->search . '%')
-        ->orWhere('c.name','like', '%' .$this->search . '%')
-        ->orderBy('products.name', 'asc')
-        ->paginate($this->pagination);
-        else
-            $products = Product::join('categories as c', 'c.id', 'products.category_id')
-        ->select('products.*', 'c.name as category')
-        ->orderBy('products.name', 'asc')
-        ->paginate($this->pagination);
-        return view('livewire.products.create', [
-            'data' => $products,
-            'categories' => Category::orderBy('name', 'asc')->get()
-        ])->extends('layouts.theme.app')
+        ->orderBy('products.name', 'asc');
+        return view('livewire.products.edit')->extends('layouts.theme.app')
             ->section('content');
     }
 
-      public function Store()
-    {
-        $rules = [
-            'name'        => 'required|unique:products|min:3',
-            'cost'        => 'required',
-            'price'       => 'required',
-            'stock'       => 'required',
-            'alerts'      => 'required',
-            'category_id' => 'required|not_in:Seleccione',
-        ];
-        $messages =[
-            'name.required' => 'Nombre del producto es requerido',
-            'name.unique' => 'Ya existe el nombre del producto',
-            'name.min' => 'El nombre del producto debe tener al menos 3 caracteres.',
-            'cost.required' => 'Costo es requerido',
-            'price.required' => 'Precio es requerido',
-            'stock.required' => 'Stock es requerido',
-            'alerts.required' => 'Ingresa el valor mínimo de existencias',
-            'category_id.not_in' => 'Elige un nombre de categoría',
-        ];
-
-        $this->validate($rules, $messages);
-
-        $product = Product::create([
-            'name'        => $this->name,
-            'cost'        => $this->cost,
-            'price'       => $this->price,
-            'barcode'     => $this->barcode,
-            'stock'       => $this->stock,
-            'alerts'      => $this->alerts,
-            'category_id' => $this->category_id
-        ]);
-
-        if ($this->image)
-        {
-            $customFileName = uniqid() . '_.' . $this->image->extension();
-            $this->image->storeAs('/public/products', $customFileName);
-            $product->image = $customFileName;
-            $product->save();
-        }
-        $this->resetUI();
-        $this->emit('product-added', 'Producto Registrado');
-    }
     public function Update()
     {
         $rules = [

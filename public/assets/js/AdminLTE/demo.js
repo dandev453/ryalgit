@@ -53,6 +53,16 @@ $(function() {
             + "</label>"
             + "</div>"
             + "</div>"
+
+
+            + "<div class='form-group no-margin'>"
+            + "<div class='.radio'>"
+            + "<label>"
+            + "<input name='skins' type='radio' onchange='change_skin(\"skin-red\");'/> "
+            + "Red"
+            + "</label>"
+            + "</div>"
+            + "</div>"
             );
 
     demo.click(function() {
@@ -76,6 +86,6 @@ function change_layout() {
     fix_sidebar();
 }
 function change_skin(cls) {
-    $("body").removeClass("skin-blue skin-black");
+    $("body").removeClass("skin-blue skin-black skin-red");
     $("body").addClass(cls);
 }

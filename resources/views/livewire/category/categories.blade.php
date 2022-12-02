@@ -1,12 +1,7 @@
 <article class="content-header d-flex justify-content-between bg-light w-100">
     <div class="row content-header ">
         <div class="col-xs-12 col-md-3">
-            <div class="input-group">
-                <input wire:model="search" type="text" class="form-control" placeholder="Buscar por nombre" id="q" >
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" ><i class="fa fa-search"></i></button>
-                </span>
-            </div><!-- /input-group -->
+             @include('common.searchbox')
         </div>
         <div class="col-md-3 hidden-xs"></div>
         <div class="col-md-1 col-xs-2">
@@ -29,7 +24,7 @@
         </div>
         <input type="hidden" id="per_page" value="15">
     </div>
-</section>
+
 <!-- Main content -->
 <section class=" content" >
     <div class="row">
@@ -77,12 +72,12 @@
                                         <a href="javascript:void(0)"
                                         wire:click="Edit({{$category->id}})"
                                         class="btn btn-default" title="Edit"><span>
-                                            <i class="fas fa-edit"></i></span> EDITAR
+                                            <i class="fa fa-edit"></i></span> EDITAR
                                         </a>
                                         <a href="javascript:void(0)"
                                         onclick="Confirm('{{$category->id}}', '{{$category->products->count()}}')"
                                         class="btn btn-default" title="Delete">
-                                        <span> <i class="fas fa-trash"></i></span> ELIMINAR
+                                        <span> <i class="fa fa-trash"></i></span> ELIMINAR
                                     </a>
                                 </div>
                             </div><!-- /btn-group -->
@@ -99,8 +94,8 @@
             </div>
         </div>
         @include('livewire.category.form')
-        <div class="box-footer">
-        </div><!-- /.box-footer -->
+        <!--/<div class="box-footer">
+        </div>--><!-- /.box-footer -->
     </div><!-- /.box -->
 
     <!-- MODAL CREATE & EDIT -->

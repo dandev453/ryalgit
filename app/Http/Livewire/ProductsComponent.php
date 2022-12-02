@@ -14,7 +14,7 @@ class ProductsComponent extends Component
     use WithFileUploads;
 
      public $name, $barcode, $cost, $price, $stock, $alerts, $category_id, $search, $image, $selected_id, $pageTitle, $componentName;
-    private $pagination = 5;
+    private $pagination = 10;
 
     public function paginationView()
     {

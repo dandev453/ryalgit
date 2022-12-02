@@ -119,10 +119,10 @@
 			    </div>
 			    <div class="btn-group pull-right" style="margin-right:20px;">
 					 <button type="button" wire:click="Store()" class="btn btn-primary btn-md">
-		                GUARDAR
+		          GUARDAR
 		       </button>
 		       <a class="btn btn-default btn-md">
-		            <span ><i class="carret-left"></i></span>                REGRESAR
+		         <span ><i class="carret-left"></i></span> REGRESAR
 		       </a>
 		     </div>
 					</div>

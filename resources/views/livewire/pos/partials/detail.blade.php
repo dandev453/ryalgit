@@ -111,8 +111,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    
                     <!-- <form  method="post" name="save_sale" id="save_sale"> -->
                     <div class="button-list pull-right">
                         <button data-toggle="modal" data-target="#paymentModel" value="0.00" onclick="modalPago(this.value);" id="payButton" class="btn btn-success waves-effect waves-light">

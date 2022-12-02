@@ -1,7 +1,7 @@
 <div class="content-wrapper" style="min-height: 557px;">
 <section class="content-header" style="position: relative;
   padding: 15px 15px 0 15px;">
-<h3><i class="fa fa-edit"></i>Agregar nuevo producto</h3>
+<h3><i class="fa fa-edit"></i>AGREGAR NUEVO ROL DE USUARIO</h3>
 </section>
 <!-- Main content -->
 <section class="content">

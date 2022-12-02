@@ -1,12 +1,7 @@
 <article class="content-header d-flex justify-content-between bg-light w-100">
 <div class="row content-header ">
 <div class="col-xs-12 col-md-3">
-    <div class="input-group">
-        <input wire:model="search" type="text" class="form-control" placeholder="Buscar por nombre" id="q" >
-        <span class="input-group-btn">
-            <button class="btn btn-default" type="button" ><i class="fa fa-search"></i></button>
-        </span>
-    </div><!-- /input-group -->
+    @include('common.searchbox')
 </div>
 <div class="col-md-3 hidden-xs"></div>
 <div class="col-md-1 col-xs-2">
@@ -30,7 +25,7 @@
 </div>
 <input type="hidden" id="per_page" value="15">
 </div>
-</section>
+
 <!-- Main content -->
 <section class=" content" >
 <div class="row">
@@ -51,113 +46,115 @@
                 <tbody>
                     <tr>
                         <!-- <th>ID</th> -->
-                        <th>CODIGO </th>
+                        <th class="text-center">CODIGO </th>
                         <!-- <th>Nº de productos</th> -->
-                        <th>IMAGEN</th>
-                        <th>PRODUCTO</th>
-                        <th>CATEGORÍA</th>
-                        <th>ALERTAS</th>
-                        <th>STOCK</th>
-                        <th>ESTADO</th>
-                        <th>PRECIO</th>
-                        <th></th>
+                        <th class="text-center">IMAGEN</th>
+                        <th class="text-center">PRODUCTO</th>
+                        <th class="text-center">CATEGORÍA</th>
+                        <th class="text-center">ESTADO</th>
+                        <th class="text-center">STOCK</th>
+                        <th class="text-center">PRECIO</th>
+                        <th class="text-center"></th>
                     </tr>
                     @foreach($data as $product)
                     <tr>
                         <!-- <td>2</td> -->
-                        <td> {{$product->barcode}} </td>
-                        <td>
+                        <td class="text-center"> {{$product->barcode}} </td>
+                        <td class="text-center">
                             <span>
-                                <img src="{{ asset('storage/products/' . $product->imagen ) }}" alt="imagen de ejemplo" height="70" width="80" class="rounded">
+                                <img src="{{ asset('storage/products/'. $product->imagen) }}" alt="imagen de ejemplo" height="70" width="80" class="rounded">
                             </span>
                         </td>
-                        <td>
+                        <td class="text-center">
                             {{$product->name}}
                         </td>
-                        <td>{{$product->category}}</td>
-                        <td> <h6>{{$product->alerts}}</h6></td>
-                        <td>{{$product->stock}}</td>
-                        <td><span class="label label-success">Activo</span></td>
-                        <td>{{$product->price}}</td>
-                        <td>
+                        <td class="text-center">{{$product->category}}</td>
+
+                        <td class="text-center"><span class="label label-success">Activo</span></td>
+                        <td class="text-center">{{$product->stock}}</td>                        
+                        <td class="text-center">{{$product->price}}</td>
+                        <td class="text-center">
                             <div class="btn-group">
                                 <a href="javascript:void(0)"
-                                 wire:click.prevent="Edit({{$product->id}})"
+                                wire:click.prevent="Edit({{$product->id}})"
                                 class="btn btn-default" title="Edit"><span>
-                                    <i class="fas fa-edit"></i></span> EDITAR
+                                    <i class="fa fa-edit"></i></span> EDITAR
                                 </a>
+                                <!-- /<a href="/edit_product"
+                                    class="btn btn-default" title="Edit"><span>
+                                    <i class="fas fa-edit"></i></span> EDITAR
+                                </a>-->
                                 <a href="javascript:void(0)"
                                 onclick="Confirm('{{$product->id}}')"
                                 class="btn btn-default" title="Delete">
-                                <span> <i class="fas fa-trash"></i></span> ELIMINAR
+                                <span> <i class="fa fa-trash"></i></span> ELIMINAR
                             </a>
                         </div>
-                    @endforeach
+                        @endforeach
                     </td>
                 </tr>
-
                 <tr>
                     <td colspan="9">
                         Mostrando {{ $data->count() }} de   {{ $data->count() }} de registros
-
                     </td>
                 </tr>
             </tbody>
         </table>
         <div style="margin: 5px;">
-        {{ $data->links() }}
+            {{ $data->links() }}
         </div>
     </div>
     @include('livewire.products.form')
-    <div class="box-footer">
-    </div><!-- /.box-footer -->
-</div><!-- /.box -->
-<!-- MODAL CREATE & EDIT -->
-<!--  END MODAL -->
+    @include('livewire.pos.scripts.events')
+        <!-- /<div class="box-footer">
+        </div>--><!-- /.box-footer -->
+    </div><!-- /.box -->
+    <!-- MODAL CREATE & EDIT -->
+    <!--  END MODAL -->
 </div><!-- row -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    window.livewire.on('product-added', msg =>{
-        $('#theModal').modal('hide');
+    document.addEventListener('DOMContentLoaded', function() {
+        window.livewire.on('product-added', msg =>{
+            $('#theModal').modal('hide');
+        });
+        window.livewire.on('product-updated', msg =>{
+            $('#theModal').modal('hide');
+        });
+        window.livewire.on('product-deleted', msg =>{
+            //noty
+        });
+        window.livewire.on('show-modal', msg =>{
+            $('#theModal').modal('show');
+        });
+        window.livewire.on('hide-modal', msg =>{
+            $('#theModal').modal('hide');
+        });
+        window.livewire.on('hidden.bs.modal', msg =>{
+            $('.er').css('display', 'none')
+        });
     });
-    window.livewire.on('product-updated', msg =>{
-        $('#theModal').modal('hide');
-    });
-    window.livewire.on('product-deleted', msg =>{
-                //noty
-    });
-    window.livewire.on('show-modal', msg =>{
-        $('#theModal').modal('show');
-    });
-    window.livewire.on('hide-modal', msg =>{
-        $('#theModal').modal('hide');
-    });
-    window.livewire.on('hidden.bs.modal', msg =>{
-        $('.er').css('display', 'none')
-    });
-});
-function Confirm(id, products)
-{
-    if (products > 0)
+    function Confirm(id, products)
     {
-        swal('No se puede eliminar la categoria porque tiene productos relacionados.')
-        return;
-    }
-    swal({
-        title: 'CONFIRMAR',
-        text: '¿CONFIRMAS ELIMINAR EL REGISTRO?',
-        type: 'warning',
-        showCancelButton: true,
-        cancelButtonText: 'Cerrar',
-        cancelButtonColor: '#fff',
-        confirmButtonText: 'Aceptar',
-        confirmButtonColor: '#3B3F5C'
-    }).then(function (result) {
-        if (result.value){
-            window.livewire.emit('deleteRow', id)
-            swal.close()
+        if (products > 0)
+        {
+            swal('No se puede eliminar la categoria porque tiene productos relacionados.')
+            return;
         }
-    });
-}
+        swal({
+            title: 'CONFIRMAR',
+            text: '¿CONFIRMAS ELIMINAR EL REGISTRO?',
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'Cerrar',
+            cancelButtonColor: '#fff',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#3B3F5C'
+        }).then(function (result) {
+            if (result.value){
+                window.livewire.emit('deleteRow', id)
+                swal.close()
+            }
+        });
+    }
 </script>
 </article><!-- /.content -->

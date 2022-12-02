@@ -9,7 +9,6 @@ class SearchComponent extends Component
     public $search;
     public function render()
     {
-        
-        return view('livewire.search-component');
+        return view('livewire.common.searchbox');
     }
 }

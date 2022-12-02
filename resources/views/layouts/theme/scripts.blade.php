@@ -7,12 +7,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<script>
+<!--/<script>
     $(document).ready(function() {
        // App.init();
         console.log("App init is ready!")
     });
-</script>
+</script>-->
 <script src="{{ asset('assets/js/custom.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/onscan.js') }}"></script>
 <!-- <script src="{{ asset('js/keypress.js') }}"></script> -->

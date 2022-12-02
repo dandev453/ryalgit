@@ -1,7 +1,7 @@
 <article>
-    <a href="javascript::void(0)" class="logo">
+    <a href="/" class="logo">
         <!-- Add the class icon to your logo image or logo icon to add the margining -->
-        AdminLTE
+        Punto de ventta
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">
@@ -207,14 +207,14 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ asset('assets/img/avatar3.png') }}" class="user-image" alt="User Image">
-                        <span>Jane Doe <i class="caret"></i></span>
+                        <span>{{ auth()->user()->name}} <i class="caret"></i></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header bg-light-blue">
                             <img src="{{ asset('assets/img/avatar3.png') }}" class="img-circle" alt="User Image" />
                             <p>
-                                Jane Doe - Web Developer
+                                {{ auth()->user()->name}} - {{auth()->user()->profile}}
                                 <small>Member since Nov. 2012</small>
                             </p>
                         </li>
@@ -236,12 +236,12 @@
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                               <button class="btn btn-default btn-flat"><span><i class="fa fa-power-off mr-2"></i></span>salir</button>
-                           </div>
-                       </li>
-                   </ul>
-               </li>
-           </ul>
-       </div>
-   </nav>
+                                <button class="btn btn-default btn-flat"><span><i class="fa fa-power-off mr-2"></i></span>salir</button>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </article>

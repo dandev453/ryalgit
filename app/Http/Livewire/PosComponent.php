@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Denomination;
 use App\Models\Product;
 use App\Models\Sale;
-use App\Models\SaleDetail;
+use App\Models\SaleDetails;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use DB;
 use Exception;
@@ -199,7 +199,7 @@ class PosComponent extends Component
             {
                 $items = Cart::getContent();
                 foreach ($items as $item) {
-                    SaleDetail::create([
+                    SaleDetails::create([
                         'price'          => $item->price,
                         'quantity'       => $item->quantity,
                         'product_id'  => $item->id,
@@ -230,7 +230,7 @@ class PosComponent extends Component
 
     public function printTicket($sale)
     {
-        return Redirect::To("print://$sale->id");
+        return Redirect::To("print/sale/$sale->id");
     }
 
 }

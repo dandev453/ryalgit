@@ -14,16 +14,16 @@ class RolesComponent extends Component
     use WithPagination;
 
     public $roleName, $search, $selected_id, $pageTitle, $componentName;
-    private $pagination = 5;
+    private $pagination = 1;
 
     public function mount()
     {
         $this->pageTitle = 'Listado';
         $this->componentName = 'Roles';
     }
-    public function paginationView()
+     public function paginationView()
     {
-        return 'vendor.livewire.bootstrap';
+        return 'vendor.livewire.admin-lte';
     }
 
     public function render()
@@ -40,7 +40,7 @@ class RolesComponent extends Component
         ->section('content');
     }
 
-    public function CreateRole()
+    public function Store()
     {
         $rules = ['roleName' => 'required|min:2|unique:roles,name'];
 

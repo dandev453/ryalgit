@@ -4,7 +4,7 @@
 	<div class="box box-primary">
 		<div class="box-header">
 			<h3 class="box-title">
-				AÑADIR CATEGORIA
+			 {{ $selected_id > 0 ? 'Editar' : 'Crear' }}	categoria
 			</h3>
 		</div><!-- /.box-header -->
 		<!-- form start -->

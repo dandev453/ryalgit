@@ -1,4 +1,5 @@
 <div>
+    
     <!-- Main content -->
     <section class="content">
         <div class="row">
@@ -23,7 +24,7 @@
                                 <!-- Info Boxes Style 2 -->
                                 <div class="info-box bg-purple">
                                     <span class="info-box-icon"><i class="fa fa-tags"></i></span>
-                                    <div class="info-box-content">
+                                    <div class="info-box-content d-flex flex-wrap align-items-center justify-content-center">
                                         <span class="info-box-text">Inventario Neto</span>
                                         <span class="info-box-number">680,357.00</span>
                                         <div class="progress">

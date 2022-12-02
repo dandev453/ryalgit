@@ -5,7 +5,7 @@
             <img src="{{ asset('assets/img/avatar3.png') }}" class="img-circle" alt="User Image" />
         </div>
         <div class="pull-left info">
-            <p>Hello, Jane</p>
+            <p>{{ auth()->user()->name}}</p>
             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
     </div>
@@ -31,7 +31,7 @@
                 <i class="fa fa-truck"></i> <span>compras</span> <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="./new_purchase.html"><i class="glyphicon glyphicon-shopping-cart"></i> Nueva compra</a></li>
+               <li> <a href="/new_purchase"><li><i class="glyphicon glyphicon-shopping-cart"></i> Nueva compra</a></li>
                 <li><a href="./purchase_list.html"><i class="glyphicon glyphicon-th-list"></i> Historial de compras</a></li>
             </ul>
         </li>
@@ -67,11 +67,8 @@
             </ul>
         </li>
         <li class="treeview">
-            <a id="pos_" href="/pos" >
-                <i class="fa fa-dollar"></i> <span>POS</span>
-                <i class="fa fa-angle-left pull-right"></i>
-            </a>
-        </li>
+            <a href="{{url('pos')}}"><i class="fa fa-dollar"></i> POS</a>
+         </li>
         <li class="treeview">
             <a href="Javascript::void(0)">
                 <i class="glyphicon glyphicon-signal"></i> <span>Reportes</span>
@@ -91,19 +88,19 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="tables/simple.html"><i class="glyphicon glyphicon-briefcase"></i> Perfil de la empresa</a></li>
-                <li><a href="tables/data.html"><i class="fa fa-usd"></i> Monedas </a></li>
-                <li><a href="tables/data.html"><i class="fa fa-align-justify"></i>Impuestos</a></li>
+                <li><a href="/coins"><i class="fa fa-usd"></i> Monedas </a></li>
+                <li><a href="javascript::void(0)"><i class="fa fa-align-justify"></i>Impuestos</a></li>
             </ul>
         </li>
 
          <li class="treeview">
             <a href="mailbox.html">
-                <i class="fa fa-lock"></i> <span>Administrar accesos</span>
+               <li ><a href="/permisos"> <i class="fa fa-lock"></i> <span>Administrar accesos</span> </a></li>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
                 <li><a href="/roles"><i class="glyphicon glyphicon-briefcase"></i> Grupos de usuarios</a></li>
-                <li><a href="tables/simple.html"><i class="fa fa-users"></i> Usuarios</a></li>
+                <li><a href="/users"><i class="fa fa-users"></i> Usuarios</a></li>
             </ul>
         </li>
     </ul>

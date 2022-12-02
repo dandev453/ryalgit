@@ -476,42 +476,7 @@ class="btn btn-info waves-effect waves-light m-t-15">
         $('div.container').removeClass("container");
     })
 </script>
-<script>
-    function modalPago(value){
-        var totalModal =$("#payablePrice").val(value);
-    }
-    function paymentType(payment)
-    {
-        var paymentType =1;
-        switch (payment){
-        case 1:
-            $('#cash').addClass('active');
-            $('#check').removeClass('active');
-            $('#card').removeClass('active');
-            paymentType=1;
-    //console.log(paymentType);
-            break;
-        case 2:
-            $('#check').addClass('active');
-            $('#cash').removeClass('active');
-            $('#card').removeClass('active');
-    // console.log(paymentType);
-            paymentType=2;
-    // console.log(paymentType);
-            break;
-        case 3:
-            $('#card').addClass('active');
-            $('#cash').removeClass('active');
-            $('#check').removeClass('active');
-    // console.log(paymentType);
-            paymentType =3;
-    // console.log(paymentType);
-            break;
-        }
-        type = $('#typeDocument').val(paymentType);
-    }
-</script>
-<script>
+<!--/ <script>
     function descuento(value){
         var taxes=$("#taxes").val();
         $("#resultados" ).load( "./ajax/agregar_tmp_pos.php?descuento="+value+"&tax="+taxes);
@@ -524,7 +489,7 @@ class="btn btn-info waves-effect waves-light m-t-15">
         var descuento =$("#descuento").val();
         $("#resultados" ).load( "./ajax/agregar_tmp_pos.php?cantidad="+value+"&idproducto="+idproducto+"&tax="+taxes+"&descuento="+descuento);
     }
-</script>
+</script>-->
 <script>
     function modalPago(value){
         var totalModal =$("#payablePrice").val(value);

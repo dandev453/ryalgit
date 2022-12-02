@@ -1,12 +1,7 @@
 <article class="content-header d-flex justify-content-between bg-light w-100">
     <div class="row content-header ">
         <div class="col-xs-12 col-md-3">
-            <div class="input-group">
-                <input wire:model="search" type="text" class="form-control" placeholder="Buscar por nombre" id="q" >
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" ><i class="fa fa-search"></i></button>
-                </span>
-            </div><!-- /input-group -->
+           @include('common.searchbox')
         </div>
         <div class="col-md-3 hidden-xs"></div>
         <div class="col-md-1 col-xs-2">
@@ -36,13 +31,11 @@
     <div class="row">
         <div class="box">
             <div class="box-header with-border">
-                <h3 class="box-title">{{$componentName}} | {{$pageTitle}} </h3>
+                <h3 class="box-title">{{$componentName}}  </h3>
                 <div class="box-tools pull-right">
+                    <a class="btn btn-box-tool" href="/asignar"><i class="fa fa-plus"></i> ASIGNAR</a>
                     <!--    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>    -->
                     <!--    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>  -->
-                    <button  class="btn-flat btn tabmenu bg-dark btn btn-sm" data-toggle="modal" data-target="#theModal">
-                        + Agregar
-                    </a>
                 </div>
             </div><!-- /.box-header -->
             <div class="box-body" style="padding:0;">
@@ -55,44 +48,43 @@
                                 <!-- <th>Nº de productos</th> -->
                                 <th>DESCRIPCION</th>
                                 <th>ACTIONS</th>
-                                <th></th>
                             </tr>
                             @foreach($permisos as $permiso)
                             <tr>
                                 <!-- <td>2</td> -->
                                 <td>  <h6>{{ $permiso->id }}</h6></td>
-                                <td class="text-center">
-                                    {{ $permiso->name }}
-                                </td>
+                                  <td class="text-center">
+                                       {{$permiso->name}}
+                                    </td>
                                 <td>
                                     <a href="javascript:void(0)"
                                     wire:click="Edit({{$permiso->id}})"
                                     class="btn btn-dark mtmobile" title="Editar Registro">
-                                    <i class="fas fa-edit"></i>
+                                    <i class="fa fa-edit"></i>
                                 </a>
                                 <a href="javascript:void(0)"
                                 onclick="Confirm({{$permiso->id}})"
                                 class="btn btn-dark" title="Eliminar Registro">
-                                <i class="fas fa-trash"></i>
+                                <i class="fa fa-trash"></i>
                             </a>
                         </td>
-
+                     @endforeach
                     </tr>
                     <tr>
                         <td colspan="9">
-                            Mostrando {{ $data->count() }} de   {{ $data->count() }} de registros
+                            Mostrando {{ $permisos->count() }} de   {{ $permisos->count() }} de registros
                         </td>
+
                     </tr>
                 </tbody>
-                @endforeach
             </table>
             <div style="margin: 5px;">
                 {{ $permisos->links() }}
             </div>
         </div>
         @include('livewire.permisos.form')
-        <div class="box-footer">
-        </div><!-- /.box-footer -->
+       <!-- / <div class="box-footer">
+        </div> --><!-- /.box-footer -->
     </div><!-- /.box -->
     <!-- MODAL CREATE & EDIT -->
     <!--  END MODAL -->

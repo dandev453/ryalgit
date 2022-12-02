@@ -1,6 +1,35 @@
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: 'Source Sans Pro',sans-serif;
 }
+/*body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+*/
+.content {
+    padding: 15px!important;
+    background: #f9f9f9;
+}
+.right-side > .content-header {
+    position: relative;
+    padding: 15px 15px 10px 10px;
+}
+.box {
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border-top: 3px solid #d2d6de;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 1px 1px rgb(0 0 0 / 10%);
+}
+.box-header.with-border {
+    border-bottom: 1px solid #f4f4f4;
+}
 .info-box-icon {
 border-top-left-radius: 2px;
 border-top-right-radius: 0;
@@ -16,6 +45,98 @@ line-height: 90px;
 background: rgba(0,0,0,0.2);
 }
 .info-box-content {
+}
+.skin-black .navbar {
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #eee;
+}
+.skin-black .logo {
+    background-color: ##333333;
+    color: #ffffff;
+}
+.skin-black .main-header .logo {
+    background-color: #f9f9f9;
+    color: #ffffff;
+    border-bottom: 0 solid transparent;
+}
+.skin-black .navbar  > .content-header {
+    background-color: #f9f9f9;
+    box-shadow: 1px 1px 2px rgb(0 0 0 / 10%);
+ }
+.skin-black .header .navbar .nav > li.user > a {
+    font-weight: normal;
+    color: #c3c3c3;
+}
+ .skin-black .sidebar-menu > li.header {
+    color: #ffffff;
+}
+.skin-blue .sidebar-menu > li.header {
+    color: #4b646f;
+    background: #f9f9f9;
+}
+.right-side {
+    background-color: #ecf0f5;
+    margin-left: 220px;
+}
+
+ /*** SKIN RED ***/
+
+.skin-red .navbar {
+    background-color: #f44336;
+    border-bottom: 1px solid #eee;
+}
+.skin-red .logo {
+    background-color: #f44336;
+    color: #f9f9f9;
+}
+.skin-red .right-side {
+      background-color: #ecf0f5;
+}
+.skin-red .main-header .logo {
+    background-color: #f44336;
+    color: #ffffff;
+    border-bottom: 0 solid transparent;
+}
+.skin-red .navbar  > .content-header {
+    background-color: ##f44336;
+    box-shadow: 1px 1px 2px rgb(0 0 0 / 10%);
+ }
+.skin-red .main-header .navbar {
+    background-color: #f44336;
+}
+
+.skin-blue .right-side > .content-header {
+    background-color: #ecf0f5;
+    box-shadow: 1px 1px 2px rgb(0 0 0 / 10%);
+}
+.content {
+    padding: 15px!important;
+    background-color: #ecf0f5;
+}
+
+.skin-blue .right-side > .content-header {
+    background-color: #ecf0f5;
+    box-shadow: 1px 1px 2px rgb(0 0 0 / 10%);
+}
+
+/** TAbBLES WITHOUT BORDER *****/
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
+    border-top: 1px solid #f4f4f4;
+}
+.btn-default {
+    background-color: #f4f4f4;
+    color: #444;
+    border-color: #ddd;
+}
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.btn-default {
+    background-color: #f4f4f4;
+    color: #444;
+    border-color: #ddd;
 }
 
 .progress-description, .info-box-text {
@@ -35,6 +156,9 @@ box-shadow: 0 1px 1px rgb(0 0 0 / 10%);
 border-radius: 2px;
 margin-bottom: 15px;
 }
+.bg-purple {
+    background-color: #605ca8 !important;
+}
 .info-box-number {
 display: block;
 font-weight: bold;
@@ -44,8 +168,8 @@ font-size: 18px;
 background-color: #fff;
 }
 .progress {
-height: 5px;
-margin-bottom: 20px;
+height: 2px;
+margin-bottom: 0px!important;
 overflow: hidden;
 background-color: #f5f5f5;
 border-radius: 4px;
@@ -53,9 +177,12 @@ border-radius: 4px;
 box-shadow: inset 0 1px 2px rgb(0 0 0 / 10%);
 }
 .info-box-number {
-display: block;
+display: flex;
 font-weight: bold;
 font-size: 18px;
+padding-left:10px;
+padding-bottom: 1px;
+box-sizing: border-box;
 }
 .progress-description, .info-box-text {
 display: block;
@@ -87,6 +214,10 @@ font-family: fontAwesome;
 }
 .header .sidebar-toggle:before {
 content: "\f0c9";
+}
+.main-footer {
+    position: absolute;
+    bottom:0;
 }
 body > .header .navbar .nav > li.user > a {
 font-weight: normal;

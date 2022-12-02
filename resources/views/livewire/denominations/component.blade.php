@@ -1,12 +1,7 @@
 <article class="content-header d-flex justify-content-between bg-light w-100">
 <div class="row content-header ">
     <div class="col-xs-12 col-md-3">
-        <div class="input-group">
-            <input wire:model="search" type="text" class="form-control" placeholder="Buscar por nombre" id="q" >
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button" ><i class="fa fa-search"></i></button>
-            </span>
-        </div><!-- /input-group -->
+      @include('common.searchbox')
     </div>
     <div class="col-md-3 hidden-xs"></div>
     <div class="col-md-1 col-xs-2">
@@ -73,12 +68,12 @@
                                         <a href="javascript:void(0)"
                                         wire:click.prevent="Edit({{$coins->id}})"
                                         class="btn btn-default" title="Edit"><span>
-                                            <i class="fas fa-edit"></i></span> EDITAR
+                                            <i class="fa fa-edit"></i></span> EDITAR
                                         </a>
                                         <a href="javascript:void(0)"
                                         onclick="Confirm('{{$coins->id}}')"
                                         class="btn btn-default" title="Delete">
-                                        <span> <i class="fas fa-trash"></i></span> ELIMINAR
+                                        <span> <i class="fa fa-trash"></i></span> ELIMINAR
                                     </a>
                                 </div>
                                 @endforeach

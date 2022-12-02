@@ -1,4 +1,4 @@
-<div class="content-wrapper" style="min-height: 557px;">
+<div class="content-wrapper">
 <section class="content-header" style="position: relative;
   padding: 15px 15px 0 15px;">
 <h3><i class="fa fa-edit"></i>Agregar nuevo producto</h3>

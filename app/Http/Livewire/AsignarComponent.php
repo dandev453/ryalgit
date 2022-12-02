@@ -12,7 +12,7 @@ class AsignarComponent extends Component
 {
     use WithPagination;
 
-    public $componentName, $role, $permisosSelected = [], $old_permissions = [];
+    public $componentName, $search, $role, $permisosSelected = [], $old_permissions = [];
     private $pagination = 10;
 
     public function mount()
@@ -21,8 +21,14 @@ class AsignarComponent extends Component
         $this->componentName = "Asignar Permisos";
 
     }
+
     public function render()
     {
+          if(strlen($this->search) > 0)
+            $permisos = Permission::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
+        else
+            $permisos = Permission::orderBy('name', 'asc')->paginate($this->pagination);
+
         $permisos = Permission::select('name', 'id', DB::raw("0 as checked") )
             ->orderBy('name', 'asc')
             ->paginate($this->pagination);
@@ -77,7 +83,25 @@ class AsignarComponent extends Component
         $role->syncPermissions($permisos);
         $this->emit('syncall', "Se sincronizaron todos los permisos al rol $role->name ");
     }
+     public function CreatePermission()
+    {
 
+        Permission::create([
+            'name' => $this->permissionName
+        ]);
+
+        $this->emit('permiso-added', 'Se registró el permiso con exito');
+        $this->resetUI();
+    }
+
+    public function Edit(Permission $permiso)
+    {
+        //$permiso = Permission::find($id);
+        $this->selected_id = $permiso->id;
+        $this->permissionName = $permiso->name;
+
+        $this->emit('show-modal', 'Show modal');
+    }
     public function SyncPermiso($state, $permisoName)
     {
         if ($this->role != 'Elegir')
@@ -94,7 +118,6 @@ class AsignarComponent extends Component
         } else {
             $this->emit('permi', "Elige un rol válido");
         }
-
-
     }
+    
 }

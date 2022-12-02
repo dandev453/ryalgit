@@ -7,7 +7,7 @@
 <div class="content-wrapper" style="min-height: 557px;">
 <!-- Content Header (Page header) -->
 <section class="content-header">
-<h3><i class="fa fa-edit"></i>AÑADIR PRODUCTO</h3>
+<h3><i class="fa fa-edit"></i>{{ $selected_id > 0 ? 'Editar' : 'Crear' }} Producto</h3>
 </section>
 <!-- Main content -->
 <section class="content">
@@ -123,7 +123,6 @@
 				            @error('image') <span class="text-danger er">{{ $message }}</span>@enderror
 				        </div>
 				    </div>
-						
 						</div>
 					</div>
 					<!-- /.tab-pane -->

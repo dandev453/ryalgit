@@ -14,20 +14,20 @@ class PermisosComponent extends Component
     use WithPagination;
 
     public $permissionName, $search, $selected_id, $pageTitle, $componentName;
-    private $pagination = 10;
+    private $pagination = 1;
 
     public function mount()
     {
-        $this->pageTitle = 'Listado';
-        $this->componentName = 'Permisos';
+        $this->role = 'Elegir';
+        $this->componentName = "PERMISOS";
     }
 
     public function paginationView()
     {
-        return 'vendor.livewire.bootstrap';
+        return 'vendor.livewire.admin-lte';
     }
 
-    public function render()
+     public function render()
     {
         if(strlen($this->search) > 0)
             $permisos = Permission::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
@@ -40,6 +40,7 @@ class PermisosComponent extends Component
         ->extends('layouts.theme.app')
         ->section('content');
     }
+
 
     public function CreatePermission()
     {
