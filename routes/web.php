@@ -37,12 +37,13 @@ Route::get('/', function () {
     ]);
 });
 */
-Route::get('/', function () {
-    return view('home');
-});
+
 
 Route::middleware('auth')->group(function () {
 
+Route::get('/', function () {
+    return view('home');
+});
 
 Route::get('categories', Categories::class);
 Route::get('products', ProductsComponent::class);

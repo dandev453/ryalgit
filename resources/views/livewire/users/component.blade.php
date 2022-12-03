@@ -76,7 +76,7 @@
                     <a href="javascript:void(0)"
                     onclick="Confirm('{{$user->id}}')"
                     class="btn btn-default" title="Delete">
-                    <span> <i class="fas fa-trash"></i></span> ELIMINAR
+                    <span> <i class="fa fa-trash"></i></span> ELIMINAR
                 </a>
             </div>
         </td>

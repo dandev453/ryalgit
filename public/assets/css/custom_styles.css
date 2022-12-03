@@ -74,10 +74,13 @@ background: rgba(0,0,0,0.2);
     color: #4b646f;
     background: #f9f9f9;
 }
-.right-side {
+.left-side { 
+    
+}
+/*.right-side {
     background-color: #ecf0f5;
     margin-left: 220px;
-}
+}*/
 
  /*** SKIN RED ***/
 
@@ -105,19 +108,19 @@ background: rgba(0,0,0,0.2);
     background-color: #f44336;
 }
 
-.skin-blue .right-side > .content-header {
+/*.skin-blue .right-side > .content-header {
     background-color: #ecf0f5;
     box-shadow: 1px 1px 2px rgb(0 0 0 / 10%);
-}
+}*/
 .content {
     padding: 15px!important;
-    background-color: #ecf0f5;
+    /*    background-color: #ecf0f5;*/
 }
 
-.skin-blue .right-side > .content-header {
+/*.skin-blue .right-side > .content-header {
     background-color: #ecf0f5;
     box-shadow: 1px 1px 2px rgb(0 0 0 / 10%);
-}
+}*/
 
 /** TAbBLES WITHOUT BORDER *****/
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {

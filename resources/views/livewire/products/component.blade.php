@@ -112,6 +112,7 @@
     <!-- MODAL CREATE & EDIT -->
     <!--  END MODAL -->
 </div><!-- row -->
+</section>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         window.livewire.on('product-added', msg =>{

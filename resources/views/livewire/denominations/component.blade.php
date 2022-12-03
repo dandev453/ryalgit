@@ -25,7 +25,6 @@
     </div>
     <input type="hidden" id="per_page" value="15">
 </div>
-</section>
 <!-- Main content -->
 <section class=" content" >
 <div class="row">

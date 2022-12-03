@@ -31,7 +31,7 @@
                 <i class="fa fa-truck"></i> <span>compras</span> <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-               <li> <a href="/new_purchase"><li><i class="glyphicon glyphicon-shopping-cart"></i> Nueva compra</a></li>
+                <li> <a href="/new_purchase"><li><i class="glyphicon glyphicon-shopping-cart"></i> Nueva compra</a></li>
                 <li><a href="./purchase_list.html"><i class="glyphicon glyphicon-th-list"></i> Historial de compras</a></li>
             </ul>
         </li>
@@ -67,8 +67,8 @@
             </ul>
         </li>
         <li class="treeview">
-            <a href="{{url('pos')}}"><i class="fa fa-dollar"></i> POS</a>
-         </li>
+            <a href="/pos"><i class="fa fa-dollar"></i> POS</a>
+        </li>
         <li class="treeview">
             <a href="Javascript::void(0)">
                 <i class="glyphicon glyphicon-signal"></i> <span>Reportes</span>
@@ -92,16 +92,20 @@
                 <li><a href="javascript::void(0)"><i class="fa fa-align-justify"></i>Impuestos</a></li>
             </ul>
         </li>
-
-         <li class="treeview">
+        <li class="treeview">
             <a href="mailbox.html">
-               <li ><a href="/permisos"> <i class="fa fa-lock"></i> <span>Administrar accesos</span> </a></li>
+                <i class="fa fa-lock"></i> <span>Administrar accesos</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="/roles"><i class="glyphicon glyphicon-briefcase"></i> Grupos de usuarios</a></li>
-                <li><a href="/users"><i class="fa fa-users"></i> Usuarios</a></li>
+                <li><a href="/roles" style="margin-left: 10px;"><i class="glyphicon glyphicon-briefcase"></i> Grupos de usuarios</a></li>
+                <li><a href="/users" style="margin-left: 10px;"><i class="fa fa-users"></i> Usuarios</a></li>
             </ul>
         </li>
-    </ul>
+        <ul class="treeview-menu">
+            <li><a href="/roles"><i class="glyphicon glyphicon-briefcase"></i> Grupos de usuarios</a></li>
+            <li><a href="/users"><i class="fa fa-users"></i> Usuarios</a></li>
+        </ul>
+    </li>
+</ul>
 </section>
