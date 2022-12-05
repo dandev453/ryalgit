@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-4">
-        <div class="card-box">
+        <div class="card-box" style="min-height: 720px;">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-10">
@@ -39,7 +39,7 @@
             </div>
             <div id="resultados" class="">
                 <div id="resultados" class="">
-                    @if($total >0)
+                    
                     <table class=" table" id="cartTable">
                         <thead>
                             <tr>
@@ -61,6 +61,8 @@
                                         <img src="{{ asset('storage/products/' . $item->attributes[0])}}" alt="Imagen Del Producto" height="90" width="90" class="rounded">
                                     </span>
                                 </td> -->
+                                @else
+                                <h5>Agregar producto</h5>
                                 @endif
                                 <td width="">{{$item->name}}</td>
                                 <td class="" width="">
@@ -85,13 +87,25 @@
                                 <td><span class="pull-right"> ${{number_format($item->price,2)}} </span></td>
                                 <td><span class="pull-right">  ${{number_format($item->price * $item->quantity,2)}}</span></td>
                                 <td><button class="btn btn-danger btn-xs" onclick="Confirm('{{$item->id}}', 'removeItem', '¿CONFIRMAS ELIMNAR EL REGISTRO?')" ><i class="fa fa-times"></i></button></td>
+                                <td>
+                                    <div class="m-t-10">
+                                        <div class="row">
+                                            <div class="col-md-4"><label class="control-label">IVA(%)</label> </div>
+                                            <div class="col-md-4">
+                                                <select name="taxes" class="form-control input-sm" id="taxes" onchange="tax_value(this.value)">
+                                                    <option value="18.00">ITBIS 18.00 %</option>
+                                                </select>
+                                            </div>
+                                            <!-- <div class="col-md-2"></div> -->
+                                            <div class="col-md-3 col-md-offset-1">: <span id="price"><label class="control-label">0,00</label></span></div>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
-                    @else
-                    <h5 class="text-center text-muted">Agrega Productos A La Venta</h5>
-                    @endif
+                    
                     <hr>
                     <div class="m-t-10">
                         <div class="row">
@@ -109,6 +123,18 @@
                                 <div class="col-md-4"><input class="form-control input-sm" required="" pattern="\d+(\.\d{2})?" type="number" id="descuento" value="0" onblur="descuento(this.value)"></div>
                                 <div class="col-md-3 col-md-offset-1">: <span id="price"> <label class="control-label">0,00</label></span></div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="m-t-10">
+                        <div class="row">
+                            <div class="col-md-4"><label class="control-label">IVA(%)</label> </div>
+                            <div class="col-md-4">
+                                <select name="taxes" class="form-control input-sm" id="taxes" onchange="tax_value(this.value)">
+                                    <option value="18.00">ITBIS 18.00 %</option>
+                                </select>
+                            </div>
+                            <!-- <div class="col-md-2"></div> -->
+                            <div class="col-md-3 col-md-offset-1">: <span id="price"><label class="control-label">0,00</label></span></div>
                         </div>
                     </div>
                     <!-- <form  method="post" name="save_sale" id="save_sale"> -->
@@ -186,7 +212,7 @@
             <hr>
             <div class="row  outer_div" id="outer_div" style="height: 600px; overflow: scroll;">
                 <div class="col-md-12" style="display:flex; flex-wrap: wrap;">
-                    <div class="widget-panel widget-style-2 ">
+                    <div class="widget-panel widget-style-2 col-md-2 col-lg-2 col-sm-6 col-xs-6">
                         <center>
                         <img src="img/productos/1545228087_101578356-1.jpg" onclick="agregar('4')" height="100px" width="100px" alt="">
                         </center>
@@ -198,7 +224,20 @@
                         <b data-plugin="counterup">74.00 $ </b>
                         </h4>
                     </div>
-                    <div class="widget-panel widget-style-2 ">
+                    <div class="widget-panel widget-style-2 col-md-2 col-lg-2 col-sm-6 col-xs-6">
+                        <center>
+                        <img src="img/productos/1545228087_101578356-1.jpg" onclick="agregar('4')" height="100px" width="100px" alt="">
+                        </center>
+                        <div class="text-muted m-t-5 text-center" style="height: 40px"><span class="name">Audífonos JBL junior Bluetooth</span> <br>
+                        <input type="hidden" value="1" id="cantidad_4" name="">
+                        <span class="sku"></span></div>
+                        <h4 class="text-success text-center">
+                        <input type="hidden" value="74.00" id="precio_venta_4" name="">
+                        <b data-plugin="counterup">74.00 $ </b>
+                        </h4>
+                    </div>
+                    
+                    <div class="widget-panel widget-style-2 col-md-2 col-lg-2 col-sm-6 col-xs-6">
                         <center>
                         <img src="img/productos/1545228087_101578356-1.jpg" onclick="agregar('4')" height="100px" width="100px" alt="">
                         </center>

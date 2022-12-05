@@ -25,7 +25,6 @@
 </div>
 <input type="hidden" id="per_page" value="15">
 </div>
-
 <!-- Main content -->
 <section class=" content" >
 <div class="row">
@@ -37,7 +36,7 @@
             <!--    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>  -->
             <button  class="btn-flat btn tabmenu bg-dark btn btn-sm" data-toggle="modal" data-target="#theModal">
                 + Agregar
-            </a>
+            </button>
         </div>
     </div><!-- /.box-header -->
     <div class="box-body" style="padding:0;">

@@ -66,8 +66,10 @@
                 <li><a href="forms/general.html"><i class="glyphicon glyphicon-list-alt"></i> Administrar facturas</a></li>
             </ul>
         </li>
-        <li class="treeview">
-            <a href="/pos"><i class="fa fa-dollar"></i> POS</a>
+         <li class="active">
+            <a href="/pos">
+                <i class="fa fa-dollar"></i> <span>POS</span>
+            </a>
         </li>
         <li class="treeview">
             <a href="Javascript::void(0)">
@@ -75,7 +77,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="tables/simple.html"><i class="fa fa-bar-chart"></i> Reportes de ventas</a></li>
+                <li><a href="sales_report"><i class="fa fa-bar-chart"></i> Reportes de ventas</a></li>
                 <li><a href="tables/data.html"><i class="fa fa-line-chart"></i> Reportes de compras </a></li>
                 <li><a href="tables/data.html"><i class="fa fa-bar-chart"></i> Reportes de inventarios </a></li>
                 <li><a href="tables/data.html"><i class="fa fa-bar-chart"></i> Productos más vendidos</a></li>

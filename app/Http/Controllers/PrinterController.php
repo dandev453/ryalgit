@@ -8,9 +8,9 @@ use Mike42\Escpos\Printer;
 use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 
 use Carbon\Carbon;
-use App\SaleDetail;
-use App\Sale;
-use App\User;
+use App\Models\SaleDetails;
+use App\Models\Sale;
+use App\Models\User;
 
 
 
@@ -19,27 +19,24 @@ class PrinterController extends Controller
     public function TicketVenta(Request $request)
     {
         $folio = str_pad($request->id,7,"0",STR_PAD_LEFT);
-        $nombreImpresora = "TM20"; //nombre impresora a usar
+        $nombreImpresora = "XP-58"; //nombre impresora a usar
         $connector = new WindowsPrintConnector($nombreImpresora); //imp. a conecar
         $impresora = new Printer($connector);
 
         //obtenerinfo de la db
         $user =User::all();
         $sale = Sale::find($request->id);
-        $tarifa = SaleDetail::find($request->sale_id);
 
         //info del ticket
         $impresora->setJustification(Printer::JUSTIFY_CENTER);
         $impresora->setTextSize(2,2);
-        $impresora->text(strtoupper($user->name));
         $impresora->setTextSize(1,1);
         $impresora->text('** Recibo de venta ** \n\n');
 
         $impresora->setJustification(Printer::JUSTIFY_LEFT);
         $impresora->text("=================================================\n");
-        $impresora->text("Entrada: ". Carbon::parse($sale->created_at)->format('d/m/Y h:m:s') . "\n");
-        $impresora->text("Total: $".number_format($sale->total,2) . "\n");
-        if (!emty($sale->descripcion)) $impresora->text("Desc: ". $sale->descripcion ."\n");
+        
+       
         $impresora->text("=================================================\n");
 
         //footer
@@ -52,7 +49,7 @@ class PrinterController extends Controller
         $impresora->feed(2); // agregamos 2 saltos de linea
 
         $impresora->text("Gracias por su preferencia");
-        $impresora->text("Thabk you!");
+        $impresora->text("Thank you!");
         $impresora->feed(3);
         $impresora->cut();
         $impresora->close();

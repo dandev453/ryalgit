@@ -9,7 +9,7 @@
 </div>
 <div class="col-xs-10 col-md-5 ">
 <div class="btn-group pull-right">
-<a href="/add_product" class="btn btn-default"><i class="fa fa-plus"></i> Nuevo</a>
+
 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Mostrar
     <span class="caret"></span>
@@ -37,7 +37,7 @@
     <!--    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>  -->
     <button  class="btn-flat btn tabmenu bg-dark btn btn-sm" data-toggle="modal" data-target="#theModal">
         + Agregar
-    </a>
+    </button>
 </div>
 </div><!-- /.box-header -->
 
@@ -61,7 +61,13 @@
             <td>{{$user->email}}</td>
             <td>{{$user->profile}}</td>
             <td>{{$user->created_at}}</td>
-            <td>{{$user->status}}</td>
+            <td>
+                @if($user->status = 'ACTIVE')
+                <span class="label label-success">Activo</span>
+              @else
+                <span class="label label-danger">Inactivo</span>
+                @endif
+            </td>
             <td>
                 <div class="btn-group">
                     <a href="javascript:void(0)"
@@ -93,6 +99,7 @@
 {{ $data->links() }}
 </div>
 </div>
+@include('livewire.users.form')
 
 <!-- /<div class="box-footer">
 </div>--><!-- /.box-footer -->

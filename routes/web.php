@@ -6,10 +6,12 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Livewire\AsignarComponent;
+use App\Http\Livewire\CashoutComponent;
 use App\Http\Livewire\PermisosComponent;
 use App\Http\Livewire\CoinsComponent;
 use App\Http\Livewire\Categories;
 use App\Http\Livewire\EditProductsComponent;
+use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\ProductsComponent;
 use App\Http\Livewire\PurchaseComponent;
 use App\Http\Livewire\RolesComponent;
@@ -38,13 +40,9 @@ Route::get('/', function () {
 });
 */
 
-
 Route::middleware('auth')->group(function () {
 
-Route::get('/', function () {
-    return view('home');
-});
-
+Route::get('/', HomeComponent::class);
 Route::get('categories', Categories::class);
 Route::get('products', ProductsComponent::class);
 Route::get('users', UsersComponent::class);
@@ -53,21 +51,23 @@ Route::get('coins', CoinsComponent::class);
 Route::get('roles', RolesComponent::class);
 Route::get('permisos', PermisosComponent::class);
 Route::get('asignar', AsignarComponent::class);
+Route::get('sales_report', CashoutComponent::class);
 Route::get('add_product', CreateProductsComponent::class);
 Route::get('new_purchase', PurchaseComponent::class);
 Route::get('product/{id}', EditProductsComponent::class);
 //rutas impresion
 Route::get('print/sale/{id}','PrinterController@TicketVenta');
 });
-
-Route::get('/dashboard', function () {
+//
+/*Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+*/
 require __DIR__.'/auth.php';
