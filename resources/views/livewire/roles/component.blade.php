@@ -1,4 +1,4 @@
-<article class="content-header d-flex justify-content-between bg-light w-100">
+<article class="content-header  bg-light w-100">
     <div class="row content-header ">
         <div class="col-xs-12 col-md-3">
          @include('common.searchbox')
