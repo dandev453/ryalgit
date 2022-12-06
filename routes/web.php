@@ -29,7 +29,7 @@ use App\Http\Livewire\CreateProductsComponent;
 |
 */
 
-/*
+
 Route::get('/', function () {
     return Inertia::render('home', [
         'canLogin' => Route::has('login'),
@@ -38,11 +38,14 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+/*
+Route::get('/', function () {
+   redirect()->to('home');
+});
 */
-
 Route::middleware('auth')->group(function () {
 
-Route::get('/', HomeComponent::class);
+Route::get('/home', HomeComponent::class);
 Route::get('categories', Categories::class);
 Route::get('products', ProductsComponent::class);
 Route::get('users', UsersComponent::class);
@@ -57,9 +60,11 @@ Route::get('new_purchase', PurchaseComponent::class);
 Route::get('product/{id}', EditProductsComponent::class);
 //rutas impresion
 Route::get('print/sale/{id}','PrinterController@TicketVenta');
+
+
 });
-//
-/*Route::get('/dashboard', function () {
+
+Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -69,5 +74,5 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-*/
+
 require __DIR__.'/auth.php';

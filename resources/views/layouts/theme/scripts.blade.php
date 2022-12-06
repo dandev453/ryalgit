@@ -21,6 +21,10 @@
 <script src="{{ asset('plugins/notification/snackbar/snackbar.min.js') }}"></script>
 <script src="{{ asset('plugins/nicescroll/nicescroll.js') }}"></script>
 <script src="{{ asset('plugins/currency/currency.js') }}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+
 <!-- Alpine v3 -->
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
@@ -39,4 +43,5 @@
         });
     }
 </script>
+
 @livewireScripts

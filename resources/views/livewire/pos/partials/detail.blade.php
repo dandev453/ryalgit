@@ -3,23 +3,23 @@
         <div class="card-box" style="min-height: 720px;">
             <div class="col-md-12">
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-10 col-sm-10 col-xs-10">
                         <select required="" class="form-control select2 " name="customer_id" id="customer_id">
                             <option value="">Selecciona Cliente</option>
                         </select>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-sm-2 col-xs-2">
                         <button data-toggle="modal" data-target="#cliente_modal" class="btn btn-success"><i class="fa fa-plus"></i></button>
                     </div>
                 </div>
                 <input type="hidden" class="form-control" name="sale_number" id="sale_number" required="" value="3251">
-                <div class="input-group m-t-5 col-md-12">
+                <div class="input-group m-t-5 col-md-12 col-sm-12 col-xs-12">
                     <form id="barcode_form" method="">
                         <!-- <hr> -->
-                        <div class="col-md-2">
+                        <div class="col-md-2 col-xs-2 col-sm-2">
                             <input class="form-control" type="text" name="barcode_qty" id="barcode_qty" value="1" required="">
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-10 col-sm-10 col-xs-10">
                             <div class="input-group">
                                 <input class="form-control" type="text" wire:keydown.enter.prevent="$emit('scan-code', $('#code').val())" id="code" required="" placeholder="Ingresa el código de barras">
                                 <span class="input-group-btn">

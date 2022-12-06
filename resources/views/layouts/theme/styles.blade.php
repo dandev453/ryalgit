@@ -5,6 +5,9 @@
 <!-- Theme style -->
 <link href="{{ asset('assets/css/AdminLTE.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets/css/custom_styles.css') }}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link href="{{ asset('plugins/flatpickr/custom-flatpickr.css') }}" rel="stylesheet" type="text/css" />
+<!-- include style flatpickr custom -->
 <link href="{{ asset('plugins/sweetalerts/sweetalert.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('plugins/notification/snackbar/snackbar.min.css') }}" rel="stylesheet" type="text/css" />
 

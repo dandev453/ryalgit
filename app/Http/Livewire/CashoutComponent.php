@@ -37,7 +37,7 @@ class CashoutComponent extends Component
 		public function Consultar()
 		{
 			$fi = Carbon::parse($this->fromDate)->format('Y-m-d'). ' 00:00:00';
-			$ff = Carbon::parse($this->fromDate)->format('Y-m-d'). ' 23:59:59';
+			$ff = Carbon::parse($this->toDate)->format('Y-m-d'). ' 23:59:59';
 			$this->sales = Sale::whereBetween('created_at', [$fi, $ff])
 				->where('status', 'Paid')
 				->where('user_id', $this->userid)
@@ -48,8 +48,8 @@ class CashoutComponent extends Component
 
 		public function viewDetails(Sale $sale)
 		{
-			$fi = Carbon::parse($this->fromDate)->format('Y-m-d'). ' 00:00:00';
-			$ff = Carbon::parse($this->fromDate)->format('Y-m-d'). ' 23:59:59';
+			$fi = Carbon::parse($this->fromDate)->format('Y-m-d 00:00:00');
+			$ff = Carbon::parse($this->toDate)->format('Y-m-d 23:59:59');
 
 			$this->details = Sale::join('sale_details as d', 'd.sale_id', 'sales.id')
 			->join('products as p', 'p.id', 'd.product_id')
