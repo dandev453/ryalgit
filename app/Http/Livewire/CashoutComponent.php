@@ -15,8 +15,7 @@ use Carbon\Carbon;
 
 class CashoutComponent extends Component
 {
-
-		public $fromDate, $toDate, $userid, $total, $items, $sales, $details;
+	public $fromDate, $toDate, $userid, $total, $items, $sales, $details;
 
 		public function mount() {
 			$this->pageTitle = 'Reportes';

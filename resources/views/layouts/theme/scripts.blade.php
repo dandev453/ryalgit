@@ -1,4 +1,5 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
  <!-- AdminLTE App -->
  <script src="{{ asset('assets/js/AdminLTE/app.js') }}" type="text/javascript"></script> 
@@ -31,6 +32,8 @@
 <!-- Focus plugin -->
 <script defer src="https://unpkg.com/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
 
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 <script>
     function noty(msg, option = 1)
     {
@@ -42,6 +45,8 @@
             pos: 'top-right'
         });
     }
+
+
 </script>
 
 @livewireScripts

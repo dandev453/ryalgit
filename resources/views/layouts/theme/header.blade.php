@@ -1,4 +1,4 @@
-<article>
+<div>
     <a href="/" class="logo">
         <!-- Add the class icon to your logo image or logo icon to add the margining -->
         Punto de ventta
@@ -21,12 +21,12 @@
                         <li class="header">You have 4 messages</li>
                         <li>
                             <!-- inner menu: contains the actual data -->
-                            <ul class="menu">
+                            <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;"><ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
                                 <li>
                                     <!-- start message -->
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="{{ asset('assets/img/avatar3.png') }}" class="img-circle" alt="User Image" />
+                                            <img src="./img/avatar3.png" class="img-circle" alt="User Image">
                                         </div>
                                         <h4>
                                             Support Team
@@ -38,7 +38,7 @@
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="{{ asset('assets/img/avatar2.png') }}" class="img-circle" alt="user image" />
+                                            <img src="./img/avatar2.png" class="img-circle" alt="user image">
                                         </div>
                                         <h4>
                                             AdminLTE Design Team
@@ -50,7 +50,7 @@
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="{{ asset('assets/img/avatar.png') }}" class="img-circle" alt="user image" />
+                                            <img src="./img/avatar.png" class="img-circle" alt="user image">
                                         </div>
                                         <h4>
                                             Developers
@@ -62,7 +62,7 @@
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="{{ asset('assets/img/avatar2.png') }}" class="img-circle" alt="user image" />
+                                            <img src="{{ asset('assets/img/avatar.png') }}" class="img-circle" alt="user image">
                                         </div>
                                         <h4>
                                             Sales Department
@@ -74,7 +74,7 @@
                                 <li>
                                     <a href="#">
                                         <div class="pull-left">
-                                            <img src="{{ asset('assets/img/avatar.png') }}" class="img-circle" alt="user image" />
+                                            <img src="./img/avatar.png" class="img-circle" alt="user image">
                                         </div>
                                         <h4>
                                             Reviewers
@@ -83,7 +83,7 @@
                                         <p>Why not buy a new awesome theme?</p>
                                     </a>
                                 </li>
-                            </ul>
+                            </ul><div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 3px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 0px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 3px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 0px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
                         </li>
                         <li class="footer"><a href="#">See All Messages</a></li>
                     </ul>
@@ -98,7 +98,7 @@
                         <li class="header">You have 10 notifications</li>
                         <li>
                             <!-- inner menu: contains the actual data -->
-                            <ul class="menu">
+                            <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;"><ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
                                 <li>
                                     <a href="#">
                                         <i class="ion ion-ios7-people info"></i> 5 new members joined today
@@ -124,7 +124,7 @@
                                         <i class="ion ion-ios7-person danger"></i> You changed your username
                                     </a>
                                 </li>
-                            </ul>
+                            </ul><div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 3px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 0px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 3px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 0px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
                         </li>
                         <li class="footer"><a href="#">View all</a></li>
                     </ul>
@@ -139,7 +139,7 @@
                         <li class="header">You have 9 tasks</li>
                         <li>
                             <!-- inner menu: contains the actual data -->
-                            <ul class="menu">
+                            <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 200px;"><ul class="menu" style="overflow: hidden; width: 100%; height: 200px;">
                                 <li>
                                     <!-- Task item -->
                                     <a href="#">
@@ -196,7 +196,7 @@
                                         </div>
                                     </a>
                                 </li><!-- end task item -->
-                            </ul>
+                            </ul><div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 3px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 0px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 3px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 0px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
                         </li>
                         <li class="footer">
                             <a href="#">View all tasks</a>
@@ -206,16 +206,16 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{ asset('assets/img/avatar3.png') }}" class="user-image" alt="User Image">
+                        <img src="{{ asset('assets/img/avatar.png') }}" class="user-image" alt="User Image">
                         <span>{{ auth()->user()->name}} <i class="caret"></i></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header bg-light-blue">
-                            <img src="{{ asset('assets/img/avatar3.png') }}" class="img-circle" alt="User Image" />
+                            <img src="{{ asset('assets/img/avatar.png') }}" class="img-circle" alt="User Image">
                             <p>
-                                {{ auth()->user()->name}} - {{auth()->user()->profile}}
-                                <small>Member since Nov. 2012</small>
+                                {{ auth()->user()->name}} - {{ auth()->user()->profile }}
+                                <small>Member since {{ auth()->user()->created_at }}</small>
                             </p>
                         </li>
                         <!-- Menu Body -->
@@ -244,4 +244,4 @@
             </ul>
         </div>
     </nav>
-</article>
+</div>

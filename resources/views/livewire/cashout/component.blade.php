@@ -119,24 +119,25 @@
                         <div style="margin: 5px;">
 
                         </div>
-@include('livewire.cashout.form')
-<script>
-    var f1 = flatpickr(document.getElementById('basicFlatpickr'));
-    var f2 = flatpickr(document.getElementById('dateTimeFlatpickr'), {
-    enableTime: true,
-        dateFormat: "Y-m-d H:i",
-    });
-    document.addEventListener('DOMContentLoaded', function() {
-        window.livewire.on('show-modal', Msg => {
-            $('#modal-details').modal('show')
-        })
-    })
-    window.livewire.on('show-modal', msg =>{
-    $('#theModal').modal('show');
-});
-</script>
-    </div>
-    <!-- /SCRIPTS -->
+                        @include('livewire.cashout.form')
+                        <script>
+                            var f1 = flatpickr(document.getElementById('basicFlatpickr'));
+                            var f2 = flatpickr(document.getElementById('dateTimeFlatpickr'), {
+                                enableTime: true,
+                                dateFormat: "Y-m-d H:i",
+                            });
+                            $('input[id="dates"]').daterangepicker();
+                            document.addEventListener('DOMContentLoaded', function() {
+                                window.livewire.on('show-modal', Msg => {
+                                    $('#modal-details').modal('show')
+                                })
+                            })
+                            window.livewire.on('show-modal', msg =>{
+                                $('#theModal').modal('show');
+                            });
+                        </script>
+                    </div>
+                    <!-- /SCRIPTS -->
             <!-- /<div class="box-footer">
             </div>--><!-- /.box-footer -->
         </div><!-- /.box -->

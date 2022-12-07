@@ -13,6 +13,8 @@ use App\Http\Livewire\Categories;
 use App\Http\Livewire\EditProductsComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\ProductsComponent;
+use App\Http\Livewire\lastProductsComponent;
+use App\Http\Livewire\ProfileComponent;
 use App\Http\Livewire\PurchaseComponent;
 use App\Http\Livewire\RolesComponent;
 use App\Http\Livewire\UsersComponent;
@@ -29,7 +31,7 @@ use App\Http\Livewire\CreateProductsComponent;
 |
 */
 
-
+/*
 Route::get('/', function () {
     return Inertia::render('home', [
         'canLogin' => Route::has('login'),
@@ -38,18 +40,17 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
-/*
-Route::get('/', function () {
-   redirect()->to('home');
-});
 */
+
+
 Route::middleware('auth')->group(function () {
 
-Route::get('/home', HomeComponent::class);
+Route::get('/', HomeComponent::class);
 Route::get('categories', Categories::class);
 Route::get('products', ProductsComponent::class);
 Route::get('users', UsersComponent::class);
 Route::get('pos', PosComponent::class);
+Route::get('profile', PosComponent::class);
 Route::get('coins', CoinsComponent::class);
 Route::get('roles', RolesComponent::class);
 Route::get('permisos', PermisosComponent::class);
@@ -61,13 +62,11 @@ Route::get('product/{id}', EditProductsComponent::class);
 //rutas impresion
 Route::get('print/sale/{id}','PrinterController@TicketVenta');
 
-
 });
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

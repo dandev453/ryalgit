@@ -2,10 +2,10 @@
     <!-- Sidebar user panel -->
     <div class="user-panel">
         <div class="pull-left image">
-            <img src="{{ asset('assets/img/avatar3.png') }}" class="img-circle" alt="User Image" />
+            <img src="{{ asset('assets/img/avatar.png') }}" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-            <p>{{ auth()->user()->name}}</p>
+            <p> {{ auth()->user()->name}}</p>
             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
     </div>
@@ -66,7 +66,7 @@
                 <li><a href="forms/general.html"><i class="glyphicon glyphicon-list-alt"></i> Administrar facturas</a></li>
             </ul>
         </li>
-         <li class="active">
+        <li class="active">
             <a href="/pos">
                 <i class="fa fa-dollar"></i> <span>POS</span>
             </a>

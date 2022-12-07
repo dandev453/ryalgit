@@ -40,7 +40,7 @@
         </div>
     </div><!-- /.box-header -->
     <div class="box-body" style="padding:0;">
-        <div class="table-responsive">
+        <div class="table-responsive ">
             <table class="table table-condensed table-hover table-striped">
                 <tbody>
                     <tr>
@@ -56,7 +56,7 @@
                         <th class="text-center"></th>
                     </tr>
                     @foreach($data as $product)
-                    <tr>
+                    <tr >
                         <!-- <td>2</td> -->
                         <td class="text-center"> {{$product->barcode}} </td>
                         <td class="text-center">
