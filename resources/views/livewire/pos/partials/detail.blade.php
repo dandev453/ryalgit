@@ -230,6 +230,12 @@
                         onkeyup="load(1)">
                 </div>
                 <div class="col-md-6">
+                    <select wire:model="category_id" class="form-control">
+                        <option value="Seleccione">Seleccione</option>
+                           
+                        <option value=""></option>
+                           
+                        </select>
                     <select onchange="load(1);" class="form-control" name="category_id" id="category_id">
                         <option value="">Selecciona Categoría</option>
                         <option value="3"> AUDIO</option>
@@ -242,52 +248,25 @@
             <hr>
             <div class="row  outer_div" id="outer_div" style="height: 600px; overflow: scroll;">
                 <div class="col-md-12" style="display:flex; flex-wrap: wrap;">
+                    @foreach($products as $product)
                     <div class="widget-panel widget-style-2 col-md-2 col-lg-2 col-sm-6 col-xs-6">
                         <center>
-                            <img src="img/productos/1545228087_101578356-1.jpg" onclick="agregar('4')" height="100px"
-                                width="100px" alt="">
+                            <img src="{{ asset('storage/products/' . $product->image) }}" width="100px" height="100px" walt="Imagen Del Producto" class="rounded">
                         </center>
-                        <div class="text-muted m-t-5 text-center" style="height: 40px"><span class="name">Audífonos
-                                JBL junior Bluetooth</span> <br>
+                        <div class="text-muted m-t-5 text-center" style="height: 40px">
+                            <span class="name">
+                                {{$product->name }}
+                            </span> <br>
                             <input type="hidden" value="1" id="cantidad_4" name="">
                             <span class="sku"></span>
                         </div>
                         <h4 class="text-success text-center">
-                            <input type="hidden" value="74.00" id="precio_venta_4" name="">
-                            <b data-plugin="counterup">74.00 $ </b>
+                            <input type="hidden" value="{{$product->price}}" id="precio_venta_4">
+                            <b data-plugin="counterup">$ {{$product->price}} </b>
                         </h4>
                     </div>
-                    <div class="widget-panel widget-style-2 col-md-2 col-lg-2 col-sm-6 col-xs-6">
-                        <center>
-                            <img src="img/productos/1545228087_101578356-1.jpg" onclick="agregar('4')" height="100px"
-                                width="100px" alt="">
-                        </center>
-                        <div class="text-muted m-t-5 text-center" style="height: 40px"><span class="name">Audífonos
-                                JBL junior Bluetooth</span> <br>
-                            <input type="hidden" value="1" id="cantidad_4" name="">
-                            <span class="sku"></span>
-                        </div>
-                        <h4 class="text-success text-center">
-                            <input type="hidden" value="74.00" id="precio_venta_4" name="">
-                            <b data-plugin="counterup">74.00 $ </b>
-                        </h4>
-                    </div>
-
-                    <div class="widget-panel widget-style-2 col-md-2 col-lg-2 col-sm-6 col-xs-6">
-                        <center>
-                            <img src="img/productos/1545228087_101578356-1.jpg" onclick="agregar('4')" height="100px"
-                                width="100px" alt="">
-                        </center>
-                        <div class="text-muted m-t-5 text-center" style="height: 40px"><span class="name">Audífonos
-                                JBL junior Bluetooth</span> <br>
-                            <input type="hidden" value="1" id="cantidad_4" name="">
-                            <span class="sku"></span>
-                        </div>
-                        <h4 class="text-success text-center">
-                            <input type="hidden" value="74.00" id="precio_venta_4" name="">
-                            <b data-plugin="counterup">74.00 $ </b>
-                        </h4>
-                    </div>
+                    @endforeach
+                 
                 </div>
             </div>
         </div>

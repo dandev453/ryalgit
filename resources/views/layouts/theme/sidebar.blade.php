@@ -63,7 +63,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="/manage_invoce"><i class="glyphicon glyphicon-list-alt"></i> Administrar facturas</a></li>
+                <li><a href="/manage_invoice"><i class="glyphicon glyphicon-list-alt"></i> Administrar facturas</a></li>
             </ul>
         </li>
         <li class="active">

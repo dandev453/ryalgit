@@ -22,6 +22,14 @@ class HomeComponent extends Component
 
     public function mount()
     {
+         $this->pageTitle = 'Reportes';
+        $this->componentName = 'ventas';
+        $this->fromDate = null;
+        $this->toDate = null;
+        $this->userid = 0;
+        $this->total = 0;
+        $this->sales = [];
+        $this->details = [];
     }
 
     public function paginationView()
@@ -53,20 +61,16 @@ class HomeComponent extends Component
             ->section('content');
     }
 
-    public function viewDetails($saleId)
+    public function viewDetails(Sale $sale)
     {
       
-        $this->details = SaleDetails::join('products as p', 'p.id', 'd.product_id')
-            ->select('sale_details.id', 'sale_details.price', 'sale_details.quantity', 'p.name as product')
-            ->where('sale_details.sale_id', $saleId)
-            ->get();
-        //
-        $suma = $this->details->sum(function($item){
-            return $item->price * $item->quantity;
-        });
-        $this->sumDetails = $sum;
-        $this->countDetails = $this->sum('quantity');
-        $this->saleId = $saleId;
+        $this->details = Sale::join('sale_details as d', 'd.sale_id', 'sales.id')
+        ->join('products as p', 'p.id', 'd.product_id')
+        ->select('d.sale_id', 'p.name as product', 'd.quantity', 'd.price')
+       
+        ->where('sales.status', 'Paid')
+        ->where('sales.id', $sale->id)
+        ->get();
         $this->emit('show-modal', 'Show modal');
     }
 }

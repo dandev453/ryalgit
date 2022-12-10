@@ -152,7 +152,9 @@
                 </div><!-- /.box -->
             </div><!-- /.col -->
             <!-- END LASTEST -->
+            @include('livewire.products.lastSaleDetail')
         </div>
+       
     </section><!-- /.content -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>

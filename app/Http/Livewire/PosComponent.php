@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Denomination;
 use App\Models\Product;
+use Livewire\WithPagination;
 use App\Models\Sale;
 use App\Models\SaleDetails;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
@@ -14,6 +15,9 @@ use Livewire\Component;
 
 class PosComponent extends Component
 {
+    use WithPagination;
+    public $categoryName;
+    private $pagination = 5;
     public $total,
         $itemsQuantity,
         $denominations = [],
@@ -22,6 +26,7 @@ class PosComponent extends Component
 
     public function mount()
     {
+        $this->categoryName = '';
         $this->efectivo = 0;
         $this->change = 0;
         $this->total = Cart::getTotal();
@@ -31,8 +36,14 @@ class PosComponent extends Component
     public function render()
     {
         // dd(Cart::getContent()->sortBy('name'));
+        $products = Product::join('categories as c', 'c.id', 'products.category_id')
+        ->select('products.*', 'c.name as category')
+        ->where('c.name', [])
+        ->orderBy('products.id', 'desc')
+        ->paginate($this->pagination);
         $this->denominations = Denomination::all();
         return view('livewire.pos.component', [
+            'products' => $products,
             'denominations' => Denomination::orderBy('value', 'desc')->get(),
             'cart' => Cart::getContent()->sortBy('name'),
         ])
@@ -45,6 +56,7 @@ class PosComponent extends Component
         $this->efectivo += $value == 0 ? $this->total : $value;
         $this->change = $this->efectivo - $this->total;
     }
+    
 
     protected $listeners = [
         'scan-code' => 'ScanCode',

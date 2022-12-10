@@ -20,8 +20,8 @@
               <tbody>
                 @foreach($lsales as $lastsale)
                   <tr>
-                      <td><a href="javascript::void(0)" >{{ $lastsale->s_id }}</a></td>
-                      <td>{{ $lastsale->cliente }}</td> <!-- /change for client -->
+                      <td><a wire:click.prevent="viewDetails({{ $lastsale }})" >{{ $lastsale->s_id }}</a></td>
+                      <td> </td> <!-- /change for client -->
                       <td>{{ $lastsale->fecha }}</td>
                       <td class="text-right">{{ $lastsale->total }}</td>
                   </tr>
