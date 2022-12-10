@@ -104,7 +104,7 @@
                     </div>
                     <div class="product-info">
                         <a href="javascript::void(0)" class="product-title"> {{ $product->name }} <span
-                                class="label label-info pull-right">450.00</span></a>
+                                class="label label-info pull-right">{{$product->price}}</span></a>
                         <span class="product-description">
                         </span>
                     </div>
@@ -113,6 +113,6 @@
         </ul>
     </div><!-- /.box-body -->
     <div class="box-footer text-center">
-        <a href="products.php" class="uppercase">Ver todos los productos</a>
+        <a href="products" class="uppercase">Ver todos los productos</a>
     </div><!-- /.box-footer -->
 </div>

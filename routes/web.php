@@ -58,7 +58,7 @@ Route::get('business_profile', ProfileComponent::class);
 Route::get('permisos', PermisosComponent::class);
 Route::get('asignar', AsignarComponent::class);
 Route::get('sales_report', CashoutComponent::class);
-Route::get('manage_reports', ManageInvoiceComponent::class);
+Route::get('manage_invoice', ManageInvoiceComponent::class);
 Route::get('add_product', CreateProductsComponent::class);
 Route::get('business_profile', ProfileComponent::class);
 Route::get('new_purchase', PurchaseComponent::class);

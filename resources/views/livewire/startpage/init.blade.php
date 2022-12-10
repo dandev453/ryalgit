@@ -1,5 +1,4 @@
 <div>
-
     <!-- Main content -->
     <section class="content ">
         <div class="row">
@@ -81,96 +80,7 @@
             <!-- LASTEST ORDER -->
             <div class="col-md-8">
                 <!-- TABLE: LATEST ORDERS -->
-                <div class="box box-info">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Últimas ventas</h3>
-                        <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                        </div>
-                    </div><!-- /.box-header -->
-                    <div class="box-body">
-                        <div class="table-responsive">
-                            <table class="table no-margin">
-                                <thead>
-                                    <tr>
-                                        <th>Factura Nº</th>
-                                        <th>Cliente</th>
-                                        <th>Fecha</th>
-                                        <th class="text-right">Total </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><a href="edit_pos.php?id=3244">3244</a></td>
-                                        <td></td>
-                                        <td>19-11-2022</td>
-                                        <td class="text-right">87.32</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="edit_pos.php?id=3243">3243</a></td>
-                                        <td></td>
-                                        <td>19-11-2022</td>
-                                        <td class="text-right">87.32</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="edit_pos.php?id=3242">3242</a></td>
-                                        <td></td>
-                                        <td>19-11-2022</td>
-                                        <td class="text-right">87.32</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="edit_pos.php?id=3241">3241</a></td>
-                                        <td></td>
-                                        <td>19-11-2022</td>
-                                        <td class="text-right">5,263.98</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="edit_pos.php?id=3240">3240</a></td>
-                                        <td></td>
-                                        <td>14-11-2022</td>
-                                        <td class="text-right">87.32</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="edit_pos.php?id=3239">3239</a></td>
-                                        <td></td>
-                                        <td>11-11-2022</td>
-                                        <td class="text-right">87.32</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="edit_pos.php?id=3238">3238</a></td>
-                                        <td></td>
-                                        <td>11-11-2022</td>
-                                        <td class="text-right">87.32</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="edit_pos.php?id=3237">3237</a></td>
-                                        <td></td>
-                                        <td>11-11-2022</td>
-                                        <td class="text-right">573.48</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="edit_pos.php?id=3236">3236</a></td>
-                                        <td>Gonza</td>
-                                        <td>10-11-2022</td>
-                                        <td class="text-right">4,125.28</td>
-                                    </tr>
-                                    <tr>
-                                        <td><a href="edit_pos.php?id=3235">3235</a></td>
-                                        <td>PEDRO AL</td>
-                                        <td>10-11-2022</td>
-                                        <td class="text-right">436.60</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div><!-- /.table-responsive -->
-                    </div><!-- /.box-body -->
-                    <div class="box-footer clearfix">
-                        <a href="pos.php" class="btn btn-sm btn-default btn-flat pull-left">Nueva venta</a>
-                        <a href="manage_invoice.php" class="btn btn-sm btn-default btn-flat pull-right">Ver todas las
-                            facturas</a>
-                    </div><!-- /.box-footer -->
-                </div><!-- /.box -->
+                @include('livewire.products.lastsales')
             </div>
             <!-- END LASTEST ORDER -->
             <!-- /.col -->
@@ -181,10 +91,8 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Nuevos productos</h3>
                         <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" data-widget="collapse"><i
-                                    class="fa fa-minus"></i></button>
-                            <button class="btn btn-box-tool" data-widget="remove"><i
-                                    class="fa fa-times"></i></button>
+                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
                         </div>
                     </div><!-- /.box-header -->
                     <!--   /<div class="box-body">

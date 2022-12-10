@@ -1,5 +1,5 @@
 <article class="content-header  w-100">
-    <div class="row content-header">
+    <div class="row content-header ">
         <div class="col-xs-12 col-md-4">
             <div class="input-group">
                 <div class="input-group-addon">
@@ -20,34 +20,21 @@
                 @enderror
             </div><!-- /input-group Date from -->
         </div>
-        <div class="col-md-3 col-sm-12 col-xs-12">
-            <div class="input-group">
-                <select wire:model="userid" id="sale_by" class="form-control">
-                    <option value="">Selecciona tipo de reporte </option>
-                </select>
-            </div>
-        </div>
-        <!-- <div class="col-md-3 col-xs-12">
-    / <select class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el cliente" name="customer_id" id="customer_id" tabindex="-1" aria-hidden="true">
-    </select> -->
-        <!-- /
-    <span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" style="width: 619px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-customer_id-container"><span class="select2-selection__rendered" id="select2-customer_id-container"><span class="select2-selection__placeholder">Selecciona el cliente</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-</div>-->
 
         @if ($userid > 0 && $fromDate != null && $toDate != null)
-            <div class="col-md-2 col-sm-12 col-xs-12 ">
-                <div class="d-flex flex-wrap justify-content-space-bettween align-items-center">
+            <div class="col-md-4 col-sm-12 col-xs-12 ">
+                <div class="form-group">
                     <button wire:click.prevent="Consultar()" type="button"
-                        class="btn btn-flat btn-sm">Consultar</button>
+                        class="btn btn-flat btn-md">Consultar</button>
                     @if ($total > 0)
-                        <button wire:click.prevent="Print()" type="button" class="btn btn-flat btn-sm"><span><i
+                        <button wire:click.prevent="Print()" type="button" class="btn btn-flat btn-md"><span><i
                                     class="fa fa-print class="text-light></i> </span>Imprimir</button>
                     @endif
                 </div>
             </div>
         @endif
 
-        <div class="col-md-3 col-sm-12 col-xs-12 float-right">
+        <div class="col-md-4 col-sm-12 col-xs-12 float-right">
             <div class="input-group">
                 <select wire:model="userid" id="sale_by" class="form-control">
                     <option value="">Selecciona cajero </option>
@@ -64,11 +51,11 @@
             </div>
         </div>
         <!-- / <div class="col-xs-10 col-md-3 ">
-    <div class="btn-group pull-right">
-        <button type="button" onclick="reporte();" class="btn btn-default"><i class="fa fa-print"></i> PDF
-        </button><button type="button" onclick="ventas_excel();" class="btn btn-default"><i class="fa fa-file-excel-o"></i>   Excel
-    </button></div>
-</div>-->
+                <div class="btn-group pull-right">
+                    <button type="button" onclick="reporte();" class="btn btn-default"><i class="fa fa-print"></i> PDF
+                    </button><button type="button" onclick="ventas_excel();" class="btn btn-default"><i class="fa fa-file-excel-o"></i>   Excel
+                </button></div>
+            </div>-->
         <input type="hidden" id="per_page" value="15">
     </div>
     <!-- Main content -->
@@ -136,6 +123,7 @@
                                     </tr>
                                 @endif
                             </tbody>
+                          
                         </table>
                         <div style="margin: 5px;">
                         </div>
@@ -156,13 +144,7 @@
                             });
                         </script>
                     </div>
-                    <!-- /SCRIPTS -->
-                    <!-- /<div class="box-footer">
-                </div>-->
-                    <!-- /.box-footer -->
-                </div><!-- /.box -->
-                <!-- MODAL CREATE & EDIT -->
-                <!--  END MODAL -->
+                      @include('livewire.reports.form')
             </div><!-- row -->
     </section>
 </article><!-- /.content -->

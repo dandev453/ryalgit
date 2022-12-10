@@ -31,10 +31,10 @@ class HomeComponent extends Component
 
     public function render()
     {
-        $salesLists = Sale::join('sale_details as d', 'd.sale_id', 'sales.id')
-            ->join('products as p', 'p.id', 'd.product_id')
-            ->join('users as u', 'u.id', 'sales.user_id')
-            ->select('d.sale_id', 'p.name as product', 'd.quantity', 'd.price')
+        
+        $salesLists = Sale::join('users as u', 'u.id', 'sales.user_id')
+            ->select('sales.id as s_id','sales.total as total','sales.created_at as fecha','u.name as cliente')
+            ->orderBy('s_id','Desc')
             ->where('sales.status', 'Paid')
             ->paginate($this->pagination);
 
@@ -46,10 +46,27 @@ class HomeComponent extends Component
         $this->componentName = 'Entrada';
         return view('livewire.Home.component', [
             'data' => $products,
-            'salesLastlist' => $salesLists,
+            'lsales' => $salesLists,
             'categories' => Category::orderBy('name', 'asc')->get(),
         ])
             ->extends('layouts.theme.app')
             ->section('content');
+    }
+
+    public function viewDetails($saleId)
+    {
+      
+        $this->details = SaleDetails::join('products as p', 'p.id', 'd.product_id')
+            ->select('sale_details.id', 'sale_details.price', 'sale_details.quantity', 'p.name as product')
+            ->where('sale_details.sale_id', $saleId)
+            ->get();
+        //
+        $suma = $this->details->sum(function($item){
+            return $item->price * $item->quantity;
+        });
+        $this->sumDetails = $sum;
+        $this->countDetails = $this->sum('quantity');
+        $this->saleId = $saleId;
+        $this->emit('show-modal', 'Show modal');
     }
 }
