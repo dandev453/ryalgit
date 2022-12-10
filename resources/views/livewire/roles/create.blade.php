@@ -134,4 +134,6 @@
 		<!-- /.nav-tabs-custom -->
 	</form>
 </div>
+</section>
+</div>
 <!-- /.col -->

@@ -10,7 +10,6 @@ use Spatie\Permission\Models\Permission;
 
 class PermisosComponent extends Component
 {
-
     use WithPagination;
 
     public $permissionName, $search, $selected_id, $pageTitle, $componentName;
@@ -19,7 +18,7 @@ class PermisosComponent extends Component
     public function mount()
     {
         $this->role = 'Elegir';
-        $this->componentName = "PERMISOS";
+        $this->componentName = 'PERMISOS';
     }
 
     public function paginationView()
@@ -27,20 +26,20 @@ class PermisosComponent extends Component
         return 'vendor.livewire.admin-lte';
     }
 
-     public function render()
+    public function render()
     {
-        if(strlen($this->search) > 0)
+        if (strlen($this->search) > 0) {
             $permisos = Permission::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
-        else
+        } else {
             $permisos = Permission::orderBy('name', 'asc')->paginate($this->pagination);
+        }
 
         return view('livewire.permisos.component', [
-            'permisos' => $permisos
+            'permisos' => $permisos,
         ])
-        ->extends('layouts.theme.app')
-        ->section('content');
+            ->extends('layouts.theme.app')
+            ->section('content');
     }
-
 
     public function CreatePermission()
     {
@@ -48,14 +47,14 @@ class PermisosComponent extends Component
 
         $messages = [
             'permissionName.required' => 'Elnombre del permiso es requerido',
-            'permissionName.min'      => 'El nombre del permiso debe tener al menos 2 carateres',
-            'permissionName.unique'   => 'El permiso ya existe'
+            'permissionName.min' => 'El nombre del permiso debe tener al menos 2 carateres',
+            'permissionName.unique' => 'El permiso ya existe',
         ];
 
         $this->validate($rules, $messages);
 
         Permission::create([
-            'name' => $this->permissionName
+            'name' => $this->permissionName,
         ]);
 
         $this->emit('permiso-added', 'Se registró el permiso con exito');
@@ -77,8 +76,8 @@ class PermisosComponent extends Component
 
         $messages = [
             'permissionName.required' => 'Elnombre del permiso es requerido',
-            'permissionName.min'      => 'El nombre debe tener al menos 3 carateres',
-            'permissionName.unique'   => 'El permiso ya existe'
+            'permissionName.min' => 'El nombre debe tener al menos 3 carateres',
+            'permissionName.unique' => 'El permiso ya existe',
         ];
         $this->validate($rules, $messages);
 
@@ -91,15 +90,16 @@ class PermisosComponent extends Component
     }
 
     protected $listeners = [
-        'destroy' => 'Destroy'
+        'destroy' => 'Destroy',
     ];
 
     public function Destroy($id)
     {
         //dd($id);
-        $rolesCount = Permission::find($id)->getRoleNames()->count();
-        if ($rolesCount > 0)
-        {
+        $rolesCount = Permission::find($id)
+            ->getRoleNames()
+            ->count();
+        if ($rolesCount > 0) {
             $this->emit('permission-error', 'No se puede eliminar el permiso, porque tiene roles asociados.');
             return;
         }

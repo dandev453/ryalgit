@@ -66,3 +66,6 @@
 		@endif
 	</div>
 </div>
+</section>
+</div>
+</div>

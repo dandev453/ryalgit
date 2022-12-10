@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Livewire;
 
 use Livewire\Component;
@@ -12,9 +11,10 @@ use Carbon\Carbon;
 
 class ProfileComponent extends Component
 {
-  public function render()
-  {
-  		return view('livewire.profile.component')->extends('layouts.theme.app')
+    public function render()
+    {
+        return view('livewire.profile.component')
+            ->extends('layouts.theme.app')
             ->section('content');
-  }
+    }
 }

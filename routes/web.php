@@ -13,6 +13,7 @@ use App\Http\Livewire\Categories;
 use App\Http\Livewire\EditProductsComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\ProductsComponent;
+use App\Http\Livewire\ManageInvoiceComponent;
 use App\Http\Livewire\lastProductsComponent;
 use App\Http\Livewire\ProfileComponent;
 use App\Http\Livewire\PurchaseComponent;
@@ -53,17 +54,19 @@ Route::get('pos', PosComponent::class);
 Route::get('profile', PosComponent::class);
 Route::get('coins', CoinsComponent::class);
 Route::get('roles', RolesComponent::class);
+Route::get('business_profile', ProfileComponent::class);
 Route::get('permisos', PermisosComponent::class);
 Route::get('asignar', AsignarComponent::class);
 Route::get('sales_report', CashoutComponent::class);
+Route::get('manage_reports', ManageInvoiceComponent::class);
 Route::get('add_product', CreateProductsComponent::class);
+Route::get('business_profile', ProfileComponent::class);
 Route::get('new_purchase', PurchaseComponent::class);
 Route::get('product/{id}', EditProductsComponent::class);
 //rutas impresion
 Route::get('print/sale/{id}','PrinterController@TicketVenta');
 
 });
-
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -12,36 +12,40 @@ class AsignarComponent extends Component
 {
     use WithPagination;
 
-    public $componentName, $search, $role, $permisosSelected = [], $old_permissions = [];
+    public $componentName,
+        $search,
+        $role,
+        $permisosSelected = [],
+        $old_permissions = [];
     private $pagination = 10;
 
     public function mount()
     {
         $this->role = 'Elegir';
-        $this->componentName = "Asignar Permisos";
-
+        $this->componentName = 'Asignar Permisos';
     }
 
     public function render()
     {
-          if(strlen($this->search) > 0)
+        if (strlen($this->search) > 0) {
             $permisos = Permission::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
-        else
+        } else {
             $permisos = Permission::orderBy('name', 'asc')->paginate($this->pagination);
+        }
 
-        $permisos = Permission::select('name', 'id', DB::raw("0 as checked") )
+        $permisos = Permission::select('name', 'id', DB::raw('0 as checked'))
             ->orderBy('name', 'asc')
             ->paginate($this->pagination);
 
-        if ($this->role != 'Elegir')
-        {
+        if ($this->role != 'Elegir') {
             $list = Permission::join('role_has_permissions as rp', 'rp.permission_id', 'permissions.id')
-                ->where('role_id', $this->role)->pluck('permissions.id')->toArray();
+                ->where('role_id', $this->role)
+                ->pluck('permissions.id')
+                ->toArray();
 
             $this->old_permissions = $list;
         }
-        if ($this->role != 'Elegir')
-        {
+        if ($this->role != 'Elegir') {
             foreach ($permisos as $permiso) {
                 $role = Role::find($this->role);
                 $tienePermiso = $role->hasPermissionTo($permiso->name);
@@ -52,16 +56,17 @@ class AsignarComponent extends Component
         }
         return view('livewire.asignar.component', [
             'roles' => Role::orderBy('name', 'asc')->get(),
-            'permisos' => $permisos
-        ])->extends('layouts.theme.app')->section('content');
+            'permisos' => $permisos,
+        ])
+            ->extends('layouts.theme.app')
+            ->section('content');
     }
 
     protected $listeners = ['revokeall' => 'RemoveAll'];
 
     public function RemoveAll()
     {
-        if ($this->role == 'Elegir')
-        {
+        if ($this->role == 'Elegir') {
             $this->emit('sync-error', 'Selecciona un rol válido');
             return;
         }
@@ -72,8 +77,7 @@ class AsignarComponent extends Component
 
     public function SyncAll()
     {
-        if ($this->role == 'Elegir')
-        {
+        if ($this->role == 'Elegir') {
             $this->emit('sync-error', 'Selecciona un rol válido');
             return;
         }
@@ -83,11 +87,10 @@ class AsignarComponent extends Component
         $role->syncPermissions($permisos);
         $this->emit('syncall', "Se sincronizaron todos los permisos al rol $role->name ");
     }
-     public function CreatePermission()
+    public function CreatePermission()
     {
-
         Permission::create([
-            'name' => $this->permissionName
+            'name' => $this->permissionName,
         ]);
 
         $this->emit('permiso-added', 'Se registró el permiso con exito');
@@ -104,8 +107,7 @@ class AsignarComponent extends Component
     }
     public function SyncPermiso($state, $permisoName)
     {
-        if ($this->role != 'Elegir')
-        {
+        if ($this->role != 'Elegir') {
             $roleName = Role::find($this->role);
             if ($state) {
                 $roleName->givePermissionTo($permisoName);
@@ -114,10 +116,8 @@ class AsignarComponent extends Component
                 $roleName->revokePermissionTo($permisoName);
                 $this->emit('permi', 'Permiso revocado correctamente.');
             }
-
         } else {
-            $this->emit('permi', "Elige un rol válido");
+            $this->emit('permi', 'Elige un rol válido');
         }
     }
-    
 }

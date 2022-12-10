@@ -1,14 +1,14 @@
 <section class="sidebar">
     <!-- Sidebar user panel -->
-    <div class="user-panel">
-        <div class="pull-left image">
-            <img src="{{ asset('assets/img/avatar.png') }}" class="img-circle" alt="User Image">
-        </div>
-        <div class="pull-left info">
-            <p> {{ auth()->user()->name}}</p>
-            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
+<div class="user-panel">
+    <div class="pull-left image">
+        <img src="" class="img-circle" alt="User Image">
     </div>
+    <div class="pull-left info">
+        <p></p> <!-- / Name user in login -->
+        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+    </div>
+</div>
     <!-- search form -->
     <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
@@ -22,7 +22,7 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu">
         <li class="active">
-            <a href="Javascript::void(0)">
+            <a href="/">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
         </li>
@@ -63,7 +63,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="forms/general.html"><i class="glyphicon glyphicon-list-alt"></i> Administrar facturas</a></li>
+                <li><a href="/manage_reports"><i class="glyphicon glyphicon-list-alt"></i> Administrar facturas</a></li>
             </ul>
         </li>
         <li class="active">
@@ -84,12 +84,12 @@
             </ul>
         </li>
         <li class="treeview">
-            <a href="calendar.html">
+            <a href="javascript::void(0)">
                 <i class="fa fa-wrench"></i> <span>Configuración</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="tables/simple.html"><i class="glyphicon glyphicon-briefcase"></i> Perfil de la empresa</a></li>
+                <li><a href="business_profile"><i class="glyphicon glyphicon-briefcase"></i> Perfil de la empresa</a></li>
                 <li><a href="/coins"><i class="fa fa-usd"></i> Monedas </a></li>
                 <li><a href="javascript::void(0)"><i class="fa fa-align-justify"></i>Impuestos</a></li>
             </ul>

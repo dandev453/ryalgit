@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -15,10 +14,10 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->string('name',255);
-            $table->text('address',500)->nullable();
-            $table->string('phone',10)->nullable();
-            $table->string('taxpayer_id',20)->nullable();
+            $table->string('name', 255);
+            $table->text('address', 500)->nullable();
+            $table->string('phone', 10)->nullable();
+            $table->string('taxpayer_id', 20)->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-       Schema::dropIfExists('companies');
+        Schema::dropIfExists('companies');
     }
 };

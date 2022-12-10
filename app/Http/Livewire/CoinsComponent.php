@@ -20,9 +20,9 @@ class CoinsComponent extends Component
     {
         $this->pageTitle = 'Listado';
         $this->componentName = 'Denominaciones';
-        $this->type ='Seleccionar';
+        $this->type = 'Seleccionar';
     }
-    
+
     public function paginationView()
     {
         return 'vendor.livewire.admin-lte';
@@ -30,20 +30,22 @@ class CoinsComponent extends Component
 
     public function render()
     {
-        if (strlen($this->search) > 0)
+        if (strlen($this->search) > 0) {
             $data = Denomination::where('type', 'like', '%' . $this->search . '%')->paginate($this->pagination);
-        else
+        } else {
             $data = Denomination::orderBy('id', 'desc')->paginate($this->pagination);
+        }
 
         return view('livewire.denominations.component', [
-            'data' => $data
+            'data' => $data,
         ])
-        ->extends('layouts.theme.app')
-        ->section('content');
+            ->extends('layouts.theme.app')
+            ->section('content');
     }
 
-    public function Edit($id) {
-        $record = Denomination::find($id, ['id','type', 'value','image']); //array para obtener columnas
+    public function Edit($id)
+    {
+        $record = Denomination::find($id, ['id', 'type', 'value', 'image']); //array para obtener columnas
         $this->type = $record->type;
         $this->value = $record->value;
         $this->selected_id = $record->id;
@@ -52,28 +54,29 @@ class CoinsComponent extends Component
         $this->emit('show-modal', 'show modal');
     }
 
-    public function Store() {
+    public function Store()
+    {
         $rules = [
             'type' => 'required|not_in:Seleccionar',
-            'value' => 'required|unique:denominations'
+            'value' => 'required|unique:denominations',
         ];
-        $messages =[
+        $messages = [
             'type.required' => 'El tipo es requerido',
             'type.not_in' => 'Seleccione un tipo',
             'value.required' => 'El valor es requerido.',
-            'value.unique' => 'El valor ya existe.'
+            'value.unique' => 'El valor ya existe.',
         ];
 
         $this->validate($rules, $messages);
 
         $denomination = Denomination::create([
             'type' => $this->type,
-            'value' => $this->value
+            'value' => $this->value,
         ]);
 
-        if($this->image) {
+        if ($this->image) {
             $customFileName = uniqid() . '_.' . $this->image->extension();
-            $this->image->storeAs('public/denominations',$customFileName);
+            $this->image->storeAs('public/denominations', $customFileName);
             $denomination->image = $customFileName;
             $denomination->save();
         }
@@ -85,9 +88,9 @@ class CoinsComponent extends Component
     {
         $rules = [
             'type' => 'required|not_in:Seleccionar',
-            'value' => "required|unique:denominations,value,{$this->selected_id}"
+            'value' => "required|unique:denominations,value,{$this->selected_id}",
         ];
-        $messages =[
+        $messages = [
             'type.required' => 'El tipo es requerido',
             'type.not_in' => 'Seleccione un tipo',
             'value.required' => 'El valor es requerido.',
@@ -99,9 +102,9 @@ class CoinsComponent extends Component
         $denomination = Denomination::find($this->selected_id);
         $denomination->update([
             'type' => $this->type,
-            'value' => $this->value
+            'value' => $this->value,
         ]);
-        if ($this->image){
+        if ($this->image) {
             $customFileName = uniqid() . '_.' . $this->image->extension();
             $this->image->storeAs('public/denominations', $customFileName);
             $imageName = $denomination->image;
@@ -109,10 +112,8 @@ class CoinsComponent extends Component
             $denomination->image = $customFileName;
             $denomination->save();
 
-            if ($imageName != null)
-            {
-                if(file_exists('storage/denominations' . $imageName))
-                {
+            if ($imageName != null) {
+                if (file_exists('storage/denominations' . $imageName)) {
                     unlink('storage/denominations' . $imageName);
                 }
             }
@@ -123,7 +124,7 @@ class CoinsComponent extends Component
     }
 
     protected $listeners = [
-        'deleteRow' => 'Destroy'
+        'deleteRow' => 'Destroy',
     ];
 
     public function Destroy(Denomination $denomination)
@@ -132,18 +133,19 @@ class CoinsComponent extends Component
         $imageName = $denomination->image; //imagen temporal
         $denomination->delete();
 
-        if ($imageName != null){
+        if ($imageName != null) {
             unlink('storage/denominations/' . $imageName);
         }
         $this->resetUI();
         $this->emit('item-deleted', 'Denominación eliminada');
     }
 
-    public function resetUI() {
-        $this->type ='';
-        $this->value ='';
-        $this->image =null;
-        $this->search ='';
+    public function resetUI()
+    {
+        $this->type = '';
+        $this->value = '';
+        $this->image = null;
+        $this->search = '';
         $this->selected_id = 0;
     }
 }

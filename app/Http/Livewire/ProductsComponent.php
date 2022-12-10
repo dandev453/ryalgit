@@ -15,7 +15,7 @@ class ProductsComponent extends Component
     use WithPagination;
     use WithFileUploads;
 
-     public $name, $barcode, $cost, $price, $stock, $alerts, $category_id, $search, $image, $selected_id, $pageTitle, $componentName;
+    public $name, $barcode, $cost, $price, $stock, $alerts, $category_id, $search, $image, $selected_id, $pageTitle, $componentName;
     private $pagination = 10;
 
     public function paginationView()
@@ -30,36 +30,38 @@ class ProductsComponent extends Component
     }
     public function render()
     {
-        if (strlen($this->search) > 0)
+        if (strlen($this->search) > 0) {
             $products = Product::join('categories as c', 'c.id', 'products.category_id')
-        ->select('products.*', 'c.name as category')
-        ->where('products.name','like', '%' .$this->search . '%')
-        ->orWhere('products.barcode','like', '%' .$this->search . '%')
-        ->orWhere('c.name','like', '%' .$this->search . '%')
-        ->orderBy('products.name', 'asc')
-        ->paginate($this->pagination);
-        else
+                ->select('products.*', 'c.name as category')
+                ->where('products.name', 'like', '%' . $this->search . '%')
+                ->orWhere('products.barcode', 'like', '%' . $this->search . '%')
+                ->orWhere('c.name', 'like', '%' . $this->search . '%')
+                ->orderBy('products.name', 'asc')
+                ->paginate($this->pagination);
+        } else {
             $products = Product::join('categories as c', 'c.id', 'products.category_id')
-        ->select('products.*', 'c.name as category')
-        ->orderBy('products.name', 'asc')
-        ->paginate($this->pagination);
+                ->select('products.*', 'c.name as category')
+                ->orderBy('products.name', 'asc')
+                ->paginate($this->pagination);
+        }
         return view('livewire.products.component', [
             'data' => $products,
-            'categories' => Category::orderBy('name', 'asc')->get()
-        ])->extends('layouts.theme.app')
+            'categories' => Category::orderBy('name', 'asc')->get(),
+        ])
+            ->extends('layouts.theme.app')
             ->section('content');
     }
-        public function Store()
+    public function Store()
     {
         $rules = [
-            'name'        => 'required|unique:products|min:3',
-            'cost'        => 'required',
-            'price'       => 'required',
-            'stock'       => 'required',
-            'alerts'      => 'required',
+            'name' => 'required|unique:products|min:3',
+            'cost' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+            'alerts' => 'required',
             'category_id' => 'required|not_in:Seleccione',
         ];
-        $messages =[
+        $messages = [
             'name.required' => 'Nombre del producto es requerido',
             'name.unique' => 'Ya existe el nombre del producto',
             'name.min' => 'El nombre del producto debe tener al menos 3 caracteres.',
@@ -73,17 +75,16 @@ class ProductsComponent extends Component
         $this->validate($rules, $messages);
 
         $product = Product::create([
-            'name'        => $this->name,
-            'cost'        => $this->cost,
-            'price'       => $this->price,
-            'barcode'     => $this->barcode,
-            'stock'       => $this->stock,
-            'alerts'      => $this->alerts,
-            'category_id' => $this->category_id
+            'name' => $this->name,
+            'cost' => $this->cost,
+            'price' => $this->price,
+            'barcode' => $this->barcode,
+            'stock' => $this->stock,
+            'alerts' => $this->alerts,
+            'category_id' => $this->category_id,
         ]);
 
-        if ($this->image)
-        {
+        if ($this->image) {
             $customFileName = uniqid() . '_.' . $this->image->extension();
             $this->image->storeAs('/public/products', $customFileName);
             $product->image = $customFileName;
@@ -109,14 +110,14 @@ class ProductsComponent extends Component
     public function Update()
     {
         $rules = [
-            'name'        => "required|min:3|unique:products,name,{$this->selected_id}",
-            'cost'        => 'required',
-            'price'       => 'required',
-            'stock'       => 'required',
-            'alerts'      => 'required',
+            'name' => "required|min:3|unique:products,name,{$this->selected_id}",
+            'cost' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+            'alerts' => 'required',
             'category_id' => 'required|not_in:Seleccione',
         ];
-        $messages =[
+        $messages = [
             'name.required' => 'Nombre del producto es requerido',
             'name.unique' => 'Ya existe el nombre del producto',
             'name.min' => 'El nombre del producto debe tener al menos 3 caracteres.',
@@ -132,25 +133,23 @@ class ProductsComponent extends Component
         $product = Product::find($this->selected_id);
 
         $product->update([
-            'name'        => $this->name,
-            'cost'        => $this->cost,
-            'price'       => $this->price,
-            'barcode'     => $this->barcode,
-            'stock'       => $this->stock,
-            'alerts'      => $this->alerts,
-            'category_id' => $this->category_id
+            'name' => $this->name,
+            'cost' => $this->cost,
+            'price' => $this->price,
+            'barcode' => $this->barcode,
+            'stock' => $this->stock,
+            'alerts' => $this->alerts,
+            'category_id' => $this->category_id,
         ]);
 
-        if ($this->image)
-        {
+        if ($this->image) {
             $customFileName = uniqid() . '_.' . $this->image->extension();
             $this->image->storeAs('/public/products', $customFileName);
             $imageTemp = $product->image; //imagen temporal
             $product->image = $customFileName;
             $product->save();
 
-            if ($imageTemp != null)
-            {
+            if ($imageTemp != null) {
                 if (file_exists('storage/products/' . $imageTemp)) {
                     unlink('storage/products/' . $imageTemp);
                 }
@@ -160,16 +159,17 @@ class ProductsComponent extends Component
         $this->emit('product-updated', 'Producto Actualizado');
     }
 
-    public function resetUI() {
-        $this->name ='';
-        $this->barcode ='';
-        $this->cost ='';
-        $this->price ='';
-        $this->stock ='';
-        $this->alerts ='';
-        $this->category_id ='Seleccione';
-        $this->image =null;
-        $this->search ='';
+    public function resetUI()
+    {
+        $this->name = '';
+        $this->barcode = '';
+        $this->cost = '';
+        $this->price = '';
+        $this->stock = '';
+        $this->alerts = '';
+        $this->category_id = 'Seleccione';
+        $this->image = null;
+        $this->search = '';
         $this->selected_id = 0;
     }
 
@@ -188,6 +188,5 @@ class ProductsComponent extends Component
 
         $this->resetUI();
         $this->emit('product-deleted', 'Producto Eliminado');
-
     }
 }

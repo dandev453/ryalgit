@@ -28,7 +28,7 @@
                                             <div class="progress-bar" style="width: 100%"></div>
                                         </div>
                                         <span class="progress-description">
-                                        Productos en stock: 13 </span>
+                                            Productos en stock: 13 </span>
                                     </div><!-- /.info-box-content -->
                                 </div><!-- /.info-box -->
                                 <div class="info-box bg-green">
@@ -40,7 +40,7 @@
                                             <div class="progress-bar" style="width: 100%"></div>
                                         </div>
                                         <span class="progress-description">
-                                        Facturas emitidas: 350 </span>
+                                            Facturas emitidas: 350 </span>
                                     </div><!-- /.info-box-content -->
                                 </div><!-- /.info-box -->
                                 <div class="info-box bg-yellow">
@@ -52,7 +52,7 @@
                                             <div class="progress-bar" style="width: 100%"></div>
                                         </div>
                                         <span class="progress-description">
-                                        Compras realizadas: 34 </span>
+                                            Compras realizadas: 34 </span>
                                     </div><!-- /.info-box-content -->
                                 </div><!-- /.info-box -->
                                 <div class="info-box bg-aqua">
@@ -64,7 +64,7 @@
                                             <div class="progress-bar" style="width: 100%"></div>
                                         </div>
                                         <span class="progress-description">
-                                        Clientes nuevos: 1 </span>
+                                            Clientes nuevos: 1 </span>
                                     </div><!-- /.info-box-content -->
                                 </div><!-- /.info-box -->
                             </div><!-- /.col -->
@@ -163,7 +163,8 @@
                     </div><!-- /.box-body -->
                     <div class="box-footer clearfix">
                         <a href="pos.php" class="btn btn-sm btn-default btn-flat pull-left">Nueva venta</a>
-                        <a href="manage_invoice.php" class="btn btn-sm btn-default btn-flat pull-right">Ver todas las facturas</a>
+                        <a href="manage_invoice.php" class="btn btn-sm btn-default btn-flat pull-right">Ver todas las
+                            facturas</a>
                     </div><!-- /.box-footer -->
                 </div><!-- /.box -->
             </div><!-- /.col -->
@@ -173,8 +174,10 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Nuevos productos</h3>
                         <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            <button class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i></button>
+                            <button class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i></button>
                         </div>
                     </div><!-- /.box-header -->
                     <div class="box-body">
@@ -184,7 +187,8 @@
                                     <img src="img/productos/1545277406_sony.jpg" alt="Product Image">
                                 </div>
                                 <div class="product-info">
-                                    <a href="edit_product.php?id=21" class="product-title">Cámara Sony DSC-HX400V <span class="label label-info pull-right">450.00</span></a>
+                                    <a href="edit_product.php?id=21" class="product-title">Cámara Sony DSC-HX400V
+                                        <span class="label label-info pull-right">450.00</span></a>
                                     <span class="product-description">
                                     </span>
                                 </div>
@@ -194,7 +198,8 @@
                                     <img src="img/productos/1545277347_033744500.1433346759.jpg" alt="Product Image">
                                 </div>
                                 <div class="product-info">
-                                    <a href="edit_product.php?id=20" class="product-title">Cámara fotográfica Sony <span class="label label-info pull-right">274.00</span></a>
+                                    <a href="edit_product.php?id=20" class="product-title">Cámara fotográfica Sony
+                                        <span class="label label-info pull-right">274.00</span></a>
                                     <span class="product-description">
                                     </span>
                                 </div>
@@ -204,7 +209,8 @@
                                     <img src="img/productos/1545277243_393791-7.jpg" alt="Product Image">
                                 </div>
                                 <div class="product-info">
-                                    <a href="edit_product.php?id=19" class="product-title">Canon Cámara Fotográfica <span class="label label-info pull-right">500.00</span></a>
+                                    <a href="edit_product.php?id=19" class="product-title">Canon Cámara Fotográfica
+                                        <span class="label label-info pull-right">500.00</span></a>
                                     <span class="product-description">
                                     </span>
                                 </div>
@@ -214,7 +220,8 @@
                                     <img src="img/productos/1545277174_estuche.jpg" alt="Product Image">
                                 </div>
                                 <div class="product-info">
-                                    <a href="edit_product.php?id=18" class="product-title">Estuche para Cámara <span class="label label-info pull-right">29.00</span></a>
+                                    <a href="edit_product.php?id=18" class="product-title">Estuche para Cámara <span
+                                            class="label label-info pull-right">29.00</span></a>
                                     <span class="product-description">
                                     </span>
                                 </div>
@@ -224,7 +231,8 @@
                                     <img src="img/productos/1545277096_amgo.jpg" alt="Product Image">
                                 </div>
                                 <div class="product-info">
-                                    <a href="edit_product.php?id=17" class="product-title">Celular Amgoo 530 <span class="label label-info pull-right">60.00</span></a>
+                                    <a href="edit_product.php?id=17" class="product-title">Celular Amgoo 530 <span
+                                            class="label label-info pull-right">60.00</span></a>
                                     <span class="product-description">
                                     </span>
                                 </div>
@@ -237,29 +245,29 @@
                 </div><!-- /.box -->
             </div><!-- /.col -->
         </div>
-        
+
     </section><!-- /.content -->
 </div>
 @section('scripts')
-<script>
-    const ctx = document.getElementById('myChart');
-    new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+    <script>
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
                 }
             }
-        }
-    });
-</script>
+        });
+    </script>
 @endsection

@@ -8,10 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'name',
-        'image',
-    ];
+    protected $fillable = ['name', 'image'];
 
     public function products()
     {
@@ -20,9 +17,10 @@ class Category extends Model
 
     public function getImagenAttribute()
     {
-        if (file_exists('storage/categories/' . $this->image))
+        if (file_exists('storage/categories/' . $this->image)) {
             return $this->image;
-        else
+        } else {
             return 'no-image.png';
+        }
     }
 }

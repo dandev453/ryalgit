@@ -24,14 +24,14 @@
                                 <!-- Info Boxes Style 2 -->
                                 <div class="info-box bg-purple">
                                     <span class="info-box-icon"><i class="fa fa-tags"></i></span>
-                                        <div class="info-box-content">
+                                    <div class="info-box-content">
                                         <span class="info-box-text">INVENTARIO NETO</span>
                                         <span class="info-box-number">457,416.61</span>
                                         <div class="progress">
                                             <div class="progress-bar" style="width: 100%"></div>
                                         </div>
                                         <span class="progress-description">
-                                        Facturas emitidas: 350 </span>
+                                            Facturas emitidas: 350 </span>
                                     </div><!-- /.info-box-content -->
                                 </div><!-- /.info-box -->
                                 <div class="info-box bg-green">
@@ -43,7 +43,7 @@
                                             <div class="progress-bar" style="width: 100%"></div>
                                         </div>
                                         <span class="progress-description">
-                                        Facturas emitidas: 350 </span>
+                                            Facturas emitidas: 350 </span>
                                     </div><!-- /.info-box-content -->
                                 </div><!-- /.info-box -->
                                 <div class="info-box bg-yellow">
@@ -55,7 +55,7 @@
                                             <div class="progress-bar" style="width: 100%"></div>
                                         </div>
                                         <span class="progress-description">
-                                        Compras realizadas: 34 </span>
+                                            Compras realizadas: 34 </span>
                                     </div><!-- /.info-box-content -->
                                 </div><!-- /.info-box -->
                                 <div class="info-box bg-aqua">
@@ -67,7 +67,7 @@
                                             <div class="progress-bar" style="width: 100%"></div>
                                         </div>
                                         <span class="progress-description">
-                                        Clientes nuevos: 1 </span>
+                                            Clientes nuevos: 1 </span>
                                     </div><!-- /.info-box-content -->
                                 </div><!-- /.info-box -->
                             </div><!-- /.col -->
@@ -167,7 +167,8 @@
                     </div><!-- /.box-body -->
                     <div class="box-footer clearfix">
                         <a href="pos.php" class="btn btn-sm btn-default btn-flat pull-left">Nueva venta</a>
-                        <a href="manage_invoice.php" class="btn btn-sm btn-default btn-flat pull-right">Ver todas las facturas</a>
+                        <a href="manage_invoice.php" class="btn btn-sm btn-default btn-flat pull-right">Ver todas las
+                            facturas</a>
                     </div><!-- /.box-footer -->
                 </div><!-- /.box -->
             </div>
@@ -180,11 +181,13 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Nuevos productos</h3>
                         <div class="box-tools pull-right">
-                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                            <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            <button class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i></button>
+                            <button class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i></button>
                         </div>
                     </div><!-- /.box-header -->
-                 <!--   /<div class="box-body">
+                    <!--   /<div class="box-body">
                         <ul class="products-list product-list-in-box">
                             <li class="item">
                                 <div class="product-img">
@@ -196,7 +199,7 @@
                                     </span>
                                 </div>
                             </li><!-- /.item -->
-                           <!--   /  <li class="item">
+                    <!--   /  <li class="item">
                                 <div class="product-img">
                                     <img src="img/productos/1545277347_033744500.1433346759.jpg" alt="Product Image">
                                 </div>
@@ -206,7 +209,7 @@
                                     </span>
                                 </div>
                             </li><!-- /.item -->
-                           <!--   /  <li class="item">
+                    <!--   /  <li class="item">
                                 <div class="product-img">
                                     <img src="img/productos/1545277243_393791-7.jpg" alt="Product Image">
                                 </div>
@@ -216,7 +219,7 @@
                                     </span>
                                 </div>
                             </li><!-- /.item -->
-                           <!--   /  <li class="item">
+                    <!--   /  <li class="item">
                                 <div class="product-img">
                                     <img src="img/productos/1545277174_estuche.jpg" alt="Product Image">
                                 </div>
@@ -226,7 +229,7 @@
                                     </span>
                                 </div>
                             </li><!-- /.item -->
-                          <!--   /   <li class="item">
+                    <!--   /   <li class="item">
                                 <div class="product-img">
                                     <img src="img/productos/1545277096_amgo.jpg" alt="Product Image">
                                 </div>
@@ -236,9 +239,8 @@
                                     </span>
                                 </div>
                             </li><!-- /.item -->
-                        <!--   /  </ul> ><!-- /.item -->
-                         @include('livewire.products.lastproducts')
-                 
+                    <!--   /  </ul> ><!-- /.item -->
+                    @include('livewire.products.lastproducts')
                 </div><!-- /.box -->
             </div><!-- /.col -->
             <!-- END LASTEST -->

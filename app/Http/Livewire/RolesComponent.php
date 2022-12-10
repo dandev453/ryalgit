@@ -21,23 +21,24 @@ class RolesComponent extends Component
         $this->pageTitle = 'Listado';
         $this->componentName = 'Roles';
     }
-     public function paginationView()
+    public function paginationView()
     {
         return 'vendor.livewire.admin-lte';
     }
 
     public function render()
     {
-        if(strlen($this->search) > 0)
+        if (strlen($this->search) > 0) {
             $roles = Role::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
-        else
+        } else {
             $roles = Role::orderBy('name', 'asc')->paginate($this->pagination);
+        }
 
         return view('livewire.roles.component', [
-            'roles' => $roles
+            'roles' => $roles,
         ])
-        ->extends('layouts.theme.app')
-        ->section('content');
+            ->extends('layouts.theme.app')
+            ->section('content');
     }
 
     public function Store()
@@ -45,15 +46,15 @@ class RolesComponent extends Component
         $rules = ['roleName' => 'required|min:2|unique:roles,name'];
 
         $messages = [
-          'roleName.required' => 'Elnombre del rol es requerido',
-          'roleName.min'      => 'El nombre debe tener al menos 3 carateres',
-          'roleName.unique'   => 'El rol ya existe'
+            'roleName.required' => 'Elnombre del rol es requerido',
+            'roleName.min' => 'El nombre debe tener al menos 3 carateres',
+            'roleName.unique' => 'El rol ya existe',
         ];
 
         $this->validate($rules, $messages);
 
         Role::create([
-            'name' => $this->roleName
+            'name' => $this->roleName,
         ]);
 
         $this->emit('role-added', 'Se registró el rol con exito');
@@ -75,8 +76,8 @@ class RolesComponent extends Component
 
         $messages = [
             'roleName.required' => 'Elnombre del rol es requerido',
-            'roleName.min'      => 'El nombre debe tener al menos 3 carateres',
-            'roleName.unique'   => 'El rol ya existe'
+            'roleName.min' => 'El nombre debe tener al menos 3 carateres',
+            'roleName.unique' => 'El rol ya existe',
         ];
         $this->validate($rules, $messages);
 
@@ -89,15 +90,14 @@ class RolesComponent extends Component
     }
 
     protected $listeners = [
-      'destroy' => 'Destroy'
+        'destroy' => 'Destroy',
     ];
 
     public function Destroy($id)
     {
         //dd($id);
         $permissionsCount = Role::find($id)->permissions->count();
-        if ($permissionsCount > 0)
-        {
+        if ($permissionsCount > 0) {
             $this->emit('role-error', 'No se puede eliminar el role, porque tiene permisos asociados.');
             return;
         }

@@ -6,36 +6,37 @@ use App\Models\Product;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class EditProductsComponent extends ProductsComponent{
+class EditProductsComponent extends ProductsComponent
+{
     use WithFileUploads;
-	public function mount()
+    public function mount()
     {
         $this->pageTitle = 'Edit';
         $this->componentName = 'Editar producto';
         $this->category_id = 'Seleccione';
     }
 
-   
     public function render()
     {
         $products = Product::join('categories as c', 'c.id', 'products.category_id')
-        ->select('products.*', 'c.name as category')
-        ->orderBy('products.name', 'asc');
-        return view('livewire.products.edit')->extends('layouts.theme.app')
+            ->select('products.*', 'c.name as category')
+            ->orderBy('products.name', 'asc');
+        return view('livewire.products.edit')
+            ->extends('layouts.theme.app')
             ->section('content');
     }
 
     public function Update()
     {
         $rules = [
-            'name'        => "required|min:3|unique:products,name,{$this->selected_id}",
-            'cost'        => 'required',
-            'price'       => 'required',
-            'stock'       => 'required',
-            'alerts'      => 'required',
+            'name' => "required|min:3|unique:products,name,{$this->selected_id}",
+            'cost' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+            'alerts' => 'required',
             'category_id' => 'required|not_in:Seleccione',
         ];
-        $messages =[
+        $messages = [
             'name.required' => 'Nombre del producto es requerido',
             'name.unique' => 'Ya existe el nombre del producto',
             'name.min' => 'El nombre del producto debe tener al menos 3 caracteres.',
@@ -51,25 +52,23 @@ class EditProductsComponent extends ProductsComponent{
         $product = Product::find($this->selected_id);
 
         $product->update([
-            'name'        => $this->name,
-            'cost'        => $this->cost,
-            'price'       => $this->price,
-            'barcode'     => $this->barcode,
-            'stock'       => $this->stock,
-            'alerts'      => $this->alerts,
-            'category_id' => $this->category_id
+            'name' => $this->name,
+            'cost' => $this->cost,
+            'price' => $this->price,
+            'barcode' => $this->barcode,
+            'stock' => $this->stock,
+            'alerts' => $this->alerts,
+            'category_id' => $this->category_id,
         ]);
 
-        if ($this->image)
-        {
+        if ($this->image) {
             $customFileName = uniqid() . '_.' . $this->image->extension();
             $this->image->storeAs('/public/products', $customFileName);
             $imageTemp = $product->image; //imagen temporal
             $product->image = $customFileName;
             $product->save();
 
-            if ($imageTemp != null)
-            {
+            if ($imageTemp != null) {
                 if (file_exists('storage/products/' . $imageTemp)) {
                     unlink('storage/products/' . $imageTemp);
                 }
@@ -79,16 +78,17 @@ class EditProductsComponent extends ProductsComponent{
         $this->emit('product-updated', 'Producto Actualizado');
     }
 
-    public function resetUI() {
-        $this->name ='';
-        $this->barcode ='';
-        $this->cost ='';
-        $this->price ='';
-        $this->stock ='';
-        $this->alerts ='';
-        $this->category_id ='Seleccione';
-        $this->image =null;
-        $this->search ='';
+    public function resetUI()
+    {
+        $this->name = '';
+        $this->barcode = '';
+        $this->cost = '';
+        $this->price = '';
+        $this->stock = '';
+        $this->alerts = '';
+        $this->category_id = 'Seleccione';
+        $this->image = null;
+        $this->search = '';
         $this->selected_id = 0;
     }
 
@@ -107,6 +107,5 @@ class EditProductsComponent extends ProductsComponent{
 
         $this->resetUI();
         $this->emit('product-deleted', 'Producto Eliminado');
-
     }
 }

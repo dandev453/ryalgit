@@ -14,7 +14,11 @@ use Livewire\Component;
 
 class PosComponent extends Component
 {
-    public $total, $itemsQuantity, $denominations=[], $efectivo, $change;
+    public $total,
+        $itemsQuantity,
+        $denominations = [],
+        $efectivo,
+        $change;
 
     public function mount()
     {
@@ -26,27 +30,27 @@ class PosComponent extends Component
 
     public function render()
     {
-       // dd(Cart::getContent()->sortBy('name'));
+        // dd(Cart::getContent()->sortBy('name'));
         $this->denominations = Denomination::all();
         return view('livewire.pos.component', [
-                'denominations' => Denomination::orderBy('value', 'desc')->get(),
-                'cart' => Cart::getContent()->sortBy('name')
-            ])
+            'denominations' => Denomination::orderBy('value', 'desc')->get(),
+            'cart' => Cart::getContent()->sortBy('name'),
+        ])
             ->extends('layouts.theme.app')
             ->section('content');
     }
 
     public function ACash($value)
     {
-        $this->efectivo += ($value == 0 ? $this->total : $value);
-        $this->change = ($this->efectivo - $this->total);
+        $this->efectivo += $value == 0 ? $this->total : $value;
+        $this->change = $this->efectivo - $this->total;
     }
 
     protected $listeners = [
         'scan-code' => 'ScanCode',
         'removeItem' => 'removeItem',
         'clearCart' => 'clearCart',
-        'saveSale' => 'saveSale'
+        'saveSale' => 'saveSale',
     ];
 
     public function ScanCode($barcode, $cant = 1)
@@ -54,24 +58,22 @@ class PosComponent extends Component
         //dd($barcode); //** LLega el barcode OK!!
         $product = Product::where('barcode', $barcode)->first();
         //dd($product); //Producto encontrado!
-        if ($product == null || empty($product)){
+        if ($product == null || empty($product)) {
             $this->emit('scan-notfound', 'El producto no fue encontrado');
-        }else{
-            if ($this->InCart($product->id))
-            {
+        } else {
+            if ($this->InCart($product->id)) {
                 $this->increaseQty($product->id);
                 return;
             }
 
-            if ($product->stock < 1)
-            {
+            if ($product->stock < 1) {
                 $this->emit('no-stock', 'Stock insuficiente');
                 return;
             }
 
             Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
             /*$carro = Cart::getContent();
-            dd($carro);*/
+             dd($carro);*/
 
             $this->total = Cart::getTotal();
             $this->itemsQuantity = Cart::getTotalQuantity();
@@ -83,10 +85,11 @@ class PosComponent extends Component
     public function InCart($productId)
     {
         $exist = Cart::get($productId);
-        if ($exist)
+        if ($exist) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     public function increaseQty($productId, $cant = 1)
@@ -94,13 +97,13 @@ class PosComponent extends Component
         $title = '';
         $product = Product::find($productId);
         $exist = Cart::get($productId);
-        if ($exist)
+        if ($exist) {
             $title = 'Cantidad actualizada';
-        else
+        } else {
             $title = 'Producto agregada';
+        }
 
-        if ($product->stock < ($cant + $exist->quantity))
-        {
+        if ($product->stock < $cant + $exist->quantity) {
             $this->emit('no-stock', 'Stock insuficiente');
             return;
         }
@@ -116,23 +119,21 @@ class PosComponent extends Component
         $title = '';
         $product = Product::find($productId);
         $exist = Cart::get($productId);
-        if ($exist)
+        if ($exist) {
             $title = 'Cantidad actualizada';
-        else
+        } else {
             $title = 'Producto agregado';
+        }
 
-        if ($exist)
-        {
-            if ($product->stock < $cant)
-            {
+        if ($exist) {
+            if ($product->stock < $cant) {
                 $this->emit('no-stock', 'Stock insuficiente :/');
                 return;
             }
         }
 
         $this->removeItem($productId);
-        if ($cant > 0)
-        {
+        if ($cant > 0) {
             Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
             $this->total = Cart::getTotal();
             $this->itemsQuantity = Cart::getTotalQuantity();
@@ -152,9 +153,10 @@ class PosComponent extends Component
     {
         $item = Cart::get($productId);
         Cart::remove($productId);
-        $newQty = ($item->quantity) - 1;
-        if ($newQty > 0)
+        $newQty = $item->quantity - 1;
+        if ($newQty > 0) {
             Cart::add($item->id, $item->name, $item->price, $newQty);
+        }
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
         $this->emit('scan-ok', 'Cantidad actualizada');
@@ -172,17 +174,15 @@ class PosComponent extends Component
 
     public function saveSale()
     {
-        if ($this->total <= 0){
+        if ($this->total <= 0) {
             $this->emit('sale-error', 'AGREGA PRODUCTOS A LA VENTA');
             return;
         }
-        if ($this->efectivo <= 0)
-        {
+        if ($this->efectivo <= 0) {
             $this->emit('sale-error', 'INGRESA EL EFECTIVO');
             return;
         }
-        if ($this->total > $this->efectivo)
-        {
+        if ($this->total > $this->efectivo) {
             $this->emit('sale-error', 'EL EFECTIVO DEBE SER MAYOR O IGUAL AL TOTAL');
             return;
         }
@@ -191,18 +191,17 @@ class PosComponent extends Component
             $sale = Sale::create([
                 'total' => $this->total,
                 'items' => $this->itemsQuantity,
-                'cash'  => $this->efectivo,
-                'change'  => $this->change,
-                'user_id' => Auth()->user()->id
+                'cash' => $this->efectivo,
+                'change' => $this->change,
+                'user_id' => Auth()->user()->id,
             ]);
-            if ($sale)
-            {
+            if ($sale) {
                 $items = Cart::getContent();
                 foreach ($items as $item) {
                     SaleDetails::create([
-                        'price'          => $item->price,
-                        'quantity'       => $item->quantity,
-                        'product_id'  => $item->id,
+                        'price' => $item->price,
+                        'quantity' => $item->quantity,
+                        'product_id' => $item->id,
                         'sale_id' => $sale->id,
                     ]);
 
@@ -232,5 +231,4 @@ class PosComponent extends Component
     {
         return Redirect::To("print/sale/$sale->id");
     }
-
 }

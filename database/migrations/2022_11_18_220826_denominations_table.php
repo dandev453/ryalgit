@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -15,8 +14,8 @@ return new class extends Migration
     {
         Schema::create('denominations', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['BILLETE','MONEDA','OTRO'])->default('BILLETE');
-            $table->string('value',255);
+            $table->enum('type', ['BILLETE', 'MONEDA', 'OTRO'])->default('BILLETE');
+            $table->string('value', 255);
             $table->string('image', 100)->nullable();
             $table->timestamps();
         });

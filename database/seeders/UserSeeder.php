@@ -15,20 +15,20 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name'        => 'Daniel Virguez',
-            'phone'        => '6671147',
-            'email'       => 'dkinslert@gmail.com',
-            'profile'     => 'ADMIN',
-            'status'       => 'ACTIVE',
-            'password'      => bcrypt('password'),
+            'name' => 'Daniel Virguez',
+            'phone' => '6671147',
+            'email' => 'dkinslert@gmail.com',
+            'profile' => 'ADMIN',
+            'status' => 'ACTIVE',
+            'password' => bcrypt('password'),
         ]);
         User::create([
-            'name'        => 'Roberto Perez',
-            'phone'        => '9562166445',
-            'email'       => 'rperez@example.com',
-            'profile'     => 'EMPLOYEE',
-            'status'       => 'ACTIVE',
-            'password'      => bcrypt('password'),
+            'name' => 'Roberto Perez',
+            'phone' => '9562166445',
+            'email' => 'rperez@example.com',
+            'profile' => 'EMPLOYEE',
+            'status' => 'ACTIVE',
+            'password' => bcrypt('password'),
         ]);
     }
 }

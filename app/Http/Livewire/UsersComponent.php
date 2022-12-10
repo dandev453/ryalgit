@@ -11,17 +11,15 @@ use Illuminate\Support\Facades\Storage;
 
 class UsersComponent extends Component
 {
-
     private $pagination = 10;
     public $search, $selected_id, $user, $name, $email, $profile, $password, $image, $pageTitle, $componentName;
     use WithFileUploads, WithPagination;
 
-   public function mount()
+    public function mount()
     {
         $this->pageTitle = 'Listado';
         $this->role = 'Elegir';
-        $this->componentName = "Añadir usuario";
-
+        $this->componentName = 'Añadir usuario';
     }
     public function paginationView()
     {
@@ -29,16 +27,18 @@ class UsersComponent extends Component
     }
     public function render()
     {
-         if(strlen($this->search) > 0)
+        if (strlen($this->search) > 0) {
             $users = User::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
-        else
+        } else {
             $users = User::orderBy('name', 'asc')->paginate($this->pagination);
-        return view('livewire.users.component',[
-            'data' =>  $users
-         ])->extends('layouts.theme.app')
+        }
+        return view('livewire.users.component', [
+            'data' => $users,
+        ])
+            ->extends('layouts.theme.app')
             ->section('content');
     }
-     public function Edit(User $user)
+    public function Edit(User $user)
     {
         $this->selected_id = $user->id;
         $this->name = $user->name;
@@ -51,11 +51,11 @@ class UsersComponent extends Component
     public function Update()
     {
         $rules = [
-            'name'        => "required|min:3|unique:products,name,{$this->selected_id}",
-            'email'        => 'required',
-            'profile'       => 'required',
+            'name' => "required|min:3|unique:products,name,{$this->selected_id}",
+            'email' => 'required',
+            'profile' => 'required',
         ];
-        $messages =[
+        $messages = [
             'name.required' => 'Nombre del producto es requerido',
             'email.unique' => 'Ya existe el correo eléctronico',
             'name.min' => 'El nombre del producto debe tener al menos 3 caracteres.',
@@ -67,21 +67,19 @@ class UsersComponent extends Component
         $user = User::find($this->selected_id);
 
         $user->update([
-            'name'        => $this->name,
-            'email'        => $this->email,
-            'profile'       => $this->profile,
+            'name' => $this->name,
+            'email' => $this->email,
+            'profile' => $this->profile,
         ]);
 
-        if ($this->image)
-        {
+        if ($this->image) {
             $customFileName = uniqid() . '_.' . $this->image->extension();
             $this->image->storeAs('/public/users', $customFileName);
             $imageTemp = $product->image; //imagen temporal
             $user->image = $customFileName;
             $user->save();
 
-            if ($imageTemp != null)
-            {
+            if ($imageTemp != null) {
                 if (file_exists('storage/users/' . $imageTemp)) {
                     unlink('storage/users/' . $imageTemp);
                 }
@@ -90,14 +88,15 @@ class UsersComponent extends Component
         $this->resetUI();
         $this->emit('user-updated', 'Usuario Actualizado');
     }
-      public function resetUI() {
-        $this->name ='';
-        $this->email ='';
-        $this->profile ='';
+    public function resetUI()
+    {
+        $this->name = '';
+        $this->email = '';
+        $this->profile = '';
         $this->status = null;
     }
     protected $listeners = ['deleteRow' => 'Destroy'];
-      public function Destroy(User $user)
+    public function Destroy(User $user)
     {
         $imageTemp = $user->image;
         $user->delete();
@@ -110,6 +109,5 @@ class UsersComponent extends Component
 
         $this->resetUI();
         $this->emit('user-deleted', 'Usuario Eliminado');
-
-    }     
+    }
 }
