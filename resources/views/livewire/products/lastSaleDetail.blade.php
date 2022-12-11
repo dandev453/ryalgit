@@ -35,6 +35,7 @@
                                                         <table class="table table-condensed table-hover table-striped">
                                                             <tbody>
                                                                 <tr>
+                                                                    
                                                                     <!-- <th>ID</th> -->
                                                                     <th class="text-center">PRODUCTO </th>
                                                                     <!-- <th>Nº de productos</th> -->

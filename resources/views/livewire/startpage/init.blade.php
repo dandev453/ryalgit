@@ -25,24 +25,24 @@
                                     <span class="info-box-icon"><i class="fa fa-tags"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">INVENTARIO NETO</span>
-                                        <span class="info-box-number">457,416.61</span>
+                                        <span class="info-box-number currency">{{ $InventoryProductsSum }}</span>
                                         <div class="progress">
                                             <div class="progress-bar" style="width: 100%"></div>
                                         </div>
                                         <span class="progress-description">
-                                            Facturas emitidas: 350 </span>
+                                            Productos en stock: {{$StockProducts}}</span>
                                     </div><!-- /.info-box-content -->
                                 </div><!-- /.info-box -->
                                 <div class="info-box bg-green">
                                     <span class="info-box-icon"><i class="fa fa-money"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">Ventas 2022</span>
-                                        <span class="info-box-number">457,416.61</span>
+                                        <span class="info-box-number">{{$TotalSales}}</span>
                                         <div class="progress">
                                             <div class="progress-bar" style="width: 100%"></div>
                                         </div>
                                         <span class="progress-description">
-                                            Facturas emitidas: 350 </span>
+                                            Facturas emitidas: {{$salesCount}} </span>
                                     </div><!-- /.info-box-content -->
                                 </div><!-- /.info-box -->
                                 <div class="info-box bg-yellow">

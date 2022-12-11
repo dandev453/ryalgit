@@ -39,6 +39,13 @@ class HomeComponent extends Component
 
     public function render()
     {
+        $salesCount = Sale::count();
+        $TotalSalesSum = Sale::sum('total');
+        $TotalCashSum = Sale::sum('cash');
+        //SUM ROW CLIENTS
+        //PURCHASE TOTAL SUM IN OUT PURCHASE
+        $StockproductsSum = Product::count('id');
+        $InventoryProductsSum = Product::sum('price');
         
         $salesLists = Sale::join('users as u', 'u.id', 'sales.user_id')
             ->select('sales.id as s_id','sales.total as total','sales.created_at as fecha','u.name as cliente')
@@ -55,6 +62,10 @@ class HomeComponent extends Component
         return view('livewire.Home.component', [
             'data' => $products,
             'lsales' => $salesLists,
+            'salesCount' => $salesCount,
+            'TotalSales' => $TotalSalesSum,
+            'StockProducts' => $StockproductsSum,
+            'InventoryProductsSum' => $InventoryProductsSum,
             'categories' => Category::orderBy('name', 'asc')->get(),
         ])
             ->extends('layouts.theme.app')
@@ -63,7 +74,6 @@ class HomeComponent extends Component
 
     public function viewDetails(Sale $sale)
     {
-      
         $this->details = Sale::join('sale_details as d', 'd.sale_id', 'sales.id')
         ->join('products as p', 'p.id', 'd.product_id')
         ->select('d.sale_id', 'p.name as product', 'd.quantity', 'd.price')
