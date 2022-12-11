@@ -4,3 +4,4 @@ node_modules
 .env
 package-lock.json
 composer.lock
+!resources/views/vendor/
