@@ -19,6 +19,7 @@ class PosComponent extends Component
     public $categoryName;
     private $pagination = 5;
     public $total,
+        $search,
         $itemsQuantity,
         $denominations = [],
         $efectivo,
@@ -36,18 +37,29 @@ class PosComponent extends Component
     public function render()
     {
         // dd(Cart::getContent()->sortBy('name'));
-        $products = Product::join('categories as c', 'c.id', 'products.category_id')
-        ->select('products.*', 'c.name as category')
-        ->where('c.name', [])
-        ->orderBy('products.id', 'desc')
-        ->paginate($this->pagination);
+        if (strlen($this->search) > 0) {
+            $products = Product::join('categories as c', 'c.id', 'products.category_id')
+                ->select('products.*', 'c.name as category')
+                ->where('products.name', 'like', '%' . $this->search . '%')
+                ->orWhere('products.barcode', 'like', '%' . $this->search . '%')
+                ->orWhere('c.name', 'like', '%' . $this->search . '%')
+                ->orderBy('products.name', 'asc')
+                ->paginate($this->pagination);
+        } else {
+            $products = Product::join('categories as c', 'c.id', 'products.category_id')
+                ->select('products.*', 'c.name as category')
+                ->where('c.name', [])
+                ->orderBy('products.id', 'desc')
+                ->paginate($this->pagination);
+        }
+
         $this->denominations = Denomination::all();
         return view('livewire.pos.component', [
             'products' => $products,
             'denominations' => Denomination::orderBy('value', 'desc')->get(),
             'cart' => Cart::getContent()->sortBy('name'),
         ])
-            ->extends('layouts.theme.app')
+            ->extends('layouts.theme.pos.app')
             ->section('content');
     }
 
@@ -56,7 +68,6 @@ class PosComponent extends Component
         $this->efectivo += $value == 0 ? $this->total : $value;
         $this->change = $this->efectivo - $this->total;
     }
-    
 
     protected $listeners = [
         'scan-code' => 'ScanCode',

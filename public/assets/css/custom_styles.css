@@ -6,7 +6,22 @@
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: 'Source Sans Pro',sans-serif;
 }
+
+/* POINT - SALES **/
+/* CASHOUT */
+#cartTable {
+    height: 392px;
+}
+@media(min-height: 720px){
+    .cashout { 
+        height:392px
+    }
+    #cartTable {
+        height: 392px;
+    }
+}
 /* EVENTOS DEL CALENDARIO****/
+
 .event {
     position: absolute;
     width: 3px;
