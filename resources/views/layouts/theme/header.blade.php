@@ -77,7 +77,7 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="./img/avatar.png" class="img-circle" alt="user image">
+                                                <img src="{{ asset('assets/img/avatar.png') }}" class="img-circle" alt="user image">
                                             </div>
                                             <h4>
                                                 Reviewers
@@ -270,11 +270,14 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="/profile" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <button class="btn btn-default btn-flat"><span><i
-                                            class="fa fa-power-off mr-2"></i></span>salir</button>
+                                <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                                    @csrf
+                                    <button class="btn btn-default btn-flat"> <span><i
+                                                class="fa fa-power-off mr-2"></i></span> salir</button>
+                                </form>
                             </div>
                         </li>
                     </ul>
