@@ -212,18 +212,14 @@
                         placeholder="Buscar Productos">
                 </div>
                 <div class="col-md-6">
-                    <select wire:model="category_id" class="form-control">
-                        <option value="Seleccione">Seleccione</option>
-
-                        <option value=""></option>
-
-                    </select>
-                    <select onchange="load(1);" class="form-control" name="category_id" id="category_id">
+                  
+                    <!-- onchange="load(1);" class="form-control" name="category_id" id="category_id" -->
+                    <select class="form-control" wire:model.lazy="categoryName" >
+                       
                         <option value="">Selecciona Categoría</option>
-                        <option value="3"> AUDIO</option>
-                        <option value="4">CAMARAS</option>
-                        <option value="2">CÓMPUTO</option>
-                        <option value="1">TELÉFONOS</option>
+                        @foreach($categories as $category)
+                        <option value="{{$category->name }}">{{$category->name }}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>

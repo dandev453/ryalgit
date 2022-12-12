@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Denomination;
 use App\Models\Product;
 use Livewire\WithPagination;
+use App\Models\Category;
 use App\Models\Sale;
 use App\Models\SaleDetails;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
@@ -16,9 +17,9 @@ use Livewire\Component;
 class PosComponent extends Component
 {
     use WithPagination;
-    public $categoryName;
-    private $pagination = 5;
+    private $pagination = 100;
     public $total,
+        $categoryName,
         $search,
         $itemsQuantity,
         $denominations = [],
@@ -35,7 +36,9 @@ class PosComponent extends Component
     }
 
     public function render()
-    {
+    {   
+        $category = $this->categoryName;
+        $categories = Category::all();
         // dd(Cart::getContent()->sortBy('name'));
         if (strlen($this->search) > 0) {
             $products = Product::join('categories as c', 'c.id', 'products.category_id')
@@ -48,7 +51,7 @@ class PosComponent extends Component
         } else {
             $products = Product::join('categories as c', 'c.id', 'products.category_id')
                 ->select('products.*', 'c.name as category')
-                ->where('c.name', [])
+                ->where('c.name', [$category])
                 ->orderBy('products.id', 'desc')
                 ->paginate($this->pagination);
         }
@@ -56,6 +59,7 @@ class PosComponent extends Component
         $this->denominations = Denomination::all();
         return view('livewire.pos.component', [
             'products' => $products,
+            'categories' => $categories,
             'denominations' => Denomination::orderBy('value', 'desc')->get(),
             'cart' => Cart::getContent()->sortBy('name'),
         ])
@@ -80,6 +84,34 @@ class PosComponent extends Component
     {
         //dd($barcode); //** LLega el barcode OK!!
         $product = Product::where('barcode', $barcode)->first();
+        //dd($product); //Producto encontrado!
+        if ($product == null || empty($product)) {
+            $this->emit('scan-notfound', 'El producto no fue encontrado');
+        } else {
+            if ($this->InCart($product->id)) {
+                $this->increaseQty($product->id);
+                return;
+            }
+
+            if ($product->stock < 1) {
+                $this->emit('no-stock', 'Stock insuficiente');
+                return;
+            }
+
+            Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
+            /*$carro = Cart::getContent();
+             dd($carro);*/
+
+            $this->total = Cart::getTotal();
+            $this->itemsQuantity = Cart::getTotalQuantity();
+
+            $this->emit('scan-ok', 'Producto agregado');
+        }
+    }
+    public function AddtoCart($barcode, $cant = 1)
+    {
+        //dd($barcode); //** LLega el barcode OK!!
+        $product = Product::where('id', $productId)->first();
         //dd($product); //Producto encontrado!
         if ($product == null || empty($product)) {
             $this->emit('scan-notfound', 'El producto no fue encontrado');

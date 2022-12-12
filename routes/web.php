@@ -65,7 +65,9 @@ Route::get('new_purchase', PurchaseComponent::class);
 Route::get('product/{id}', EditProductsComponent::class);
 //rutas impresion
 Route::get('print/sale/{id}','PrinterController@TicketVenta');
-
+//Exportar a pdf
+/*Route::get('report/pdf/{id}/{f2}/{f2}', [ExportController::class, 'reportPDF']);
+Route::get('report/pdf/{user}/{type}/', [ExportController::class, 'reportPDF']);*/
 });
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

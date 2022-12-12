@@ -14,7 +14,7 @@ class Categories extends Component
     use WithFileUploads, WithPagination;
     //PROPIEDADES
     public $name, $search, $image, $selected_id, $pageTitle, $componentName;
-    private $pagination = 3;
+    private $pagination = 10;
 
     public function mount()
     {
