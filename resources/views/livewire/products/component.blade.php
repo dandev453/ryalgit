@@ -16,11 +16,9 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu pull-right">
-                    <li class="active" onclick="per_page(15);" id="15"><a href="#">15</a></li>
-                    <li onclick="per_page(25);" id="25"><a href="#">25</a></li>
-                    <li onclick="per_page(50);" id="50"><a href="#">50</a></li>
-                    <li onclick="per_page(100);" id="100"><a href="#">100</a></li>
-                    <li onclick="per_page(1000000);" id="1000000"><a href="#">Todos</a></li>
+                    <li class="active" wire:model="pagination"><a href="#">15</a></li>
+                    <li wire:click.prevent="load()"><a href="#">25</a></li>
+                    <li wire:model="pagination"><a href="#">Todos</a></li>
                 </ul>
             </div>
         </div>

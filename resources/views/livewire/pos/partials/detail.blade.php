@@ -216,7 +216,7 @@
                     <!-- onchange="load(1);" class="form-control" name="category_id" id="category_id" -->
                     <select class="form-control" wire:model.lazy="categoryName" >
                        
-                        <option value="">Selecciona Categoría</option>
+                        <option value="" default>Selecciona Categoría</option>
                         @foreach($categories as $category)
                         <option value="{{$category->name }}">{{$category->name }}</option>
                         @endforeach

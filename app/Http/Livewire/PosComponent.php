@@ -28,7 +28,7 @@ class PosComponent extends Component
 
     public function mount()
     {
-        $this->categoryName = '';
+        $this->categoryName;
         $this->efectivo = 0;
         $this->change = 0;
         $this->total = Cart::getTotal();
@@ -36,7 +36,7 @@ class PosComponent extends Component
     }
 
     public function render()
-    {   
+    {
         $category = $this->categoryName;
         $categories = Category::all();
         // dd(Cart::getContent()->sortBy('name'));
@@ -49,11 +49,17 @@ class PosComponent extends Component
                 ->orderBy('products.name', 'asc')
                 ->paginate($this->pagination);
         } else {
-            $products = Product::join('categories as c', 'c.id', 'products.category_id')
-                ->select('products.*', 'c.name as category')
-                ->where('c.name', [$category])
-                ->orderBy('products.id', 'desc')
-                ->paginate($this->pagination);
+            if (!$category) {
+                $products = Product::get();
+            } elseif ($category > 1) {
+                $products = Product::join('categories as c', 'c.id', 'products.category_id')
+                    ->select('products.*', 'c.name as category')
+                    ->where('c.name', [$category])
+                    ->orderBy('products.id', 'desc')
+                    ->paginate($this->pagination);
+            } else {
+                return;
+            }
         }
 
         $this->denominations = Denomination::all();
