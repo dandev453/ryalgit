@@ -89,7 +89,7 @@ utilizar usuario para prueba:
 
 
 ## Screenshots
-(![X-printer](https://lh3.googleusercontent.com/drive-viewer/AFDK6gOBnhkxMyfkpM_B-RaQpNbQk_K8SIh53gGXaNVNpG4W7PDhu4YHf5SBEqu6BFcsz3heOPZ63FXgmZOXFendFdNwsP444A=w1001-h637)
+![X-printer](https://lh3.googleusercontent.com/drive-viewer/AFDK6gOBnhkxMyfkpM_B-RaQpNbQk_K8SIh53gGXaNVNpG4W7PDhu4YHf5SBEqu6BFcsz3heOPZ63FXgmZOXFendFdNwsP444A=w1001-h637)
 
 ![Barcode-Scanner](https://th.bing.com/th/id/OIP.6YsqX3Tu5USPakt-pEKA6wAAAA?pid=ImgDet&w=224&h=224&rs=1)
 #### Crear productos
