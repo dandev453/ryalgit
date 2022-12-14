@@ -225,18 +225,18 @@
             </div>
             <hr>
             <div class="row  outer_div" id="outer_div" style="height: 600px; overflow: scroll;">
-                <div class="col-md-12" style="display:flex; flex-wrap: wrap;">
+                <div class="col-md-12" style="display:flex; flex-wrap: wrap;" >
                     @foreach ($products as $product)
-                        <div class="widget-panel widget-style-2 col-md-2 col-lg-2 col-sm-6 col-xs-6">
+                       <div wire:click.prevent="AddtoCart($('p' + {{ $product->id}}),  '{{ $product->id }}') " id="p{{$product->id}}" class="widget-panel widget-style-2 col-md-2 col-lg-2 col-sm-6 col-xs-6">
                             <center>
-                                <img src="{{ asset('storage/products/' . $product->image) }}" width="100px"
-                                    height="100px" walt="Imagen Del Producto" class="rounded">
+                                <a href="javascript::void(0)" >  <img src="{{ asset('storage/products/' . $product->image) }}" width="100px"
+                                    height="100px" walt="Imagen Del Producto"  class="rounded"></a>
                             </center>
                             <div class="text-muted m-t-5 text-center" style="height: 40px">
                                 <span class="name">
                                     {{ $product->name }}
                                 </span> <br>
-                                <input type="hidden" value="1" id="cantidad_4" name="">
+                                <input type="hidden" value="1" id="" name="">
                                 <span class="sku"></span>
                             </div>
                             <h4 class="text-success text-center">
@@ -245,9 +245,12 @@
                             </h4>
                         </div>
                     @endforeach
-
+                </div>
+                <div class="col-md-12 text-center">
+                    links
                 </div>
             </div>
         </div>
     </div>
+    
 </div>

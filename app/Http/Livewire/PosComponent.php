@@ -114,11 +114,13 @@ class PosComponent extends Component
             $this->emit('scan-ok', 'Producto agregado');
         }
     }
-    public function AddtoCart($barcode, $cant = 1)
+    public function AddtoCart($product, $id)
     {
-        //dd($barcode); //** LLega el barcode OK!!
-        $product = Product::where('id', $productId)->first();
-        //dd($product); //Producto encontrado!
+        //dd($barcode); //LLega el barcode OK!!
+       // dd($id); //Producto encontrado!
+        
+       $product = Product::where('id', $id)->first();
+       $cant = 1;
         if ($product == null || empty($product)) {
             $this->emit('scan-notfound', 'El producto no fue encontrado');
         } else {
