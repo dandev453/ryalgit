@@ -79,7 +79,7 @@
             <ul class="treeview-menu">
                 <li><a href="sales_report"><i class="fa fa-bar-chart"></i> Reportes de ventas</a></li>
                 <li><a href="tables/data.html"><i class="fa fa-line-chart"></i> Reportes de compras </a></li>
-                <li><a href="tables/data.html"><i class="fa fa-bar-chart"></i> Reportes de inventarios </a></li>
+                <li><a href="inventory_report"><i class="fa fa-bar-chart"></i> Reportes de inventarios </a></li>
                 <li><a href="tables/data.html"><i class="fa fa-bar-chart"></i> Productos más vendidos</a></li>
             </ul>
         </li>

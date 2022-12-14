@@ -208,8 +208,7 @@
         <div class="card-box">
             <div class="row">
                 <div class="col-md-6">
-                    <input type="text" id="q" wire:model="search" class="form-control"
-                        placeholder="Buscar Productos">
+                  @include('common.searchbox')
                 </div>
                 <div class="col-md-6">
                   
