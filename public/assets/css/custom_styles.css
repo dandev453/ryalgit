@@ -6,13 +6,18 @@
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: 'Source Sans Pro',sans-serif;
 }
+th, td:nth-child(2) {
+    width: 150px;
+}
 
 /* POINT - SALES **/
 /* CASHOUT */
 #cartTable {
-    height: 392px;
+    display: block;
+    height: 356px;
+    overflow: auto;
 }
-@media(min-height: 720px){
+/*@media(min-height: 720px){
     .cashout { 
         height:392px
     }
@@ -20,6 +25,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
         height: 392px;
     }
 }
+*/
 /* EVENTOS DEL CALENDARIO****/
 
 .event {

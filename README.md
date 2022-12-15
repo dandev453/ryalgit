@@ -22,7 +22,7 @@ Puedes seguir estos pasos para la instalación:
 
 * Clonar desde github (usar github desktop)
 ```bash
-  gh repo clone dandev453/ryalgit
+  git clone https://github.com/dandev453/ryalgit.git
 ```
 * Vaya a la carpeta del proyecto
 ```bash
@@ -31,6 +31,11 @@ Puedes seguir estos pasos para la instalación:
 * Instalar dependencias con composer desde consola
 ```bash
   composer install
+```
+
+* Instalar dependencias node
+```bash
+  npm install
 ```
 
 * Instalar dependencias node

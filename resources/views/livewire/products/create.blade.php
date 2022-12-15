@@ -33,10 +33,10 @@
                             <div id="resultados_ajax"></div>
                             <div class="tab-pane active">
                                 <div class="form-group ">
-                                    <label for="name" class="col-sm-2 control-label">Nombre:</label>
+                                    <label for="name" class="col-sm-2 control-label">NOMBRE:</label>
                                     <div class="col-sm-4">
                                         <input type="text" class="form-control" wire:model.lazy="name"
-                                            placeholder="ej: Curso Laravel">
+                                            placeholder="ej: NOMBRE PRODUCTO">
                                         @error('name')
                                             <span class="text-danger er">{{ $message }}</span>
                                         @enderror
@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="barcode" class="col-sm-2 control-label">Código</label>
+                                    <label for="barcode" class="col-sm-2 control-label">CÓDIGO</label>
                                     <div class="col-sm-10">
                                         <input type="text" wire:model.lazy="barcode" class="form-control"
                                             pplaceholder="ej: 025974">
@@ -63,15 +63,20 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="category" class="col-sm-2 control-label">Costo</label>
+                                    <label for="category" class="col-sm-2 control-label">COSTO:</label>
                                     <div class="col-sm-4">
+                                        <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-usd"></i>
+                                        </div>
                                         <input type="text" data-type="currency" wire:model.lazy="cost"
                                             class="form-control" placeholder="ej: 0.00">
+                                        </div>
                                         @error('cost')
                                             <span class="text-danger er">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <label for="cost" class="col-sm-2 control-label">Precio</label>
+                                    <label for="cost" class="col-sm-2 control-label">PRECIO:</label>
                                     <div class="col-sm-4">
                                         <div class="input-group">
                                             <div class="input-group-addon">
@@ -86,11 +91,11 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="profit" class="col-sm-2 control-label">Stock</label>
+                                    <label for="profit" class="col-sm-2 control-label">STOCK</label>
                                     <div class="col-sm-4">
                                         <div class="input-group">
                                             <div class="input-group-addon">
-                                                <i class="fa fa-usd"></i>
+                                                <i class="fa fa-th-large"></i>
                                             </div>
                                             <input type="number" wire:model.lazy="stock" class="form-control"
                                                 placeholder="ej: 0">

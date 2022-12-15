@@ -32,7 +32,7 @@
             </a>
             <ul class="treeview-menu">
                 <li> <a href="/new_purchase"><li><i class="glyphicon glyphicon-shopping-cart"></i> Nueva compra</a></li>
-                <li><a href="./purchase_list.html"><i class="glyphicon glyphicon-th-list"></i> Historial de compras</a></li>
+                <li><a href="/purchase_list"><i class="glyphicon glyphicon-th-list"></i> Historial de compras</a></li>
             </ul>
         </li>
         <li class="treeview">
@@ -53,8 +53,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="UI/general.html"><i class="glyphicon glyphicon-user"></i> Clientes</a></li>
-                <li><a href="UI/icons.html"><i class="glyphicon glyphicon-briefcase"></i> Proveedores</a></li>
+                <li><a href="customers"><i class="glyphicon glyphicon-user"></i> Clientes</a></li>
+                <li><a href="supplier"><i class="glyphicon glyphicon-briefcase"></i> Proveedores</a></li>
             </ul>
         </li>
         <li class="treeview">
@@ -80,7 +80,7 @@
                 <li><a href="sales_report"><i class="fa fa-bar-chart"></i> Reportes de ventas</a></li>
                 <li><a href="tables/data.html"><i class="fa fa-line-chart"></i> Reportes de compras </a></li>
                 <li><a href="inventory_report"><i class="fa fa-bar-chart"></i> Reportes de inventarios </a></li>
-                <li><a href="tables/data.html"><i class="fa fa-bar-chart"></i> Productos más vendidos</a></li>
+                <li><a href="products_mas_vendidos_report"><i class="fa fa-bar-chart"></i> Productos más vendidos</a></li>
             </ul>
         </li>
         <li class="treeview">

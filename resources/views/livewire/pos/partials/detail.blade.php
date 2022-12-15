@@ -44,7 +44,7 @@
                 </div>
             </div>
             <div id="resultados">
-                <table class="cashout table" id="cartTable">
+                <table class=" table" id="cartTable">
                     <thead>
                         <tr>
                             <th width="">
@@ -67,7 +67,7 @@
                     </thead>
                     <tbody class="">
                         @foreach ($cart as $item)
-                            <tr>
+                            <tr >
                                 @if (count($item->attributes) > 0)
                                     <td width="">1</td>
                                     <!-- <td>
@@ -128,8 +128,9 @@
                             <div class="col-md-4"><input class="form-control input-sm" required=""
                                     pattern="\d+(\.\d{2})?" type="number" id="descuento" value="0"
                                     onblur="descuento(this.value)"></div>
+                                    <!-- DESCUENTO - TOTAL -->
                             <div class="col-md-3 col-md-offset-1">: <span id="price"> <label
-                                        class="control-label">0,00</label></span></div>
+                                        class="control-label"> ${{ number_format($total, 2) }} - DESC %</label></span></div>
                         </div>
                     </div>
                 </div>
@@ -142,9 +143,27 @@
                                 <option value="18.00">ITBIS 18.00 %</option>
                             </select>
                         </div>
-                        <!-- <div class="col-md-2"></div> -->
-                        <div class="col-md-3 col-md-offset-1">: <span id="price"><label
-                                    class="control-label">0,00</label></span></div>
+                        <!-- IVA + TOTAL -->
+                        <div class="col-md-3 col-md-offset-1">: <span id="iva"> <label
+                            class="control-label"> ${{ number_format($total, 2) }} + %iva</label></span></div>
+                        <div class="m-t-10">
+                            <div class="row">           
+                                <div class="col-md-3 col-md-offset-6">
+                                        <h3> <label class="control-label">TOTAL</label> </h3>
+                                    </div>
+                                <div class="col-md-3">
+                                        <h3>
+                                             <label class="control-label">
+                                                ${{ number_format($total, 2) }}         		 			
+                                             </label>
+                                         </h3>
+                                         <!-- <input type="hidden" id="total" name="total"  value="0,00">
+                                          -->
+                     
+                                    </div>
+                     
+                             </div>	
+                         </div>
                     </div>
                 </div>
                 <!-- <form  method="post" name="save_sale" id="save_sale"> -->
@@ -208,28 +227,31 @@
         <div class="card-box">
             <div class="row">
                 <div class="col-md-6">
-                  @include('common.searchbox')
+                    <input type="text" wire:model="search" id="q" class="form-control" placeholder="Buscar Productos" onkeyup="load(1)">
                 </div>
                 <div class="col-md-6">
-                  
+
                     <!-- onchange="load(1);" class="form-control" name="category_id" id="category_id" -->
-                    <select class="form-control" wire:model.lazy="categoryName" >
-                       
+                    <select class="form-control" wire:model.lazy="categoryName">
+
                         <option value="" default>Selecciona Categoría</option>
-                        @foreach($categories as $category)
-                        <option value="{{$category->name }}">{{$category->name }}</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->name }}">{{ $category->name }}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
             <hr>
             <div class="row  outer_div" id="outer_div" style="height: 600px; overflow: scroll;">
-                <div class="col-md-12" style="display:flex; flex-wrap: wrap;" >
+                <div class="col-md-12" style="display:flex; flex-wrap: wrap;">
                     @foreach ($products as $product)
-                       <div wire:click.prevent="AddtoCart($('p' + {{ $product->id}}),  '{{ $product->id }}') " id="p{{$product->id}}" class="widget-panel widget-style-2 col-md-2 col-lg-2 col-sm-6 col-xs-6">
+                        <div wire:click.prevent="AddtoCart($('p' + {{ $product->id }}),  '{{ $product->id }}') "
+                            id="p{{ $product->id }}"
+                            class="widget-panel widget-style-2 col-md-2 col-lg-2 col-sm-6 col-xs-6">
                             <center>
-                                <a href="javascript::void(0)" >  <img src="{{ asset('storage/products/' . $product->image) }}" width="100px"
-                                    height="100px" walt="Imagen Del Producto"  class="rounded"></a>
+                                <a href="javascript::void(0)"> <img
+                                        src="{{ asset('storage/products/' . $product->image) }}" width="100px"
+                                        height="100px" walt="Imagen Del Producto" class="rounded"></a>
                             </center>
                             <div class="text-muted m-t-5 text-center" style="height: 40px">
                                 <span class="name">
@@ -246,10 +268,11 @@
                     @endforeach
                 </div>
                 <div class="col-md-12 text-center">
-                    links
+                    
+                    <button  class="btn btn-lg btn-flat">Cargar Más...</button>
                 </div>
             </div>
         </div>
     </div>
-    
+
 </div>

@@ -1,7 +1,9 @@
 public/build/
+public/storage/*
 vendor/
 node_modules
 .env
+storage
 package-lock.json
 composer.lock
 !resources/views/vendor/

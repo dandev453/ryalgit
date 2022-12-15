@@ -38,10 +38,10 @@
                         @endforeach
                     </select>
                 </div>
-                <button type="button" wire:click.prevent="SyncAll()" class="btn btn-default mbmobile inblock mr-5">
+                <button type="button" wire:click.prevent="SyncAll()" class="btn btn-default   mr-5">
                     Sincronizar Todos
                 </button>
-                <button type="button" onclick="Revocar()" class="btn btn-default mbmobile mr-5">
+                <button type="button" onclick="Revocar()" class="btn btn-default  mr-5">
                     Revocar Todos
                 </button>
             </div>
@@ -65,14 +65,29 @@
                                 <th>ROLES CON EL PERMISO</th>
                                 <th></th>
                             </tr>
-
+                            @foreach($permisos as $permiso)
                             <tr>
-                                <!-- <td>2</td> -->
-                                <td>1</td>
-                                <td>ROLES CON EL PERMISO</td>
-                                <td>ROLES CON EL PERMISO</td>
-                                <td>ROLES CON EL PERMISO</td>
+                                <td><h6 class="text-center">{{$permiso->id}}</h6></td>
+                                <td class="text-center">
+                                    <div class="n-check">
+                                        <label class="new-control new-checkbox checkbox-primary">
+                                            <input type="checkbox"
+                                                wire:change="SyncPermiso($('#p' + {{ $permiso->id }}).is(':checked'), '{{ $permiso->name }}' )"
+                                                   id="p{{ $permiso->id }}"
+                                                   value="{{ $permiso->id }}"
+                                                   class="new-control-input"
+                                                   {{ $permiso->checked == 1 ? 'checked' : '' }}
+                                            >
+                                            <span class="new-control-indicator"></span>
+                                            <h6>{{ $permiso->name }}</h6>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <h6>{{ \App\Models\User::permission($permiso->name)->count() }}</h6>
+                                </td>
                             </tr>
+                            @endforeach
                             <tr>
                                 <td colspan="9">
                                     Mostrando de de registros

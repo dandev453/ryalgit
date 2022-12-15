@@ -16,7 +16,10 @@ class ProductsComponent extends Component
     use WithFileUploads;
 
     public $name, $barcode, $cost, $price, $stock, $alerts, $category_id, $search, $image, $selected_id, $pageTitle, $componentName;
-    private $pagination = 10;
+    private $pagination = 5;
+    public array $perPageAccepted = [100, 200, 500];
+    public bool $perPageAll = true;
+  
 
     public function paginationView()
     {
@@ -27,9 +30,11 @@ class ProductsComponent extends Component
         $this->pageTitle = 'Listado';
         $this->componentName = 'Productos';
         $this->category_id = 'Seleccione';
+        $this->pagination;
     }
     public function render()
     {
+       $pagination = $this->pagination;
         if (strlen($this->search) > 0) {
             $products = Product::join('categories as c', 'c.id', 'products.category_id')
                 ->select('products.*', 'c.name as category')
@@ -37,12 +42,12 @@ class ProductsComponent extends Component
                 ->orWhere('products.barcode', 'like', '%' . $this->search . '%')
                 ->orWhere('c.name', 'like', '%' . $this->search . '%')
                 ->orderBy('products.name', 'asc')
-                ->paginate($this->pagination);
+                ->paginate($pagination);
         } else {
             $products = Product::join('categories as c', 'c.id', 'products.category_id')
                 ->select('products.*', 'c.name as category')
                 ->orderBy('products.name', 'asc')
-                ->paginate($this->pagination);
+                ->paginate();
         }
         return view('livewire.products.component', [
             'data' => $products,
@@ -50,6 +55,10 @@ class ProductsComponent extends Component
         ])
             ->extends('layouts.theme.app')
             ->section('content');
+    }
+    public function load(){
+        $pagination = $this->pagination;
+        $pagination + 10;
     }
     public function Store()
     {

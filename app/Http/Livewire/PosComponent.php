@@ -17,7 +17,7 @@ use Livewire\Component;
 class PosComponent extends Component
 {
     use WithPagination;
-    private $pagination = 100;
+    private $pagination = 5;
     public $total,
         $categoryName,
         $search,
@@ -50,7 +50,10 @@ class PosComponent extends Component
                 ->paginate($this->pagination);
         } else {
             if (!$category) {
-                $products = Product::get();
+              $products = Product::join('categories as c', 'c.id', 'products.category_id')
+                    ->select('products.*', 'c.name as category')
+                    ->orderBy('products.id', 'desc')
+                    ->paginate($this->pagination);
             } elseif ($category > 1) {
                 $products = Product::join('categories as c', 'c.id', 'products.category_id')
                     ->select('products.*', 'c.name as category')
@@ -68,9 +71,11 @@ class PosComponent extends Component
             'categories' => $categories,
             'denominations' => Denomination::orderBy('value', 'desc')->get(),
             'cart' => Cart::getContent()->sortBy('name'),
-        ])
-            ->extends('layouts.theme.pos.app')
+        ]) ->extends('layouts.theme.pos.app')
             ->section('content');
+    }
+    public function loadMore(){
+       
     }
 
     public function ACash($value)
