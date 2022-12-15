@@ -2,11 +2,14 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PrinterController;
+use App\Http\Controllers\ExportController;
+use App\Exports\SaleExport;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Livewire\AsignarComponent;
 use App\Http\Livewire\CashoutComponent;
+use App\Http\Livewire\InventoryComponent;
 use App\Http\Livewire\PermisosComponent;
 use App\Http\Livewire\CoinsComponent;
 use App\Http\Livewire\Categories;
@@ -58,17 +61,32 @@ Route::get('business_profile', ProfileComponent::class);
 Route::get('permisos', PermisosComponent::class);
 Route::get('asignar', AsignarComponent::class);
 Route::get('sales_report', CashoutComponent::class);
+Route::get('inventory_report', InventoryComponent::class);
 Route::get('manage_invoice', ManageInvoiceComponent::class);
 Route::get('add_product', CreateProductsComponent::class);
 Route::get('business_profile', ProfileComponent::class);
 Route::get('new_purchase', PurchaseComponent::class);
 Route::get('product/{id}', EditProductsComponent::class);
+Route::get('pos/{product}', PosComponent::class);
+
 //rutas impresion
 Route::get('print/sale/{id}','PrinterController@TicketVenta');
 //Exportar a pdf
-/*Route::get('report/pdf/{id}/{f2}/{f2}', [ExportController::class, 'reportPDF']);
-Route::get('report/pdf/{user}/{type}/', [ExportController::class, 'reportPDF']);*/
+
 });
+//report Test
+Route::get('report/pdf/', [ExportController::class, 'reportTest']);
+
+
+//reportes PDF
+Route::get('report/pdf/{user}/{type}/{f1}/{f2}', [ExportController::class, 'reportPDF']);
+Route::get('report/pdf/{user}/{type}/', [ExportController::class, 'reportPDF']);
+
+//reportes EXCEL
+Route::get('report/excel/{user}/{type}/{f1}/{f2}', [SaleExport::class, 'reportExcel']);
+Route::get('report/excel/{user}/{type}', [SaleExport::class, 'reportExcel']);
+
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
