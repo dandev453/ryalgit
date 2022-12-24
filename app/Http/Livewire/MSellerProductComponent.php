@@ -17,12 +17,12 @@ class MSellerProductComponent extends Component
 {
     use WithPagination;
 
-    public $permissionName, $searchBybarcode ,$search, $selected_id, $pageTitle, $componentName, $categoryName;
+    public $permissionName, $searchBybarcode, $search, $selected_id, $pageTitle, $componentName, $categoryName;
     private $pagination = 25;
 
     public function mount()
     {
-         $this->pageTitle = 'Reportes';
+        $this->pageTitle = 'Reportes';
         $this->componentName = 'ventas';
         $this->categoryName;
         $this->fromDate = null;
@@ -51,13 +51,12 @@ class MSellerProductComponent extends Component
 
         //SUM PRODUCT TOTAL - INVENTORY
         $InventoryProductsSum = Product::sum('price');
-        
+
         $salesLists = Sale::join('users as u', 'u.id', 'sales.user_id')
-            ->select('sales.id as s_id','sales.total as total','sales.created_at as fecha','u.name as cliente')
-            ->orderBy('s_id','Desc')
-            ->where('sales.status', 'Paid')
+            ->select('sales.id as s_id', 'sales.total as total', 'sales.created_at as fecha', 'u.name as cliente')
+            ->orderBy('s_id', 'Desc')
             ->paginate($this->pagination);
-       if (strlen($this->search) > 0) {
+        if (strlen($this->search) > 0) {
             $products = Product::join('categories as c', 'c.id', 'products.category_id')
                 ->select('products.*', 'c.name as category')
                 ->where('products.name', 'like', '%' . $this->search . '%')
@@ -65,18 +64,23 @@ class MSellerProductComponent extends Component
                 ->orWhere('c.name', 'like', '%' . $this->search . '%')
                 ->orderBy('products.name', 'asc')
                 ->paginate($this->pagination);
-       }elseif($this->searchBybarcode > 0){
-        $products = Product::join('categories as c', 'c.id', 'products.category_id')
+        } elseif ($this->searchBybarcode > 0) {
+            $products = Product::join('categories as c', 'c.id', 'products.category_id')
                 ->select('products.*', 'c.name as category')
                 ->Where('products.barcode', 'like', '%' . $this->searchBybarcode . '%')
-                ->orderBy('products.name', 'asc') 
-                ->paginate($this->pagination);;
+                ->orderBy('products.name', 'asc')
+                ->paginate($this->pagination);
         } else {
             if (!$category) {
                 $products = Product::join('categories as c', 'c.id', 'products.category_id')
-                ->select('products.*', 'c.name as category')
-                ->orderBy('products.id', 'desc')
-                ->paginate($this->pagination);
+                    ->select('products.*', 'c.name as category')
+                    ->orderBy('products.id', 'desc')
+                    ->paginate($this->pagination);
+                //SUM PRODUCT TOTAL SALES
+               /* $SalesproductsSum = Product::join('SaleDetails as sd', 'sd.product_id', 'products.id')
+                    ->select('products.*', 'products.name as product')
+                    ->orderBy('products.name', 'asc')
+                    ->paginate();*/
             } elseif ($category > 1) {
                 $products = Product::join('categories as c', 'c.id', 'products.category_id')
                     ->select('products.*', 'c.name as category')
@@ -87,14 +91,11 @@ class MSellerProductComponent extends Component
                 return;
             }
         }
-       
-       
+
         $this->componentName = 'Entrada';
         return view('livewire.products.msellerproduct', [
             'data' => $products,
-            'lsales' => $salesLists,
             'Stock' => $productStockQuantity,
-            'InventoryProductsSum' => $InventoryProductsSum,
             'categories' => Category::orderBy('name', 'asc')->get(),
         ])
             ->extends('layouts.theme.app')
@@ -104,12 +105,12 @@ class MSellerProductComponent extends Component
     public function viewDetails(Sale $sale)
     {
         $this->details = Sale::join('sale_details as d', 'd.sale_id', 'sales.id')
-        ->join('products as p', 'p.id', 'd.product_id')
-        ->select('d.sale_id', 'p.name as product', 'd.quantity', 'd.price')
-       
-        ->where('sales.status', 'Paid')
-        ->where('sales.id', $sale->id)
-        ->get();
+            ->join('products as p', 'p.id', 'd.product_id')
+            ->select('d.sale_id', 'p.name as product', 'd.quantity', 'd.price')
+
+            ->where('sales.status', 'Paid')
+            ->where('sales.id', $sale->id)
+            ->get();
         $this->emit('show-modal', 'Show modal');
     }
 }

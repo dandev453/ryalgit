@@ -21,12 +21,14 @@
 
                     @foreach ($lsales as $lastsale)
                         <tr>
-                            
+                           
                             <td>
                                 <a wire:click.prevent="viewDetails({{ $lastsale }})">
-                                {{ $lastsale->s_id }}</a>
+                                000{{ $lastsale->s_id }}</a>
                             </td>
-                            <td> </td> <!-- /change for client -->
+                                <td>
+                                    {{ $lastsale->cliente }}
+                                </td>
                             <td>{{ $lastsale->fecha }}</td>
                             <td class="text-right">{{ $lastsale->total }}</td>
                         </tr>

@@ -10,6 +10,7 @@ th, td:nth-child(2) {
     width: 150px;
 }
 
+
 /* POINT - SALES **/
 /* CASHOUT */
 #cartTable {
@@ -191,20 +192,29 @@ background: rgba(0,0,0,0.2);
 .skin-black .left-side {
     background: #222d32;
 }
+.skin-black .main-header .navbar .sidebar-toggle {
+    color: #fff;
+}
 .skin-black .sidebar > .sidebar-menu > li > a:hover, .skin-black .sidebar > .sidebar-menu > li.active > a {
-    color: #f6f6f6;
+    color: #ccc;
     background: #222d32;
+}
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header {
+    background-color: #00a65a !important;
+}
+.skin-green .main-header .navbar {
+    background-color: #00a65a;
 }
 
 .skin-black .sidebar > .sidebar-menu > li:first-of-type > a {
     border-top: 0px solid #222d32;
 }
 .skin-black .navbar {
-    background-color: #222d32;
-    border-bottom: 1px solid #eee;
+    background-color: #00a65a;
+    border-bottom: 1px solid #ccc;
 }
 .skin-black .logo {
-    background-color: #222d32;
+    background-color: #00a65a;
     color: #ffffff;
 }
 .skin-black .main-header .logo {

@@ -1,6 +1,6 @@
 <article class="content-header  w-100">
-    <div class="row content-header ">
-        <div class="col-xs-12 col-md-4">
+    <div class="row content-header">
+        <div class="col-md-3 col-xs-12">
             <div class="input-group">
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
@@ -10,54 +10,68 @@
                 @error('fromDate')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
+
+
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                 </div>
                 <input type="date" wire:model.lazy="toDate" id="dateTimeFlatpickr"
                     class="form-control flatpickr pull-right active">
-                @error('toDate')
+                @error('fromDate')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
-            </div><!-- /input-group Date from -->
-        </div>
-
-        @if ($userid > 0 && $fromDate != null && $toDate != null)
-            <div class="col-md-4 col-sm-12 col-xs-12 ">
-                <div class="form-group">
-                    <button wire:click.prevent="Consultar()" type="button"
-                        class="btn btn-flat btn-md">Consultar</button>
-                    @if ($total > 0)
-                        <button wire:click.prevent="Print()" type="button" class="btn btn-flat btn-md"><span><i
-                                    class="fa fa-print class="text-light></i> </span>Imprimir</button>
-                    @endif
-                </div>
             </div>
-        @endif
-
-        <div class="col-md-4 col-sm-12 col-xs-12 float-right">
+        </div>
+        <div class="col-md-3 col-xs-12">
+            <select class="form-control" wire:model.lazy="customer_id">
+                <option >Seleccione Cliente</option>
+               @foreach($customers as $customers)
+                    <option value="{{ $customers->id }}"> {{$customers->name}} </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-md-3 col-xs-12">
             <div class="input-group">
-                <select wire:model="userid" id="sale_by" class="form-control">
-                    <option value="">Selecciona cajero </option>
-                    @foreach ($users as $u)
-                        <option value="{{ $u->id }}">{{ $u->name }}</option>
-                    @endforeach
+
+                <select class="form-control" wire:model.lazy="user_id">
+                    <option >Seleccione Cajero</option>
+                    @foreach($users as $user)
+                    <option value="{{ $user->id }}"> {{$user->name}} </option>
+                @endforeach
                 </select>
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+                    <button class="btn btn-default" type="button" onclick="load(1);"><i
+                            class="fa fa-search"></i></button>
                 </span>
-                @error('userid')
-                    <span class="text-danger"><i class="fa fa-warning-symbol"></i> {{ $message }}</span>
-                @enderror
+            </div><!-- /input-group -->
+        </div>
+
+        <div class="col-xs-12 col-md-3 ">
+            <div class="btn-group pull-right">
+                    <button wire:click="Consultar()" class="btn btn-default"><span> <i class="fa fa-file"></i></span></button>
+                <button type="button" onclick="reporte();" class="btn btn-default"><i class="fa fa-print"></i> PDF
+                </button><button type="button" onclick="inventario_excel();" class="btn btn-default"><i
+                        class="fa fa-file-excel-o"></i> Excel
+                </button><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Mostrar
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu pull-right">
+                    <li class="active" onclick="per_page(15);" id="15"><a href="#">15</a></li>
+                    <li onclick="per_page(25);" id="25"><a href="#">25</a></li>
+                    <li onclick="per_page(50);" id="50"><a href="#">50</a></li>
+                    <li onclick="per_page(100);" id="100"><a href="#">100</a></li>
+                    <li onclick="per_page(1000000);" id="1000000"><a href="#">Todos</a></li>
+                </ul>
             </div>
         </div>
-        <!-- / <div class="col-xs-10 col-md-3 ">
-                <div class="btn-group pull-right">
-                    <button type="button" onclick="reporte();" class="btn btn-default"><i class="fa fa-print"></i> PDF
-                    </button><button type="button" onclick="ventas_excel();" class="btn btn-default"><i class="fa fa-file-excel-o"></i>   Excel
-                </button></div>
-            </div>-->
+        <div class="col-xs-12">
+            <div id="loader" class="text-center"></div>
+        </div>
         <input type="hidden" id="per_page" value="15">
     </div>
+
     <!-- Main content -->
     <section class=" content">
         <div class="row">
@@ -80,30 +94,34 @@
                                     <!-- <th>ID</th> -->
                                     <th class="text-center">DOCUMENTO Nº </th>
                                     <!-- <th>Nº de productos</th> -->
-                                    <th class="text-center">TOTAL</th>
-                                    <th class="text-center">ITEMS</th>
+                                    <th>CLIENTE</th>
+                                    <th>MÉTODO DE PAGO</th>
+                                   
+                                    <th>CAJERO</th>
+                                    <th>TOTAL</th>
                                     <th class="text-center">FECHA</th> <!-- / -->
                                     <th class="text-center"></th>
                                 </tr>
-                                @if ($total <= 0)
-                                    <h6>
+                              
+                                    @foreach ($salesLists as $row)
                                         <tr>
-                                            <td colspan="4" class="text-center">
-                                                <h6>
-                                                    no hay ventas en la fecha seleccionada
-                                                </h6>
+                                            <td class="text-center"> 000{{ $row->s_id }} </td>
+                                            <td>{{ $row->cliente }}</td>
+                                            <td>
+                                              @if($row->cash > 0)
+                                             <span class="text-center"><b>EFECTIVO</b></span>
+                                              @endif
                                             </td>
-                                        </tr>
-                                    </h6>
-                                @else
-                                    @foreach ($sales as $row)
-                                        <tr>
-                                            <td class="text-center"> {{ $row->id }} </td>
-                                            <td class="text-center"><span
-                                                    class="label label-success">{{ number_format($row->total, 2) }}</span>
+                                            <td>
+                                               {{ $row->user }}
                                             </td>
-                                            <td class="text-center"> {{ $row->items }} </td>
-                                            <td class="text-center"> {{ $row->created_at }} </td>
+                                            <td>
+                                                <span
+                                                class="label label-success">{{ number_format($row->total, 2) }}</span>
+                                            </td>
+                                            <td>
+                                                {{ $row->fecha }}
+                                            </td>
                                             <td class="text-center">
                                                 <button wire:click.prevent="viewDetails({{ $row }})"
                                                     class="btn btn-flat"><span><i
@@ -121,9 +139,9 @@
                                             articulos totales: {{ $items }}
                                         </td>
                                     </tr>
-                                @endif
+                                
                             </tbody>
-                          
+
                         </table>
                         <div style="margin: 5px;">
                         </div>
@@ -144,7 +162,7 @@
                             });
                         </script>
                     </div>
-                      @include('livewire.reports.form')
-            </div><!-- row -->
+                    @include('livewire.reports.form')
+                </div><!-- row -->
     </section>
 </article><!-- /.content -->

@@ -14,6 +14,8 @@
         console.log("App init is ready!")
     });
 </script>-->
+<script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
+<script src="{{ asset('plugins/select2/custom-select2.js') }}"></script>
 <script src="{{ asset('assets/js/custom.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/onscan.js') }}"></script>
 <!-- <script src="{{ asset('js/keypress.js') }}"></script> -->

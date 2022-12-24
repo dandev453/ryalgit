@@ -4,75 +4,62 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Category;
+use App\Models\Custoemers;
 use App\Models\Product;
+use App\Models\Supliers;
+use App\Models\Purchase;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class PurchaseListComponent extends Component
-{       
-    
-    public $name, $barcode, $cost, $price, $stock, $alerts, $category_id, $search, $image, $selected_id, $pageTitle, $componentName;
+{   
+    public $fromDate, $toDate, $userid, $total, $items, $details;
+    public $name, $barcode, $cost, $price, $stock, $purchases, $alerts, $category_id, $search, $image, $selected_id, $pageTitle, $componentName;
     private $pagination = 5;
 
     public function mount()
     {
-        $this->pageTitle = 'Listado';
-        $this->componentName = 'Productos';
+        $this->fromDate = null;
+        $this->toDate = null;
+        $this->purchases = [];
+        $this->userid = 0;
+        $this->pageTitle = 'REPORTES';
+        $this->componentName = 'COMPRAS';
         $this->category_id = 'Seleccione';
         $this->pagination;
     }
 
     public function render()
     {
-        $pagination = $this->pagination;
-        if (strlen($this->search) > 0) {
-            $products = Product::join('categories as c', 'c.id', 'products.category_id')
-                ->select('products.*', 'c.name as category')
-                ->where('products.name', 'like', '%' . $this->search . '%')
-                ->orWhere('products.barcode', 'like', '%' . $this->search . '%')
-                ->orWhere('c.name', 'like', '%' . $this->search . '%')
-                ->orderBy('products.name', 'asc')
-                ->paginate($pagination);
-        } else {
-            $products = Product::join('categories as c', 'c.id', 'products.category_id')
-                ->select('products.*', 'c.name as category')
-                ->orderBy('products.name', 'asc')
-                ->paginate();
+        $fi = Carbon::parse($this->fromDate)->format('Y-m-d') . ' 00:00:00';
+        $ff = Carbon::parse($this->toDate)->format('Y-m-d') . ' 23:59:59';
+        if(!$fi && !$ff){
+           $purchases = Purchase::all();
         }
-        return view('livewire.compras.purchase_list.component')
+        return view('livewire.compras.purchase_list.component',
+        [
+            'users' => User::orderBy('name', 'asc')->get(),
+            'supliers' =>  Supliers::orderBy('name', 'asc')->get(),
+            'purchases' => Purchase::all()
+        ])
             ->extends('layouts.theme.app')
             ->section('content');
     }
-    public function AddtoCart($product, $id)
+
+    public function Consultar()
     {
-        //dd($barcode); //LLega el barcode OK!!
-       // dd($id); //Producto encontrado!
-        
-       $product = Product::where('id', $id)->first();
-       $cant = 1;
-        if ($product == null || empty($product)) {
-            $this->emit('scan-notfound', 'El producto no fue encontrado');
-        } else {
-            if ($this->InCart($product->id)) {
-                $this->increaseQty($product->id);
-                return;
-            }
-
-            if ($product->stock < 1) {
-                $this->emit('no-stock', 'Stock insuficiente');
-                return;
-            }
-
-            Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
-            /*$carro = Cart::getContent();
-             dd($carro);*/
-
-            $this->total = Cart::getTotal();
-            $this->itemsQuantity = Cart::getTotalQuantity();
-
-            $this->emit('scan-ok', 'Producto agregado');
-        }
+        $fi = Carbon::parse($this->fromDate)->format('Y-m-d') . ' 00:00:00';
+        $ff = Carbon::parse($this->toDate)->format('Y-m-d') . ' 23:59:59';
+        $this->purchases = Purchase::whereBetween('created_at', [$fi, $ff])
+        ->where('purchases.suplier_id', $this->suplier_id)
+        //SELECT WITH JOIN TO CUSTOMERS AND CASHOUT USERS
+            ->get();
+        $this->total = $this->purchases ? $this->purchases->sum('total') : 0;
+        $this->items = $this->purchases ? $this->purchases->sum('items') : 0;
     }
+    
 }

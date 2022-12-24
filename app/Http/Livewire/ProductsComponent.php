@@ -100,7 +100,7 @@ class ProductsComponent extends Component
             $product->save();
         }
         $this->resetUI();
-        $this->emit('product-added', 'Producto Registrado');
+        $this->emit('scan-ok', 'Producto Registrado');
     }
 
     public function Edit(Product $product)
@@ -165,7 +165,7 @@ class ProductsComponent extends Component
             }
         }
         $this->resetUI();
-        $this->emit('product-updated', 'Producto Actualizado');
+        $this->emit('scan-ok', 'Producto Actualizado');
     }
 
     public function resetUI()
@@ -196,6 +196,6 @@ class ProductsComponent extends Component
         }
 
         $this->resetUI();
-        $this->emit('product-deleted', 'Producto Eliminado');
+        $this->emit('scan-ok', 'Producto Eliminado');
     }
 }

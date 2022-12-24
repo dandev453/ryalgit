@@ -3,7 +3,7 @@
         window.livewire.on('scan-ok', Msg =>{
             noty(Msg)
         })
-
+        
         window.livewire.on('scan-notfound', Msg =>{
             noty(Msg, 2)
         })

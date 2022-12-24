@@ -40,7 +40,7 @@ $(function() {
             + "<div class='.radio'>"
             + "<label>"
             + "<input name='skins' type='radio' onchange='change_skin(\"skin-black\");' /> "
-            + "Black"
+            + "Dark"
             + "</label>"
             + "</div>"
             + "</div>"
@@ -86,6 +86,6 @@ function change_layout() {
     fix_sidebar();
 }
 function change_skin(cls) {
-    $("body").removeClass("skin-blue skin-black skin-red");
+    $("body").removeClass("skin-blue skin-dark skin-red");
     $("body").addClass(cls);
 }

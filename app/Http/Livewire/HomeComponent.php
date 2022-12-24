@@ -7,11 +7,14 @@ use Livewire\WithPagination;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Customers;
 use App\Models\Sale;
+use App\Models\Purchase;
 use App\Models\SaleDetails;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Permission;
+use Carbon\Carbon;
 
 class HomeComponent extends Component
 {
@@ -40,7 +43,17 @@ class HomeComponent extends Component
     public function render()
     {
         $salesCount = Sale::count();
+        $purchasesCount = Purchase::count();
         $TotalSalesSum = Sale::sum('total');
+        //LAST CLIENT FOR WEEKS
+        /* In the following code you can directly get the count value */
+        $startofcurrentweek =Carbon::now()->startOfWeek(); //2020-02-17 00:00:00
+        $endofcurrentweek = Carbon::now()->endOfWeek(); //2020-02-23 23:59:59
+        $parcelCount  =     Customers::whereBetween('created_at', [$startofcurrentweek, $endofcurrentweek])->count();
+        $LastClientsWeek  = $parcelCount;
+        
+        $TotalPurchasesSum = Purchase::sum('total');
+        $TotalcustomersSum = Customers::count('id'); 
         $TotalCashSum = Sale::sum('cash');
         //SUM ROW CLIENTS
         //PURCHASE TOTAL SUM IN OUT PURCHASE
@@ -48,7 +61,8 @@ class HomeComponent extends Component
         $InventoryProductsSum = Product::sum('price');
         
         $salesLists = Sale::join('users as u', 'u.id', 'sales.user_id')
-            ->select('sales.id as s_id','sales.total as total','sales.created_at as fecha','u.name as cliente')
+            ->join('customers as cliente', 'cliente.id', 'sales.customer_id' )
+            ->select('sales.id as s_id','sales.total as total','sales.created_at as fecha','cliente.name as cliente')
             ->orderBy('s_id','Desc')
             ->where('sales.status', 'Paid')
             ->paginate($this->pagination);
@@ -63,15 +77,20 @@ class HomeComponent extends Component
             'data' => $products,
             'lsales' => $salesLists,
             'salesCount' => $salesCount,
+            'LastClients' => $LastClientsWeek,
+            'TotalPurchases' => $TotalPurchasesSum,
+            'purchasesCount' => $purchasesCount,
             'TotalSales' => $TotalSalesSum,
+            'TotalClients' => $TotalcustomersSum,
             'StockProducts' => $StockproductsSum,
             'InventoryProductsSum' => $InventoryProductsSum,
-            'categories' => Category::orderBy('name', 'asc')->get(),
+            'categories' => Category::orderBy('name', 'asc')->get()
         ])
             ->extends('layouts.theme.app')
             ->section('content');
     }
-
+    
+   
     public function viewDetails(Sale $sale)
     {
         $this->details = Sale::join('sale_details as d', 'd.sale_id', 'sales.id')

@@ -49,24 +49,24 @@
                                     <span class="info-box-icon"><i class="fa fa-shopping-cart"></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">Compras 2022</span>
-                                        <span class="info-box-number">303,586.95</span>
+                                        <span class="info-box-number">{{$TotalPurchases}}</span>
                                         <div class="progress">
                                             <div class="progress-bar" style="width: 100%"></div>
                                         </div>
                                         <span class="progress-description">
-                                            Compras realizadas: 34 </span>
+                                            Compras realizadas :{{$purchasesCount}} </span>
                                     </div><!-- /.info-box-content -->
                                 </div><!-- /.info-box -->
                                 <div class="info-box bg-aqua">
                                     <span class="info-box-icon"><i class="fa fa-users "></i></span>
                                     <div class="info-box-content">
                                         <span class="info-box-text">Clientes</span>
-                                        <span class="info-box-number">260</span>
+                                        <span class="info-box-number">{{$TotalClients}}</span>
                                         <div class="progress">
                                             <div class="progress-bar" style="width: 100%"></div>
                                         </div>
                                         <span class="progress-description">
-                                            Clientes nuevos: 1 </span>
+                                            Clientes nuevos: {{ $LastClients }}</span>
                                     </div><!-- /.info-box-content -->
                                 </div><!-- /.info-box -->
                             </div><!-- /.col -->

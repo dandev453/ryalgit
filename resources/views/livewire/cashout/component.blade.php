@@ -1,46 +1,50 @@
 <article class="content-header  w-100">
-    <div class="row content-header ">
-        <div class="col-xs-12 col-md-4">
+    <div class="row">
+        <div class="col-md-3 col-xs-12">
             <div class="input-group">
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                 </div>
-                <input type="date" wire:model.lazy="fromDate" id="basicFlatpickr"
+               <input type="date" wire:model.lazy="fromDate" id="basicFlatpickr"
                     class="form-control flatpickr pull-right active">
                 @error('fromDate')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
+
+
                 <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                 </div>
                 <input type="date" wire:model.lazy="toDate" id="dateTimeFlatpickr"
                     class="form-control flatpickr pull-right active">
-                @error('toDate')
+                @error('fromDate')
                     <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div><!-- /input-group Date from -->
-        </div>
-        <!-- <div class="col-md-3 col-xs-12">
-                / <select class="form-control select2 select2-hidden-accessible" data-placeholder="Selecciona el cliente" name="customer_id" id="customer_id" tabindex="-1" aria-hidden="true">
-                </select> -->
-        <!-- /
-                <span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" style="width: 619px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-customer_id-container"><span class="select2-selection__rendered" id="select2-customer_id-container"><span class="select2-selection__placeholder">Selecciona el cliente</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-            </div>-->
+                @enderror 
+                <!-- <input type="text" name="datetimes" class="form-control" /> -->
 
-        @if ($userid > 0 && $fromDate != null && $toDate != null)
-            <div class="col-md-4 col-sm-12 col-xs-12 ">
-                <div class="form-group">
-                    <button wire:click.prevent="Consultar()" type="button"
-                        class="btn btn-flat btn-md">Consultar</button>
-                    @if ($total > 0)
-                        <button wire:click.prevent="Print()" type="button" class="btn btn-flat btn-md"><span><i
-                                    class="fa fa-print class="text-light></i> </span>Imprimir</button>
-                    @endif
-                </div>
+              <!--  <script>
+                $(function() {
+                  $('input[name="datetimes"]').daterangepicker({
+                    timePicker: true,
+                    startDate: moment().startOf('hour'),
+                    endDate: moment().startOf('hour').add(32, 'hour'),
+                    locale: {
+                      format: 'M/DD hh:mm A'
+                    }
+                  });
+                });
+                </script>-->
             </div>
-        @endif
-
-        <div class="col-md-4 col-sm-12 col-xs-12 float-right">
+        </div>
+        <div class="col-md-3 col-xs-12">
+            <select class="form-control" >
+                <option value="">Selecciona el cliente </option>
+                @foreach($customers as $customers)
+                <option value="{{ $customers->name }}"> {{$customers->name}} </option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-xs-12 col-md-3">
             <div class="input-group">
                 <select wire:model="userid" id="sale_by" class="form-control">
                     <option value="">Selecciona cajero </option>
@@ -56,14 +60,29 @@
                 @enderror
             </div>
         </div>
-        <!-- / <div class="col-xs-10 col-md-3 ">
-                <div class="btn-group pull-right">
-                    <button type="button" onclick="reporte();" class="btn btn-default"><i class="fa fa-print"></i> PDF
-                    </button><button type="button" onclick="ventas_excel();" class="btn btn-default"><i class="fa fa-file-excel-o"></i>   Excel
-                </button></div>
-            </div>-->
-        <input type="hidden" id="per_page" value="15">
+        <div class="col-xs-2 col-md-1">
+            <div id="loader" class="text-center"></div>
+        </div>
+        @if ($userid > 0 && $fromDate != null && $toDate != null)
+        <div class="col-xs-10 col-md-3 ">
+            
+            <div class="btn-group pull-right">
+                <button wire:click.prevent="Consultar()" type="button"
+                class="btn btn-flat btn-md">Consultar</button>
+                @if ($total > 0)
+                <button wire:click.prevent="Print()" type="button" class="btn btn-default"><i class="fa fa-print"></i> PDF
+                </button>
+                <button type="button" class="btn btn-default"><i
+                    class="fa fa-file-excel-o"></i> Excel
+                </button>
+                @endif
+           
+            </div>
+        </div>
+        @endif
     </div>
+
+    
     <!-- Main content -->
     <section class=" content">
         <div class="row">
@@ -109,7 +128,8 @@
                                                     class="label label-success">{{ number_format($row->total, 2) }}</span>
                                             </td>
                                             <td class="text-center"> {{ $row->items }} </td>
-                                            <td class="text-center"> {{ $row->created_at }} </td>
+                                            <td class="text-center">
+                                                {{ \Carbon\Carbon::parse($row->created_at)->format('Y-m-d') }} </td>
                                             <td class="text-center">
                                                 <button wire:click.prevent="viewDetails({{ $row }})"
                                                     class="btn btn-flat"><span><i

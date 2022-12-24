@@ -12,12 +12,12 @@
         </div>
         <div class="col-xs-12 col-md-3">
             <div class="input-group">
-                <select id="cat" class="form-control" onchange="load(1);">
-                    <option value="">Selecciona Categoría </option>
-                    <option value="1">TELÉFONOS</option>
-                    <option value="2">CÓMPUTO</option>
-                    <option value="3"> AUDIO</option>
-                    <option value="4">CAMARAS</option>
+                <select class="form-control" wire:model.lazy="categoryName">
+
+                    <option value="" default>Selecciona Categoría</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->name }}">{{ $category->name }}</option>
+                    @endforeach
                 </select>
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" onclick="load(1);"><i
@@ -65,21 +65,24 @@
                                     <th class="text-center">VENTAS</th>
                                     <th class="text-center"></th>
                                 </tr>
-
                                 <tr>
                                     <!-- <td>2</td> -->
                                     <td class="text-center"> </td>
                                     <td class="text-center">
-
+                                       
                                     </td>
                                     <td class="text-center">
-
+                                        
+                                    </td>
+                                    <td class="text-center">
+                                   
                                     </td>
 
-
                                 </tr>
+                               
                                 <tr>
                                     <td colspan="9">
+                                      
                                         Mostrando de registros
                                     </td>
                                 </tr>

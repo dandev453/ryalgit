@@ -4,9 +4,12 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-10 col-sm-10 col-xs-10">
-                        <select required="" class="form-control select2 " name="customer_id" id="customer_id">
-                            <option value="">Selecciona Cliente</option>
-                        </select>
+                      <select wire:model="customer_id" class="form-control " >
+                        <option default>Seleccionar Cliente</option>
+                        @foreach($customers as $customer)
+                        <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                        @endforeach
+                    </select>
                     </div>
                     <div class="col-md-2 col-sm-2 col-xs-2">
                         <button data-toggle="modal" data-target="#cliente_modal" class="btn btn-success"><i
@@ -108,7 +111,6 @@
                         @endforeach
                     </tbody>
                 </table>
-
                 <hr>
                 <div class="m-t-10">
                     <div class="row">
@@ -205,7 +207,7 @@
                 <div class="col-sm-12 col-md-12 col-lg-6">
                     @if ($efectivo >= $total && $total > 0)
                         <button wire:click.prevent="saveSale" class="btn btn-dark btn-md btn-block">
-                            GUARDAR F9</button>
+                            GUARDAR F6</button>
                     @endif
                 </div>
             </div>
@@ -233,7 +235,6 @@
 
                     <!-- onchange="load(1);" class="form-control" name="category_id" id="category_id" -->
                     <select class="form-control" wire:model.lazy="categoryName">
-
                         <option value="" default>Selecciona Categoría</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category->name }}">{{ $category->name }}</option>
@@ -268,8 +269,10 @@
                     @endforeach
                 </div>
                 <div class="col-md-12 text-center">
-                    
+                   
+                      @if($products->hasMorePages())
                     <button  class="btn btn-lg btn-flat">Cargar Más...</button>
+                    @endif
                 </div>
             </div>
         </div>

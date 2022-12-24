@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\User;
 use App\Models\Sale;
 use App\Models\SaleDetails;
+use App\Models\Customers;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
@@ -30,7 +31,10 @@ class CashoutComponent extends Component
 
     public function render()
     {
-        return view('livewire.cashout.component', ['users' => User::orderBy('name', 'asc')->get()])
+        return view('livewire.cashout.component', 
+        ['users' => User::orderBy('name', 'asc')->get(),
+        'customers' =>  Customers::orderBy('name', 'asc')->get()
+        ])
             ->extends('layouts.theme.app')
             ->section('content');
     }

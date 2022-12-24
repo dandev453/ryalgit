@@ -53,6 +53,7 @@
                                                                         <td class="text-center">
                                                                            $ {{ number_format($d->quantity * $d->price, 2) }}
                                                                         </td>
+                                                                    </tr>
                                                                 @endforeach
                                                                 <td>
                                                                     @if ($details)

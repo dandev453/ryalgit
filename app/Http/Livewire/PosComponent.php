@@ -8,6 +8,7 @@ use Livewire\WithPagination;
 use App\Models\Category;
 use App\Models\Sale;
 use App\Models\SaleDetails;
+use App\Models\Customers;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use DB;
 use Exception;
@@ -21,6 +22,7 @@ class PosComponent extends Component
     public $total,
         $categoryName,
         $search,
+        $customer_id,
         $itemsQuantity,
         $denominations = [],
         $efectivo,
@@ -39,6 +41,7 @@ class PosComponent extends Component
     {
         $category = $this->categoryName;
         $categories = Category::all();
+        $customers = Customers::all();
         // dd(Cart::getContent()->sortBy('name'));
         if (strlen($this->search) > 0) {
             $products = Product::join('categories as c', 'c.id', 'products.category_id')
@@ -50,7 +53,7 @@ class PosComponent extends Component
                 ->paginate($this->pagination);
         } else {
             if (!$category) {
-              $products = Product::join('categories as c', 'c.id', 'products.category_id')
+                $products = Product::join('categories as c', 'c.id', 'products.category_id')
                     ->select('products.*', 'c.name as category')
                     ->orderBy('products.id', 'desc')
                     ->paginate($this->pagination);
@@ -68,14 +71,16 @@ class PosComponent extends Component
         $this->denominations = Denomination::all();
         return view('livewire.pos.component', [
             'products' => $products,
+            'customers' => $customers,
             'categories' => $categories,
             'denominations' => Denomination::orderBy('value', 'desc')->get(),
             'cart' => Cart::getContent()->sortBy('name'),
-        ]) ->extends('layouts.theme.pos.app')
+        ])
+            ->extends('layouts.theme.pos.app')
             ->section('content');
     }
-    public function loadMore(){
-       
+    public function loadMore()
+    {
     }
 
     public function ACash($value)
@@ -122,10 +127,10 @@ class PosComponent extends Component
     public function AddtoCart($product, $id)
     {
         //dd($barcode); //LLega el barcode OK!!
-       // dd($id); //Producto encontrado!
-        
-       $product = Product::where('id', $id)->first();
-       $cant = 1;
+        // dd($id); //Producto encontrado!
+
+        $product = Product::where('id', $id)->first();
+        $cant = 1;
         if ($product == null || empty($product)) {
             $this->emit('scan-notfound', 'El producto no fue encontrado');
         } else {
@@ -254,6 +259,15 @@ class PosComponent extends Component
             $this->emit('sale-error', 'EL EFECTIVO DEBE SER MAYOR O IGUAL AL TOTAL');
             return;
         }
+
+        $rules = [
+            'customer_id' => 'required|unique:products|min:3',
+        ];
+        $messages = [
+            'customer_id' => 'El cliente es requerido',
+        ];
+
+        $this->validate($rules, $messages);
         DB::beginTransaction();
         try {
             $sale = Sale::create([
@@ -262,6 +276,7 @@ class PosComponent extends Component
                 'cash' => $this->efectivo,
                 'change' => $this->change,
                 'user_id' => Auth()->user()->id,
+                'customer_id' => $this->customer_id,
             ]);
             if ($sale) {
                 $items = Cart::getContent();

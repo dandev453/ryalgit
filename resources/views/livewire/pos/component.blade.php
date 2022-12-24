@@ -2,7 +2,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pos/core.css') }}">
     <!--  component css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pos/components.css') }}">
-    <form class="" method="post" id="guardar_cliente" name="guardar_cliente">
+    <form id="guardar_cliente">
         <div class="modal fade" id="cliente_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -395,7 +395,7 @@
                     <div class="col-md-4">
                         <div class="list-group">
                             <a href="javascript:void(0)" id="cash" onclick="paymentType(1);"
-                                class="list-group-item active">
+                                class="list-group-item ">
                                 Efectivo
                             </a>
                             <a href="javascript:void(0)" id="check" onclick="paymentType(2); "
@@ -415,7 +415,7 @@
                         <div class="input-group">
                             <span class="input-group-addon" id="basic-addon3">Pago $ </span>
                             <input type="text" placeholder="0.0" class="form-control" id="payment"
-                                aria-describedby="basic-addon3" oninput="$(this).calculateChange();">
+                                aria-describedby="basic-addon3"   oninput="$(this).calculateChange();">
                         </div>
                         <hr>
                         <div class="row">

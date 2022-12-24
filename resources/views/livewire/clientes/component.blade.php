@@ -9,7 +9,6 @@
         </div>
         <div class="col-xs-10 col-md-5 ">
             <div class="btn-group pull-right">
-                <a href="/add_product" class="btn btn-default"><i class="fa fa-plus"></i> Nuevo</a>
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     Mostrar
@@ -29,7 +28,7 @@
         <div class="row">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> |  </h3>
+                    <h3 class="box-title"> {{ $componentName }} | {{ $pageTitle }}  </h3>
                     <div class="box-tools pull-right">
                         <!--    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>    -->
                         <!--    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>  -->
@@ -45,32 +44,45 @@
                             <tbody>
                                 <tr>
                                     <!-- <th>ID</th> -->
-                                    <th width="10%" class="text-center">ID </th>
+                                    <th  class="text-center">ID </th>
                                     <!-- <th>Nº de productos</th> -->
-                                    <th  width="12%" class="text-center">REGISTRO FISCAL #</th>
-                                    <th  width="10%" class="text-center">CLIENTE</th>
-                                    <th  width="12%" class="text-center">DIRECCIÓN</th>
-                                    <th  width="10%" class="text-center">AGREGADO</th>
-                                    <th  width="10%" class="text-center"></th>
+                                    <th  class="text-center">REGISTRO FISCAL #</th>
+                                    <th  class="text-center">CLIENTE</th>
+                                    <th  class="text-center">DIRECCIÓN</th>
+                                    <th  class="text-center">AGREGADO</th>
+                                    <th  class="text-center"></th>
                                 </tr>
-                                
+                                @foreach($data as $customer)
                                     <tr>
                                         <!-- <td>2</td> -->
-                                        <td width="10%" class="text-center"> </td>
+                                        <td  class="text-center"> {{ $customer->id }} </td>
                                         <td class="text-center">
-                                            
+                                            {{ $customer->registro_fiscal }}
                                         </td>
                                         <td class="text-center">
-                                            name
+                                            {{ $customer->name }}
                                         </td>
-                                        <td class="text-center">category </td>
-  
-                                        <td class="text-center"><span class="label label-success">Activo</span></td>
-                                        <td class="text-center">stock</td>
-                                           
-                               
+                                        <td class="text-center">{{ $customer->address }} </td>
+                                        <td class="text-center">{{ $customer->created_at }}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="javascript:void(0)"
+                                                    wire:click.prevent="Edit({{ $customer->id }})"
+                                                    class="btn btn-default" title="Edit"><span>
+                                                        <i class="fa fa-edit"></i></span> EDITAR
+                                                </a>
+                                                <!-- /<a href="/edit_product"
+                                    class="btn btn-default" title="Edit"><span>
+                                    <i class="fas fa-edit"></i></span> EDITAR
+                                </a>-->
+                                                <a href="javascript:void(0)" onclick="Confirm('{{ $customer->id }}')"
+                                                    class="btn btn-default" title="Delete">
+                                                    <span> <i class="fa fa-trash"></i></span> ELIMINAR
+                                                </a>
+                                            </div>
                                         </td>
                                 </tr>
+                                @endforeach
                                 <tr>
                                     <td colspan="9">
                                       de registros
@@ -79,7 +91,7 @@
                             </tbody>
                         </table>
                         <div style="margin: 5px;">
-                            
+                            {{ $data->links() }}
                         </div>
                     </div>
                    
@@ -90,18 +102,12 @@
                 <!-- MODAL CREATE & EDIT -->
                 <!--  END MODAL -->
             </div><!-- row -->
+            @include('livewire.clientes.form')
     </section>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             window.livewire.on('product-added', msg => {
                 $('#theModal').modal('hide');
-                noty(Msg)
-            });
-            window.livewire.on('product-updated', msg => {
-                $('#theModal').modal('hide');
-            });
-            window.livewire.on('product-deleted', msg => {
-                //noty
                 noty(Msg)
             });
             window.livewire.on('show-modal', msg => {

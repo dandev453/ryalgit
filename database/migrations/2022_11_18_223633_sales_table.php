@@ -16,7 +16,9 @@ return new class extends Migration {
             $table->id();
             $table->decimal('total', 10, 2);
             $table->integer('items');
-            $table->decimal('cash', 10, 2);
+            $table->decimal('cash', 10, 2); 
+            $table->decimal('card', 10, 0);//NO INTEGRATED
+            $table->decimal('check', 10, 0);//NO INTEGRATED
             $table->decimal('change', 10, 2);
             $table->enum('status', ['PAID', 'PENDING', 'CANCELLED'])->default('PAID');
             $table->unsignedBigInteger('user_id');

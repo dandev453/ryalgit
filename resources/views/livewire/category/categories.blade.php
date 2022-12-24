@@ -70,7 +70,7 @@
                                         <td class="text-center">
                                             <span class="label label-success">Activo</span>
                                         </td>
-                                        <td class="text-center">{{ $category->created_at }}</td>
+                                        <td class="text-center">{{ \Carbon\Carbon::parse($category->created_at)->format('Y-m-d') }}</td>
                                         <td>
                                             <div class="btn-group">
                                                 <a href="javascript:void(0)" wire:click="Edit({{ $category->id }})"

@@ -45,45 +45,45 @@
 <div class="table-responsive">
     <table class="table table-condensed table-hover table-striped">
         <tbody>
-            <th>ID</th>
-            <th>Nombres </th>
+            <th class="text-center">ID</th>
+            <th class="text-center">Nombres </th>
             <!-- <th>Nº de productos</th> -->
-            <th>Email</th>
-            <th>Grupo</th>
-            <th>Agregado</th>
-            <th>Estado</th>
-            <th></th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Grupo</th>
+            <th class="text-center">Agregado</th>
+            <th class="text-center">Estado</th>
+            <th class="text-center"></th>
         </tr>
         @foreach($data as $user)
         <tr>
-            <td>{{$user->id}}</td>
-            <td>{{$user->name}}</td>
-            <td>{{$user->email}}</td>
-            <td>{{$user->profile}}</td>
-            <td>{{$user->created_at}}</td>
-            <td>
+            <td class="text-center">{{$user->id}}</td>
+            <td class="text-center">{{$user->name}}</td>
+            <td class="text-center">{{$user->email}}</td>
+            <td class="text-center">{{$user->profile}}</td>
+            <td class="text-center">{{\Carbon\Carbon::parse($user->created_at)->format('Y-m-d')}}</td>
+            <td class="text-center ">
                 @if($user->status = 'ACTIVE')
-                <span class="label label-success">Activo</span>
+                <span class="label label-success">ACTIVO</span>
               @else
-                <span class="label label-danger">Inactivo</span>
+                <span class="label label-danger">BLOQUEADO</span>
                 @endif
             </td>
-            <td>
-                <div class="btn-group">
-                    <a href="javascript:void(0)"
+            <td class="text-center ">
+                <div class="  d-flex flex-wrap">
+                    <button href="javascript:void(0)"
                     wire:click.prevent="Edit({{$user->id}})"
-                    class="btn btn-default" title="Edit"><span>
+                    class="btn btn-flat btn-sm" title="Edit"><span>
                         <i class="fa fa-edit"></i></span> EDITAR
-                    </a>
+                    </button>
                     <!-- /<a href="/edit_product"
                         class="btn btn-default" title="Edit"><span>
                         <i class="fas fa-edit"></i></span> EDITAR
                     </a>-->
-                    <a href="javascript:void(0)"
+                    <button class="btn btn-flat btn-sm" href="javascript:void(0)"
                     onclick="Confirm('{{$user->id}}')"
                     class="btn btn-default" title="Delete">
-                    <span> <i class="fa fa-trash"></i></span> ELIMINAR
-                </a>
+                    <i class="fa fa-trash"></i>ELIMINAR
+                </button>
             </div>
         </td>
         @endforeach

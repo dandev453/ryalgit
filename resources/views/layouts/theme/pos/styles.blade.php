@@ -6,6 +6,7 @@
 <!-- Theme style -->
 <link href="{{ asset('assets/css/AdminLTE.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets/css/custom_styles.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('plugins/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
 
 <!-- include style flatpickr custom -->
 <link href="{{ asset('plugins/sweetalerts/sweetalert.css') }}" rel="stylesheet" type="text/css" />

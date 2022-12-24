@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 class UsersComponent extends Component
 {
     private $pagination = 10;
-    public $search, $selected_id, $user, $name, $email, $profile, $password, $image, $pageTitle, $componentName;
+    public $search, $selected_id, $user, $status, $name, $email, $profile, $password, $image, $pageTitle, $componentName;
     use WithFileUploads, WithPagination;
 
     public function mount()
@@ -44,7 +44,6 @@ class UsersComponent extends Component
         $this->name = $user->name;
         $this->email = $user->email;
         $this->profile = $user->profile;
-        $this->created_at = $user->created_at;
         $this->status = $user->status;
         $this->emit('show-modal', 'Show modal');
     }
@@ -54,12 +53,14 @@ class UsersComponent extends Component
             'name' => "required|min:3|unique:products,name,{$this->selected_id}",
             'email' => 'required',
             'profile' => 'required',
+            'status' => 'required'
         ];
         $messages = [
             'name.required' => 'Nombre del producto es requerido',
             'email.unique' => 'Ya existe el correo eléctronico',
             'name.min' => 'El nombre del producto debe tener al menos 3 caracteres.',
             'profile.required' => 'El rol es requerido',
+            'status.required' => 'El rol es requerido',
         ];
 
         $this->validate($rules, $messages);
@@ -70,6 +71,7 @@ class UsersComponent extends Component
             'name' => $this->name,
             'email' => $this->email,
             'profile' => $this->profile,
+            'status' => $this->status
         ]);
 
         if ($this->image) {
@@ -93,7 +95,7 @@ class UsersComponent extends Component
         $this->name = '';
         $this->email = '';
         $this->profile = '';
-        $this->status = null;
+        $this->status = '';
     }
     protected $listeners = ['deleteRow' => 'Destroy'];
     public function Destroy(User $user)
