@@ -72,6 +72,8 @@ class HomeComponent extends Component
             ->orderBy('products.id', 'desc')
             ->paginate($this->pagination);
 
+            
+
         $this->componentName = 'Entrada';
         return view('livewire.Home.component', [
             'data' => $products,
