@@ -79,7 +79,7 @@ Route::get('product/{id}', EditProductsComponent::class);
 Route::get('pos/{product}', PosComponent::class);
 
 //rutas impresion
-Route::get('print/sale/{id}','PrinterController@TicketVenta');
+//Route::get('print/sale/{id}','PrinterController@TicketVenta');
 //Exportar a pdf
 
 });
@@ -92,8 +92,8 @@ Route::get('report/pdf/{user}/{type}/{f1}/{f2}', [ExportController::class, 'repo
 Route::get('report/pdf/{user}/{type}/', [ExportController::class, 'reportPDF']);
 
 //reportes EXCEL
-Route::get('report/excel/{user}/{type}/{f1}/{f2}', [SaleExport::class, 'reportExcel']);
-Route::get('report/excel/{user}/{type}', [SaleExport::class, 'reportExcel']);
+//Route::get('report/excel/{user}/{type}/{f1}/{f2}', [SaleExport::class, 'reportExcel']);
+//Route::get('report/excel/{user}/{type}', [SaleExport::class, 'reportExcel']);
 
 
 Route::get('/dashboard', function () {

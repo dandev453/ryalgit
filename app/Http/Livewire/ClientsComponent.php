@@ -26,7 +26,7 @@ class ClientsComponent extends Component
     $adddress,
     $postal_code,
     $country, $pageTitle, $componentName;
-    private $pagination = 25;
+    private $pagination = 5;
 
     public function mount()
     {
@@ -68,17 +68,17 @@ class ClientsComponent extends Component
             'country' => 'required',
         ];
         $messages = [
-            'name' => 'Nombre del cliente es requerido',
-            'website' => 'Sitio web es requerido',
-            'phone' => 'El número de telefono es requerido',
-            'registro_fiscal' => 'El registro fiscal es requerido',
-            'fullname' => 'El nombre completo es requerido',
-            'lastname' => 'El apellido es requerido',
-            'email' => 'El correo eléctronico es requerido',
-            'phone_contact' => 'El número de telefono de contacto es requerido',
-            'street' => 'Dirección es requerido',
-            'postal_code' => 'Codigo postal es requerido',
-            'country' => 'El país es requerido',
+            'name.requrired' => 'Nombre del cliente es requerido',
+            'website.requrired' => 'Sitio web es requerido',
+            'phone.requrired' => 'El número de telefono es requerido',
+            'registro_fiscal.requrired' => 'El registro fiscal es requerido',
+            'fullname.requrired' => 'El nombre completo es requerido',
+            'lastname.requrired' => 'El apellido es requerido',
+            'email.requrired' => 'El correo eléctronico es requerido',
+            'phone_contact.requrired' => 'El número de telefono de contacto es requerido',
+            'street.requrired' => 'Dirección es requerido',
+            'postal_code.requrired' => 'Codigo postal es requerido',
+            'country.requrired' => 'El país es requerido',
         ];
 
         $this->validate($rules, $messages);
@@ -102,36 +102,64 @@ class ClientsComponent extends Component
 
     public function Edit(Customer $customer)
     {
+      
+
         $this->name = $customer->name;
         $this->website = $customer->website;
-        $this->phone = $customer->phone;
-        $this->cost = $customer->cost;
-        $this->alerts = $customer->alerts;
-        $this->category_id = $customer->category_id;
-        $this->image = null;
-
+        $this->registro_fiscal = $customer->phone;
+        $this->fullname = $customer->cost;
+        $this->lastname = $customer->alerts;
+        $this->email = $customer->category_id;
+        $this->phone_contact = null;
+        $this->street = null;
+        $this->postal_code = null;
+        $this->country = null;
         $this->emit('show-modal', 'Show modal');
     }
 
     public function Update()
     {
+        $this->validate($rules, $messages);
+
+        $Customers = Customers::find($this->selected_id);
+        $Customers->update([
+         'name' => $this->name,
+         'website' =>  $this->website,
+         'registro_fiscal' => $this->registro_fiscal,
+         'fullname' => $this->fullname,
+         'lastname' => $this->lastname,
+         'email' => $this->email,
+         'phone_contact' => $this->phone_contact,
+         'street' => $this->street,
+         'postal_code' => $this->postal_code,
+         'country' => $this->country
+        ]);
+         $this->resetUI();
+        $this->emit('scan-ok', 'Cliente Actualizado');
     }
 
     protected $listeners = [
         'deleteRow' => 'Destroy',
     ];
 
-    public function Destroy(Category $category)
+    public function Destroy(Customer $customer)
     {
+        $customer->delete();
+        this->resetUI();
+        $this->emit('scan-ok', 'Producto Eliminado');
     }
 
     public function resetUI()
     {
-        $this->name = '';
-        $this->image = null;
-        $this->search = '';
-        $this->selected_id = 0;
+        $this->name= '';
+        $this->website= '';
+        $this->registro_fiscal= '';
+        $this->fullname= '';
+        $this->lastname= '';
+        $this->email= '';
+        $this->phone_contact = '';
+        $this->street= '';
+        $this->postal_code= '';
+        $this->country= '';
     }
 }
-
-?>

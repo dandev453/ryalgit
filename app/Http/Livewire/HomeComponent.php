@@ -23,6 +23,7 @@ class HomeComponent extends Component
     public $permissionName, $search, $selected_id, $pageTitle, $componentName;
     private $pagination = 5;
 
+
     public function mount()
     {
          $this->pageTitle = 'Reportes';

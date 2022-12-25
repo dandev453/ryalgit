@@ -16,13 +16,13 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu pull-right">
-                    <li class="active" wire:model="pagination"><a href="#">15</a></li>
-                    <li wire:click.prevent="load()"><a href="#">25</a></li>
-                    <li wire:model="pagination"><a href="#">Todos</a></li>
+                    <li class="active" wire:click="pagiante1"><a href="javascript::void()">15</a></li>
+                    <li wire:click="pagiante2"><a href="javascript::void()">25</a></li>
+                    <li ><a href="#">Todos</a></li>
                 </ul>
             </div>
         </div>
-        <input type="hidden" id="per_page" value="15">
+      
     </div>
     <!-- Main content -->
     <section class=" content">

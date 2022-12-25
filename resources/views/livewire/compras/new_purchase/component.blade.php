@@ -1,4 +1,4 @@
-<div class="content">
+<div class="content" wire:ignore >
     <!-- <div class="col-md-12"> -->
     @include('livewire.compras.new_purchase.form')
     <!-- Default box -->
@@ -189,7 +189,7 @@
     </div><!-- /.box -->
     <!-- </div> -->
     <!-- modal -->
-    <div class="modal wire:ignore   fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog"
+    <div class="modal   fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog"
         aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -198,8 +198,8 @@
                             aria-hidden="true">×</span></button>
                     <h4 class="modal-title" id="myModalLabel">Buscar productos</h4>
                 </div>
-                <div class="modal-body">
-                    <form wire:ignore.self class="form-horizontal">
+                <div wire:ignore.self class="modal-body">
+                    <form  class="form-horizontal">
                         <div class="form-group">
                             <div class="col-sm-6">
                                 <input type="text" wire:model.prevent.lazy="search" class="form-control" id="q"

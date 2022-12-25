@@ -17,12 +17,12 @@
                 <div class="box">
                     <div class="box-header with-border">
                         <h3 class="box-title">Listado de Ventas</h3>
-                        @if($reportType === 0)
+                        @if($reportType == 0)
                         <span><strong>Reporte de ventas del día</strong></span>
                          @else
                         <span><strong>Reporte de ventas por fecha</strong></span>
                         @endif
-                        @if ($reportType !== 0)
+                        @if ($reportType != 0)
                             <span><strong>Fecha de consulta: {{ $dateFrom }} al {{ $dateTo }}</strong></span>
                         @else
                             <span><strong>Fecha de consulta: {{ \Carbon\Carbon::now()->format('d-M-Y') }} al
@@ -46,17 +46,17 @@
 
                                     <tr>
                                         <td>
-                                            @if ($reportType === 0)
+                                            @if ($reportType == 0)
                                                 <span><strong>Reporte de ventas del día</strong></span>
                                             @else
                                                 <span><strong>Reporte de ventas por fecha</strong></span>
                                             @endif
-                                            @if ($reportType !== 0)
+                                            @if ($reportType != 0)
                                                 <span><strong>Fecha de consulta: {{ $dateFrom }} al
                                                         {{ $dateTo }}</strong></span>
                                             @else
                                                 <span><strong>Fecha de consulta:
-                                                        {{ \Carbon\Carbon::now()->forma('d-M-Y') }} al
+                                                        {{ \Carbon\Carbon::now()->format('d-M-Y') }} al
                                                         {{ $dateTo }}</strong></span>
                                                 <span><strong>Reporte de ventas por fecha</strong></span>
                                             @endif

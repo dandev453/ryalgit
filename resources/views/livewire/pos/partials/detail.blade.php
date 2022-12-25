@@ -271,7 +271,7 @@
                 <div class="col-md-12 text-center">
                    
                       @if($products->hasMorePages())
-                    <button  class="btn btn-lg btn-flat">Cargar Más...</button>
+                    <button wire:click="loadMore" class="btn btn-lg btn-flat" >Cargar Más...</button>
                     @endif
                 </div>
             </div>

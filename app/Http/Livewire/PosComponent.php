@@ -19,6 +19,7 @@ class PosComponent extends Component
 {
     use WithPagination;
     private $pagination = 5;
+    public $perPage = 6;
     public $total,
         $categoryName,
         $search,
@@ -50,19 +51,19 @@ class PosComponent extends Component
                 ->orWhere('products.barcode', 'like', '%' . $this->search . '%')
                 ->orWhere('c.name', 'like', '%' . $this->search . '%')
                 ->orderBy('products.name', 'asc')
-                ->paginate($this->pagination);
+                ->paginate($this->perPage);
         } else {
             if (!$category) {
                 $products = Product::join('categories as c', 'c.id', 'products.category_id')
                     ->select('products.*', 'c.name as category')
                     ->orderBy('products.id', 'desc')
-                    ->paginate($this->pagination);
+                    ->paginate($this->perPage);
             } elseif ($category > 1) {
                 $products = Product::join('categories as c', 'c.id', 'products.category_id')
                     ->select('products.*', 'c.name as category')
                     ->where('c.name', [$category])
                     ->orderBy('products.id', 'desc')
-                    ->paginate($this->pagination);
+                    ->paginate($this->perPage);
             } else {
                 return;
             }
@@ -79,9 +80,9 @@ class PosComponent extends Component
             ->extends('layouts.theme.pos.app')
             ->section('content');
     }
-    public function loadMore()
-    {
-    }
+    public function loadMore(){
+        $this->perPage = $this->perPage + 5;
+  }
 
     public function ACash($value)
     {

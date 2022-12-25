@@ -40,7 +40,7 @@ class ExportController extends Controller
     }
     public function reportTest(){
         $pdf = PDF::loadView('pdf.test');
-        return $pdf->download('pdf.test');
+        return $pdf->download('pdf.test.pdf');
     }
     public function reportExcel($userId, $reportType, $dateFrom=null, $dateTo=null){
         $reportName = 'Reporte de Ventas_'. uniqid(). '.xls';

@@ -17,7 +17,7 @@ class ProductsComponent extends Component
 
     public $name, $barcode, $cost, $price, $stock, $alerts, $category_id, $search, $image, $selected_id, $pageTitle, $componentName;
     private $pagination = 5;
-    public array $perPageAccepted = [100, 200, 500];
+    public $perPage = 6;
     public bool $perPageAll = true;
   
 
@@ -42,12 +42,12 @@ class ProductsComponent extends Component
                 ->orWhere('products.barcode', 'like', '%' . $this->search . '%')
                 ->orWhere('c.name', 'like', '%' . $this->search . '%')
                 ->orderBy('products.name', 'asc')
-                ->paginate($pagination);
+                ->paginate($this->perPage);
         } else {
             $products = Product::join('categories as c', 'c.id', 'products.category_id')
                 ->select('products.*', 'c.name as category')
                 ->orderBy('products.name', 'asc')
-                ->paginate();
+                ->paginate($this->perPage);
         }
         return view('livewire.products.component', [
             'data' => $products,
@@ -56,10 +56,16 @@ class ProductsComponent extends Component
             ->extends('layouts.theme.app')
             ->section('content');
     }
-    public function load(){
-        $pagination = $this->pagination;
-        $pagination + 10;
+
+   public function pagiante1(){
+         $this->perPage = $this->perPage + 5;
+   }
+
+   public function pagiante2(){
+        $this->perPage = $this->perPage +  15;
     }
+
+
     public function Store()
     {
         $rules = [
