@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" >
     <div class="col-md-4">
         <div class="card-box" style="min-height: 720px;">
             <div class="col-md-12">
@@ -46,7 +46,7 @@
                     </form>
                 </div>
             </div>
-            <div id="resultados" wire:ignore.self>
+            <div id="resultados" >
                 <table class=" table" id="cartTable">
                     <thead>
                         <tr>
@@ -138,9 +138,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="m-t-10">
-                    <div class="row">
-                        <div class="col-md-4"><label class="control-label">IVA(%)</label> </div>
+                <div class="m-t-10" >
+                    <div class="row" wire:model="iva" >
+                        <div class="col-md-4" ><label class="control-label">IVA(%)</label> </div>
                         <div class="col-md-4">
                             @if($total)
                             @php $total_wPercen =  ($iva / 100) * $total;  @endphp 
@@ -165,7 +165,6 @@
                             class="control-label">
                             @php $ivapercentage = $iva;  @endphp
                             @php $total_wPercen =  ($ivapercentage / 100) * $total;  @endphp 
-                            
                            ${{ number_format($total_wPercen, 2) }}</label></span></div>
                         <div class="m-t-10">
                             <div class="row">           
@@ -182,9 +181,7 @@
                                          </h3>
                                          <!-- <input type="hidden" id="total" name="total"  value="0,00">
                                           -->
-                     
                                     </div>
-                     
                              </div>	
                          </div>
                     </div>
@@ -289,14 +286,13 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="col-md-12 text-center">
-                   
+                <div class="col-md-12 text-center" >
+                    
                       @if($products->hasMorePages())
-                    <button wire:click="loadMore" class="btn btn-lg btn-flat" >Cargar Más...</button>
+                    <button wire:click="loadMore" class="btn btn-lg btn-flat" >Cargar Más</button><br><h6 class="text-center text-primary" wire:loading>POR FAVOR ESPERE</h6>
                     @endif
                 </div>
             </div>
         </div>
     </div>
-
 </div>
