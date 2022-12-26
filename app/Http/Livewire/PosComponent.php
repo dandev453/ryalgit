@@ -23,6 +23,8 @@ class PosComponent extends Component
     public $total,
         $categoryName,
         $search,
+        $desc = null, 
+        $iva,
         $customer_id,
         $itemsQuantity,
         $denominations = [],
@@ -241,6 +243,8 @@ class PosComponent extends Component
         Cart::clear();
         $this->efectivo = 0;
         $this->change = 0;
+        $this->iva = 0;
+        $this->desc = 0;
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
         $this->emit('scan-ok', 'Carro vacío');

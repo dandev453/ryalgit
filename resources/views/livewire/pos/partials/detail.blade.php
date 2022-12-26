@@ -46,7 +46,7 @@
                     </form>
                 </div>
             </div>
-            <div id="resultados">
+            <div id="resultados" wire:ignore.self>
                 <table class=" table" id="cartTable">
                     <thead>
                         <tr>
@@ -127,12 +127,14 @@
                         <div class="form-group">
                             <div class="col-md-4"> <label class="control-label">Descuento(%) </label></div>
                             <!-- <div class="col-md-2"></div> -->
-                            <div class="col-md-4"><input class="form-control input-sm" required=""
-                                    pattern="\d+(\.\d{2})?" type="number" id="descuento" value="0"
-                                    onblur="descuento(this.value)"></div>
+                            <div class="col-md-4"><input class="form-control input-sm" wire:model="desc" required=""
+                                    pattern="\d+(\.\d{2})?" type="number" min="0" id="descuento" 
+                                   ></div>
                                     <!-- DESCUENTO - TOTAL -->
+                                    @php $desc =   $total  -  ( number_format($desc,2) / 100) * $total ;
+                                    @endphp
                             <div class="col-md-3 col-md-offset-1">: <span id="price"> <label
-                                        class="control-label"> ${{ number_format($total, 2) }} - DESC %</label></span></div>
+                                        class="control-label"> $ {{$desc}} </label></span></div>
                         </div>
                     </div>
                 </div>
@@ -140,14 +142,31 @@
                     <div class="row">
                         <div class="col-md-4"><label class="control-label">IVA(%)</label> </div>
                         <div class="col-md-4">
+                            @if($total)
+                            @php $total_wPercen =  ($iva / 100) * $total;  @endphp 
+                          
                             <select name="taxes" class="form-control input-sm" id="taxes"
-                                onchange="tax_value(this.value)">
-                                <option value="18.00">ITBIS 18.00 %</option>
+                                wire:model="iva">
+                                <option default selected value="0">Seleccionar</option>
+                              
+                                <option value="18.00" >ITBIS 18.00 %</option>
+                                
+                                <option value="20.00">ITBIS 20.00 %</option>
+                              
                             </select>
+                            @else
+                            <select  name="taxes" class="form-control input-sm" id="taxes">
+                            <option default selected value="0">Debes agregar un producto</option>
+                            </select>
+                            @endif
                         </div>
                         <!-- IVA + TOTAL -->
                         <div class="col-md-3 col-md-offset-1">: <span id="iva"> <label
-                            class="control-label"> ${{ number_format($total, 2) }} + %iva</label></span></div>
+                            class="control-label">
+                            @php $ivapercentage = $iva;  @endphp
+                            @php $total_wPercen =  ($ivapercentage / 100) * $total;  @endphp 
+                            
+                           ${{ number_format($total_wPercen, 2) }}</label></span></div>
                         <div class="m-t-10">
                             <div class="row">           
                                 <div class="col-md-3 col-md-offset-6">
@@ -155,6 +174,8 @@
                                     </div>
                                 <div class="col-md-3">
                                         <h3>
+                                            @php $total=   $desc + $ivapercentage ; @endphp
+                                           ${{ number_format($total, 2) }} <br>
                                              <label class="control-label">
                                                 ${{ number_format($total, 2) }}         		 			
                                              </label>
