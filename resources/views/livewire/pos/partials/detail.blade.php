@@ -144,15 +144,11 @@
                         <div class="col-md-4">
                             @if($total)
                             @php $total_wPercen =  ($iva / 100) * $total;  @endphp 
-                          
                             <select name="taxes" class="form-control input-sm" id="taxes"
                                 wire:model="iva">
                                 <option default selected value="0">Seleccionar</option>
-                              
-                                <option value="18.00" >ITBIS 18.00 %</option>
-                                
-                                <option value="20.00">ITBIS 20.00 %</option>
-                              
+                                <option value="18" >ITBIS 18.00 %</option>
+                                <option value="20">ITBIS 20.00 %</option>
                             </select>
                             @else
                             <select  name="taxes" class="form-control input-sm" id="taxes">
@@ -173,7 +169,7 @@
                                     </div>
                                 <div class="col-md-3">
                                         <h3>
-                                            @php $total=   $desc + $ivapercentage ; @endphp
+                                            @php $total=   $desc + $total_wPercen ; @endphp
                                            ${{ number_format($total, 2) }} <br>
                                              <label class="control-label">
                                                 ${{ number_format($total, 2) }}         		 			
