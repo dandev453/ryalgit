@@ -3,7 +3,7 @@
     <!--  component css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pos/components.css') }}">
     <form id="guardar_cliente">
-        <div class="modal fade" id="cliente_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div wire:ignore.self class="modal fade" id="cliente_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -46,8 +46,7 @@
                                         </div>
                                         <div class='col-md-3'>
                                             <label for="tax_number">Registro fiscal Nº</label>
-                                            <input type="text" class="form-control"
-                                                name="registro_fiscal">
+                                            <input type="text" class="form-control" wire:model.lazy="registro_fiscal">
                                             @error('registro_fiscal')
                                                 <span class="text-danger er">{{ $message }}</span>
                                             @enderror
@@ -87,7 +86,7 @@
                                         </div>
                                         <div class='col-md-6'>
                                             <label for="phone">Teléfono</label>
-                                            <input type="text" class="form-control"  wire:model.lazy="phone"
+                                            <input type="text" class="form-control"  wire:model.lazy="phone_contact"
                                                 required>
                                             @error('phone_contact')
                                                 <span class="text-danger er">{{ $message }}</span>
@@ -99,7 +98,7 @@
                                     <div class="row">
                                         <div class='col-md-12'>
                                             <label for="address">Calle</label>
-                                            <input type="text" class="form-control" wire:model.lazy="addresss">
+                                            <input type="text" class="form-control" wire:model.lazy="address">
                                              @error('address')
                                             <span class="text-danger er">{{ $message }}</span>
                                         @enderror
@@ -125,7 +124,9 @@
                                         <div class='col-md-6'>
                                             <label for="country">País</label>
                                             <select class='form-control' wire:model.lazy="country">
-                                                <option value="0">Selecciona</option>
+                                                <option >Selecciona</option>
+                                                <option >VE</option>
+                                                
                                             @error('country')
                                                 <span class="text-danger er">{{ $message }}</span>
                                             @enderror
@@ -138,7 +139,9 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" wire:click="Store()" class="btn btn-primary">Registrar</button>
+                        <button type="button" wire:click.prevent="Store()" class="btn btn-primary close-modal">
+                            GUARDAR
+                        </button>
                     </div>
                 </div>
             </div>

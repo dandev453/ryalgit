@@ -1,22 +1,6 @@
 <script>
     document.addEventListener("DOMContentLoaded", function(){
-          window.livewire.on('product-deleted', Msg =>{
-            noty(Msg)
-        })
-
-         window.livewire.on('product-added', Msg =>{
-            noty(Msg)
-        })
-
- 
-         window.livewire.on('product-added', Msg =>{
-            noty(Msg)
-        })
-
-   
-         window.livewire.on('product-updated', Msg =>{
-            noty(Msg)
-        })
+          
 
         window.livewire.on('scan-ok', Msg =>{
             noty(Msg)

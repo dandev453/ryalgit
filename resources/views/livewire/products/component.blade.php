@@ -115,29 +115,18 @@
             </div><!-- row -->
     </section>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            window.livewire.on('product-added', msg => {
-                $('#theModal').modal('hide');
-                noty(Msg)
-            });
-            window.livewire.on('product-updated', msg => {
-                $('#theModal').modal('hide');
-            });
-            window.livewire.on('product-deleted', msg => {
-                //noty
-                noty(Msg)
-            });
-            window.livewire.on('show-modal', msg => {
-                $('#theModal').modal('show');
-            });
-            window.livewire.on('hide-modal', msg => {
-                $('#theModal').modal('hide');
-            });
-            window.livewire.on('hidden.bs.modal', msg => {
-                $('.er').css('display', 'none')
-            });
+     document.addEventListener('DOMContentLoaded', function() {
+        window.livewire.on('show-modal', msg => {
+            $('#theModal').modal('show');
         });
-
+        window.livewire.on('product-added', msg => {
+            $('#theModal').modal('hide');
+        });
+        window.livewire.on('product-updated', msg => {
+            $('#theModal').modal('hide');
+        });
+    });
+      
         function Confirm(id, products) {
             if (products > 0) {
                 swal('No se puede eliminar la categoria porque tiene productos relacionados.')

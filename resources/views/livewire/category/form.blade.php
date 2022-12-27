@@ -1,4 +1,4 @@
-<div>
+<div >
     @include('common.modalHead')
     <div class="row">
         <div class="box box-primary">

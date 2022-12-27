@@ -1,6 +1,6 @@
 <div>
 @include('common.modalHead')
-                    <div class="modal-body">
+                 
                         <div class="nav-tabs-custom">
                             <ul class="nav nav-tabs">
                                 <li class="active"><a href="#activity" data-toggle="tab">Datos del cliente</a></li>
@@ -11,7 +11,7 @@
                                     <div class="row">
                                         <div class='col-md-12'>
                                             <label for="bussines_name">Nombre</label>
-                                            <input type="text" wire:model="name" class="form-control" required>
+                                            <input type="text" wire:model="name" class="form-control" >
                                         </div>
                                     </div>
                                     <div class="row">
@@ -21,7 +21,7 @@
                                         </div>
                                         <div class='col-md-4'>
                                             <label for="work_phone">Teléfono</label>
-                                            <input type="text" class="form-control" wire:model="phone" required>
+                                            <input type="text" class="form-control" wire:model="phone" >
                                         </div>
                                         <div class='col-md-3'>
                                             <label for="tax_number">Registro fiscal Nº</label>
@@ -38,12 +38,12 @@
                                         <div class='col-md-6'>
                                             <label for="first_name">Nombres</label>
                                             <input type="text" class="form-control" wire:model="fullname"
-                                                required>
+                                                >
                                         </div>
                                         <div class='col-md-6'>
                                             <label for="last_name">Apellidos</label>
                                             <input type="text" class="form-control" wire:model="lastname"
-                                                required>
+                                                >
                                         </div>
                                     </div>
                                     <div class="row">
@@ -54,7 +54,7 @@
                                         <div class='col-md-6'>
                                             <label for="phone">Teléfono</label>
                                             <input type="text" class="form-control" wire:model="phone_contact"
-                                                required>
+                                                >
                                         </div>
                                     </div>
                                 </div><!-- /.tab-pane -->
@@ -91,10 +91,7 @@
                                 </div><!-- /.tab-pane -->
                             </div><!-- /.tab-content -->
                         </div><!-- /.nav-tabs-custom -->
-                    </div>
-                    @include('common.modalFooter')
-                </div>
-            </div>
-        </div>
-    </form>
+                   
+            @include('common.modalFooter')
+        
 </div>

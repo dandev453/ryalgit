@@ -15,6 +15,7 @@ use App\Http\Livewire\PermisosComponent;
 use App\Http\Livewire\CoinsComponent;
 use App\Http\Livewire\Categories;
 use App\Http\Livewire\EditProductsComponent;
+use App\Http\Livewire\EditsProductsComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\PurchaseListComponent;
 use App\Http\Livewire\ProductsComponent;
@@ -76,6 +77,7 @@ Route::get('add_product', CreateProductsComponent::class);
 Route::get('business_profile', ProfileComponent::class);
 Route::get('new_purchase', PurchaseComponent::class);
 Route::get('product/{id}', EditProductsComponent::class);
+Route::get('product/{id}/edit', [EditProductsController::class, "Edit"]);
 Route::get('pos/{product}', PosComponent::class);
 
 //rutas impresion
