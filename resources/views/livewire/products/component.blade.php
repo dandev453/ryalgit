@@ -18,11 +18,11 @@
                 <ul class="dropdown-menu pull-right">
                     <li class="active" wire:click="pagiante1"><a href="javascript::void()">15</a></li>
                     <li wire:click="pagiante2"><a href="javascript::void()">25</a></li>
-                    <li ><a href="#">Todos</a></li>
+                    <li><a href="#">Todos</a></li>
                 </ul>
             </div>
         </div>
-      
+
     </div>
     <!-- Main content -->
     <section class=" content">
@@ -33,6 +33,11 @@
                     <div class="box-tools pull-right">
                         <!--    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>    -->
                         <!--    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>  -->
+                        <span wire:click="$refresh">
+                            <i class="fa fa-refresh">
+
+                            </i>
+                        </span>
                         <button class="btn-flat btn tabmenu bg-dark btn btn-sm" data-toggle="modal"
                             data-target="#theModal">
                             + Agregar
@@ -40,70 +45,81 @@
                     </div>
                 </div><!-- /.box-header -->
                 <div class="box-body" style="padding:0;">
-                    <div class="table-responsive ">
-                        <table class="table table-condensed table-hover table-striped">
-                            <tbody>
-                                <tr>
-                                    <!-- <th>ID</th> -->
-                                    <th class="text-center">CODIGO </th>
-                                    <!-- <th>Nº de productos</th> -->
-                                    <th class="text-center">IMAGEN</th>
-                                    <th class="text-center">PRODUCTO</th>
-                                    <th class="text-center">CATEGORÍA</th>
-                                    <th class="text-center">ESTADO</th>
-                                    <th class="text-center">STOCK</th>
-                                    <th class="text-center">PRECIO</th>
-                                    <th class="text-center"></th>
-                                </tr>
-                                @foreach ($data as $product)
-                                    <tr>
-                                        <!-- <td>2</td> -->
-                                        <td class="text-center"> {{ $product->barcode }} </td>
-                                        <td class="text-center">
-                                            <span>
-                                                <img src="{{ asset('storage/products/' . $product->imagen) }}"
-                                                    alt="imagen de ejemplo" height="70" width="80"
-                                                    class="rounded">
-                                            </span>
-                                        </td>
-                                        <td class="text-center">
-                                            {{ $product->name }}
-                                        </td>
-                                        <td class="text-center">{{ $product->category }}</td>
+                    @if ($data)
+                        <span wire:loading class="text-center">
+                            <img src="{{ asset('assets/img/ajax-loader.gif') }}" alt="">
+                        </span>
 
-                                        <td class="text-center"><span class="label label-success">Activo</span></td>
-                                        <td class="text-center">{{ $product->stock }}</td>
-                                        <td class="text-center">{{ $product->price }}</td>
-                                        <td class="text-center">
-                                            <div class="btn-group">
-                                                <a href="javascript:void(0)"
-                                                    wire:click.prevent="Edit({{ $product->id }})"
-                                                    class="btn btn-default" title="Edit"><span>
-                                                        <i class="fa fa-edit"></i></span> EDITAR
-                                                </a>
-                                                <!-- /<a href="/edit_product"
-                                    class="btn btn-default" title="Edit"><span>
-                                    <i class="fas fa-edit"></i></span> EDITAR
-                                </a>-->
-                                                <a href="javascript:void(0)" onclick="Confirm('{{ $product->id }}')"
-                                                    class="btn btn-default" title="Delete">
-                                                    <span> <i class="fa fa-trash"></i></span> ELIMINAR
-                                                </a>
-                                            </div>
-                                @endforeach
-                                </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="9">
-                                        Mostrando {{ $data->count() }} de {{ $data->count() }} de registros
+                        <div class="table-responsive ">
+                            <table class="table table-condensed table-hover table-striped">
+                                <tbody>
+                                    <tr>
+                                        <!-- <th>ID</th> -->
+                                        <th class="text-center">CODIGO </th>
+                                        <!-- <th>Nº de productos</th> -->
+                                        <th class="text-center">IMAGEN</th>
+                                        <th class="text-center">PRODUCTO</th>
+                                        <th class="text-center">CATEGORÍA</th>
+                                        <th class="text-center">ESTADO</th>
+                                        <th class="text-center">STOCK</th>
+                                        <th class="text-center">PRECIO</th>
+                                        <th class="text-center"></th>
+                                    </tr>
+                                    @foreach ($data as $product)
+                                        <tr>
+                                            <!-- <td>2</td> -->
+                                            <td class="text-center"> {{ $product->barcode }} </td>
+                                            <td class="text-center">
+                                                <span>
+                                                    <img src="{{ asset('storage/products/' . $product->imagen) }}"
+                                                        alt="imagen de ejemplo" height="70" width="80"
+                                                        class="rounded">
+                                                </span>
+                                            </td>
+                                            <td class="text-center">
+                                                {{ $product->name }}
+                                            </td>
+                                            <td class="text-center">{{ $product->category }}</td>
+
+                                            <td class="text-center"><span class="label label-success">Activo</span></td>
+                                            <td class="text-center">{{ $product->stock }}</td>
+                                            <td class="text-center">{{ $product->price }}</td>
+                                            <td class="text-center">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-default dropdown-toggle" type="button"
+                                                        id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="true">
+                                                        Acciones
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                        <li><a href="javascript::void()"
+                                                                wire:click.prevent="Edit({{ $product->id }})">Edit
+                                                                <span><i class="fa fa-carret-down"></i></span></a></li>
+                                                        <li><a href="javascript::void()"
+                                                                onclick="Confirm('{{ $product->id }}')">Borraar</a>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                    @endforeach
                                     </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div style="margin: 5px;">
-                            {{ $data->links() }}
+                                    </tr>
+                                    <tr>
+                                        <td colspan="9">
+                                            
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div style="margin: 5px;">
+                                {{ $data->links() }}
+                            </div>
+
                         </div>
-                    </div>
+                    @else
+                        <span class="text-center">No se han encontrado productos</span>
+                    @endif
                     @include('livewire.products.form')
                     @include('livewire.pos.scripts.events')
                     <!-- /<div class="box-footer">
@@ -115,18 +131,18 @@
             </div><!-- row -->
     </section>
     <script>
-     document.addEventListener('DOMContentLoaded', function() {
-        window.livewire.on('show-modal', msg => {
-            $('#theModal').modal('show');
+        document.addEventListener('DOMContentLoaded', function() {
+            window.livewire.on('show-modal', msg => {
+                $('#theModal').modal('show');
+            });
+            window.livewire.on('product-added', msg => {
+                $('#theModal').modal('hide');
+            });
+            window.livewire.on('product-updated', msg => {
+                $('#theModal').modal('hide');
+            });
         });
-        window.livewire.on('product-added', msg => {
-            $('#theModal').modal('hide');
-        });
-        window.livewire.on('product-updated', msg => {
-            $('#theModal').modal('hide');
-        });
-    });
-      
+
         function Confirm(id, products) {
             if (products > 0) {
                 swal('No se puede eliminar la categoria porque tiene productos relacionados.')

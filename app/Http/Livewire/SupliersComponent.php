@@ -11,48 +11,46 @@ use Illuminate\Support\Facades\Storage;
 
 class SupliersComponent extends Component
 {
-  use WithFileUploads, WithPagination;
+    use WithFileUploads, WithPagination;
     //PROPIEDADES
-    public $search, 
-    $selected_id, 
+    public $search, $selected_id,
     $name,
-    $website,
-    $phone,
-    $registro_fiscal,
-    $fullname,
-    $lastname,
-    $email,
+    $website, 
+    $phone, 
+    $registro_fiscal, 
+    $fullname, $lastname, 
+    $email, 
     $phone_contact,
-    $address,
-    $postal_code,
-    $created_at,
-    $country, $pageTitle, $componentName;
+     $address, 
+     $postal_code, 
+     $created_at, 
+     $country, 
+     $pageTitle, 
+     $componentName;
     private $pagination = 5;
-    
+
     public function mount()
     {
         $this->pageTitle = 'Listado';
         $this->componentName = 'Proveedores';
     }
 
-
     public function paginationView()
     {
         return 'vendor.livewire.admin-lte';
     }
     public function render()
-    { 
-      if (strlen($this->search) > 0) {
-        $supliers = Supliers::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
-      } else {
-        $supliers = Supliers::orderBy('id', 'asc')->paginate($this->pagination);
-      }
-      return view('livewire.proveedores.component', [
-        'data' => $supliers
-      ])
-      ->extends('layouts.theme.app',['data' => $supliers])
-      ->section('content');
-      
+    {
+        if (strlen($this->search) > 0) {
+            $supliers = Supliers::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
+        } else {
+            $supliers = Supliers::orderBy('id', 'asc')->paginate($this->pagination);
+        }
+        return view('livewire.proveedores.component', [
+            'data' => $supliers,
+        ])
+            ->extends('layouts.theme.app', ['data' => $supliers])
+            ->section('content');
     }
 
     public function Store()
@@ -86,7 +84,7 @@ class SupliersComponent extends Component
 
         $this->validate($rules, $messages);
 
-        $customer = Customers::create([
+        $customer = Supliers::create([
             'name' => $this->name,
             'website' => $this->website,
             'phone' => $this->phone,
@@ -97,26 +95,26 @@ class SupliersComponent extends Component
             'phone_contact' => $this->phone_contact,
             'address' => $this->address,
             'postal_code' => $this->postal_code,
-            'country' => $this->country
+            'country' => $this->country,
         ]);
         $this->resetUI();
-        $this->emit('scan-ok', 'Cliente Registrado');
+        $this->emit('scan-ok', 'Proveedor Registrado');
     }
 
-    public function Edit(Customers $customer)
+    public function Edit(Supliers $suplier)
     {
-        $this->selected_id = $customer->id;
-        $this->name = $customer->name;
-        $this->website = $customer->website;
-        $this->phone = $customer->phone;
-        $this->registro_fiscal = $customer->registro_fiscal;
-        $this->fullname = $customer->fullname;
-        $this->lastname = $customer->lastname;
-        $this->email = $customer->email;
-        $this->phone_contact = $customer->phone_contact;
-        $this->address = $customer->address;
-        $this->postal_code = $customer->postal_code;
-        $this->country = $customer->country;
+        $this->selected_id = $suplier->id;
+        $this->name = $suplier->name;
+        $this->website = $suplier->website;
+        $this->phone = $suplier->phone;
+        $this->registro_fiscal = $suplier->registro_fiscal;
+        $this->fullname = $suplier->fullname;
+        $this->lastname = $suplier->lastname;
+        $this->email = $suplier->email;
+        $this->phone_contact = $suplier->phone_contact;
+        $this->address = $suplier->address;
+        $this->postal_code = $suplier->postal_code;
+        $this->country = $suplier->country;
         $this->emit('show-modal', 'Show modal');
     }
 
@@ -136,7 +134,7 @@ class SupliersComponent extends Component
             'country' => 'required',
         ];
         $messages = [
-            'name.required' => 'Nombre del cliente es requerido',
+            'name.required' => 'Nombre del Proveedor es requerido',
             'website.required' => 'Sitio web es requerido',
             'phone.required' => 'El número de telefono es requerido',
             'registro_fiscal.required' => 'El registro fiscal es requerido',
@@ -154,19 +152,19 @@ class SupliersComponent extends Component
 
         $Customers = Customers::find($this->selected_id);
         $Customers->update([
-         'name' => $this->name,
-         'website' =>  $this->website,
-         'registro_fiscal' => $this->registro_fiscal,
-         'fullname' => $this->fullname,
-         'lastname' => $this->lastname,
-         'email' => $this->email,
-         'phone_contact' => $this->phone_contact,
-         'address' => $this->address,
-         'postal_code' => $this->postal_code,
-         'country' => $this->country
+            'name' => $this->name,
+            'website' => $this->website,
+            'registro_fiscal' => $this->registro_fiscal,
+            'fullname' => $this->fullname,
+            'lastname' => $this->lastname,
+            'email' => $this->email,
+            'phone_contact' => $this->phone_contact,
+            'address' => $this->address,
+            'postal_code' => $this->postal_code,
+            'country' => $this->country,
         ]);
-         $this->resetUI();
-        $this->emit('scan-ok', 'Cliente Actualizado');
+        $this->resetUI();
+        $this->emit('scan-ok', 'Proveedor Actualizado');
     }
 
     protected $listeners = [
@@ -177,29 +175,22 @@ class SupliersComponent extends Component
     {
         $customer->delete();
         this->resetUI();
-        $this->emit('scan-ok', 'Cliente Eliminado');
+        $this->emit('scan-ok', 'Proveedor Eliminado');
     }
 
     public function resetUI()
     {
-        $this->name= '';
-        $this->website= '';
-        $this->registro_fiscal= '';
-        $this->fullname= '';
-        $this->lastname= '';
-        $this->email= '';
+        $this->name = '';
+        $this->website = '';
+        $this->registro_fiscal = '';
+        $this->fullname = '';
+        $this->lastname = '';
+        $this->email = '';
         $this->phone_contact = '';
-        $this->address= '';
-        $this->postal_code= '';
-        $this->country= '';
+        $this->address = '';
+        $this->postal_code = '';
+        $this->country = '';
     }
 }
-
-
-
-
-
-
-
 
 ?>

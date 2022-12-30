@@ -1,58 +1,22 @@
 <article class="content-header  w-100">
     <div class="row content-header">
         <div class="col-md-3 col-xs-12">
-            <div class="input-group">
-                <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                </div>
-                <input type="date" wire:model.lazy="fromDate" id="basicFlatpickr"
-                    class="form-control flatpickr pull-right active">
-                @error('fromDate')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
-
-
-                <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                </div>
-                <input type="date" wire:model.lazy="toDate" id="dateTimeFlatpickr"
-                    class="form-control flatpickr pull-right active">
-                @error('fromDate')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
+          @include('common.searchbox')
         </div>
         <div class="col-md-3 col-xs-12">
             <select class="form-control" wire:model.lazy="customer_id">
-                <option >Seleccione Cliente</option>
-               @foreach($customers as $customers)
-                    <option value="{{ $customers->id }}"> {{$customers->name}} </option>
+                <option value="">Seleccione Cliente</option>
+                @foreach ($customers as $customers)
+                    <option value="{{ $customers->id }}"> {{ $customers->name }} </option>
                 @endforeach
             </select>
         </div>
         <div class="col-md-3 col-xs-12">
-            <div class="input-group">
-
-                <select class="form-control" wire:model.lazy="user_id">
-                    <option >Seleccione Cajero</option>
-                    @foreach($users as $user)
-                    <option value="{{ $user->id }}"> {{$user->name}} </option>
-                @endforeach
-                </select>
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" onclick="load(1);"><i
-                            class="fa fa-search"></i></button>
-                </span>
-            </div><!-- /input-group -->
         </div>
-
         <div class="col-xs-12 col-md-3 ">
             <div class="btn-group pull-right">
-                    <button wire:click="Consultar()" class="btn btn-default"><span> <i class="fa fa-file"></i></span></button>
-                <button type="button" onclick="reporte();" class="btn btn-default"><i class="fa fa-print"></i> PDF
-                </button><button type="button" onclick="inventario_excel();" class="btn btn-default"><i
-                        class="fa fa-file-excel-o"></i> Excel
-                </button><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
+               
+               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     Mostrar
                     <span class="caret"></span>
@@ -79,11 +43,7 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">{{ $componentName }} | {{ $pageTitle }}</h3>
                     <div class="box-tools pull-right">
-                        <!--    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>    -->
-                        <!--    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>  -->
-                        <!-- / <button  class="btn-flat btn tabmenu bg-dark btn btn-sm" data-toggle="modal" data-target="#theModal">
-                + Agregar
-            </button> -->
+                     
                     </div>
                 </div><!-- /.box-header -->
                 <div class="box-body" style="padding:0;">
@@ -94,56 +54,69 @@
                                     <!-- <th>ID</th> -->
                                     <th class="text-center">DOCUMENTO Nº </th>
                                     <!-- <th>Nº de productos</th> -->
-                                    <th>CLIENTE</th>
-                                    <th>MÉTODO DE PAGO</th>
-                                   
-                                    <th>CAJERO</th>
-                                    <th>TOTAL</th>
+                                    <th class="text-center">CLIENTE</th>
+                                    <th class="text-center">MÉTODO DE PAGO</th>
+                                    
                                     <th class="text-center">FECHA</th> <!-- / -->
+                                    <th class="text-center">CAJERO</th>
+                                    <th class="text-center">TOTAL</th>
                                     <th class="text-center"></th>
                                 </tr>
-                              
-                                    @foreach ($salesLists as $row)
-                                        <tr>
-                                            <td class="text-center"> 000{{ $row->s_id }} </td>
-                                            <td>{{ $row->cliente }}</td>
-                                            <td>
-                                              @if($row->cash > 0)
-                                             <span class="text-center"><b>EFECTIVO</b></span>
-                                              @endif
-                                            </td>
-                                            <td>
-                                               {{ $row->user }}
-                                            </td>
-                                            <td>
-                                                <span
-                                                class="label label-success">{{ number_format($row->total, 2) }}</span>
-                                            </td>
-                                            <td>
-                                                {{ $row->fecha }}
-                                            </td>
-                                            <td class="text-center">
-                                                <button wire:click.prevent="viewDetails({{ $row }})"
-                                                    class="btn btn-flat"><span><i
-                                                            class="fa fa-list"></i></span></button>
-                                            </td>
-                                    @endforeach
-                                    </tr>
+
+                                @foreach ($salesLists as $row)
                                     <tr>
-                                        <td colspan="4">
+                                        <td class="text-center"> 000{{ $row->id }} </td>
+                                        <td class="text-center">{{ $row->cliente }}</td>
+                                        <td class="text-center">
+                                            @if ($row->cash > 0)
+                                                <span class="text-center">CASH</span>
+                                            @endif
+                                            @if ($row->card > 0)
+                                            <span class="text-center">CARD</span>
+                                            @endif
+                                            @if ($row->check > 0)
+                                            <span class="text-center">CHECK</span>
+                                            @endif
                                         </td>
-                                        <td>
-                                            <span> <b> ventas totales: </b>
-                                                <h5><b>$ </b>{{ number_format($total, 2) }}</h5>
-                                            </span>
-                                            articulos totales: {{ $items }}
+                                         <td class="text-center">
+                                            {{ $row->created_at }}
                                         </td>
-                                    </tr>
-                                
+                                        <td class="text-center">
+                                            {{ $row->cajero }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ number_format($row->total, 2) }}
+                                        </td>
+                                       
+                                        <td class="text-center">
+                                            <div class="btn-group pull-right">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-default dropdown-toggle" type="button"
+                                                        id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="true">
+                                                        Acciones
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                        <li><a href="javascript::void()">Ver pdf</a></li>
+                                                    </ul>
+                                                </div>
+                                               
+                                            </div>
+                                          
+                                        </td>
+                                @endforeach
+                                </tr>
+                           
+                                <tr>
+                                   
+                                </tr>
+
                             </tbody>
 
                         </table>
                         <div style="margin: 5px;">
+                            {{ $salesLists->links() }}
                         </div>
                         <script>
                             var f1 = flatpickr(document.getElementById('basicFlatpickr'));

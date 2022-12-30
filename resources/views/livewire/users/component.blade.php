@@ -69,21 +69,18 @@
                 @endif
             </td>
             <td class="text-center ">
-                <div class="  d-flex flex-wrap">
-                    <button href="javascript:void(0)"
-                    wire:click.prevent="Edit({{$user->id}})"
-                    class="btn btn-flat btn-sm" title="Edit"><span>
-                        <i class="fa fa-edit"></i></span> EDITAR
-                    </button>
-                    <!-- /<a href="/edit_product"
-                        class="btn btn-default" title="Edit"><span>
-                        <i class="fas fa-edit"></i></span> EDITAR
-                    </a>-->
-                    <button class="btn btn-flat btn-sm" href="javascript:void(0)"
-                    onclick="Confirm('{{$user->id}}')"
-                    class="btn btn-default" title="Delete">
-                    <i class="fa fa-trash"></i>ELIMINAR
+                   <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button"
+                    id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="true">
+                    Acciones
+                    <span class="caret"></span>
                 </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="javascript::void()"  wire:click.prevent="Edit({{ $user->id }})">Editar <span><i class="fa fa-carret-down"></i></span></a></li>
+                    <li><a href="javascript::void()"  onclick="Confirm('{{ $user->id }}')">Borraar</a></li>
+                    
+                </ul>
             </div>
         </td>
         @endforeach

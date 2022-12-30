@@ -10,6 +10,9 @@
                         <option value="{{ $customer->id }}">{{ $customer->name }}</option>
                         @endforeach
                     </select>
+                    @error('customer')
+                    <span class="text-danger er">{{ $message }}</span>
+                     @enderror
                     </div>
                     <div class="col-md-2 col-sm-2 col-xs-2">
                         <button data-toggle="modal" data-target="#cliente_modal" class="btn btn-success"><i
@@ -23,7 +26,7 @@
                         <!-- <hr> -->
                         <div class="col-md-2 col-xs-2 col-sm-2">
                             <input class="form-control" type="text" name="barcode_qty" id="barcode_qty"
-                                value="1" required="">
+                                wire:model="quantityOnScan">
                         </div>
                         <div class="col-md-10 col-sm-10 col-xs-10">
                             <div class="input-group">
@@ -283,7 +286,6 @@
                     @endforeach
                 </div>
                 <div class="col-md-12 text-center" >
-                    
                       @if($products->hasMorePages())
                     <button wire:click="loadMore" class="btn btn-lg btn-flat" >Cargar Más</button><br><h6 class="text-center text-primary" wire:loading>POR FAVOR ESPERE</h6>
                     @endif

@@ -16,7 +16,10 @@ use Carbon\Carbon;
 
 class ManageInvoiceComponent extends Component
 {
-    public $fromDate, $toDate, $customer, $customer_id ,$user_id, $total, $items, $sales, $details, $reportType;
+    use WithPagination;
+    use WithFileUploads;
+    public $fromDate, $toDate, $customer, $customer_id ,$search, $user_id, $total, $items, $sales, $details, $reportType;
+    private $pagination = 5;
     public function mount()
     {
         $this->pageTitle = 'Reportes';
@@ -24,53 +27,54 @@ class ManageInvoiceComponent extends Component
         $this->fromDate = null;
         $this->toDate = null;
         $this->user_id;
-        $this->customer_id = 0;
-        $this->total = 0;
+        $this->customer_id;
+        $this->total = 0;   
         $reportType = 0;
         $this->sales = [];
         $this->details = [];
     }
+     public function paginationView()
+    {
+        return 'vendor.livewire.admin-lte';
+    }
     public function render()
     {
-        $customer = $this->customer_id;
-        $user_id = $this->user_id;
-        $fi = Carbon::parse($this->fromDate)->format('Y-m-d') . ' 00:00:00';
-        $ff = Carbon::parse($this->toDate)->format('Y-m-d') . ' 23:59:59';
-        if(!$customer){
-        $salesLists = Sale::join('users as u', 'u.id', 'sales.user_id')
-        ->join('customers as cliente', 'cliente.id', 'sales.customer_id' )
-        ->select('sales.id as s_id','sales.total as total','sales.cash as cash',
-        'sales.created_at as fecha',
-        'cliente.name as cliente',
-        'u.name as user'
-        )
-        ->orderBy('s_id','Desc')
-        ->where('sales.status', 'Paid')
-        ->paginate();
-        }else {
-            $salesLists = Sale::join('users as u', 'u.id', 'sales.user_id')
-            ->join('customers as cliente', 'cliente.id', 'sales.customer_id' )
-            ->where('sales.status', 'Paid')
-            ->where('cliente.id', $customer)
-            ->select('sales.id as s_id','sales.total as total','sales.cash as cash',
-            'sales.created_at as fecha',
-            'cliente.name as cliente',
-            'u.name as user'
-            )
-            ->orderBy('s_id','Desc')
-            ->where('sales.status', 'Paid')
-            ->paginate();
-            if($fi && $ff && $user_id){
+        $pagination = $this->pagination;
+        if (strlen($this->search) > 0) {
+            $salesLists = Sale::join('customers as c', 'c.id', 'sales.customer_id')
+                ->join('users as u', 'u.id', 'sales.user_id')
+                ->select('sales.*', 'c.name as cliente', 'u.name as cajero')
+                ->where('sales.id', 'like', '%' . $this->search . '%')
+                ->orWhere('c.name', 'like', '%' . $this->search . '%')
+                ->orWhere('u.name', 'like', '%' . $this->search . '%')
+                
+                ->orderBy('c.name', 'asc')
+                ->paginate();
+        } else {
+            $salesLists = Sale::join('customers as cliente', 'cliente.id', 'sales.customer_id')
+            ->join('users as u', 'u.id', 'sales.user_id')
+            ->select('sales.*', 'cliente.name as cliente', 'u.name as cajero')
+                ->orderBy('sales.id', 'asc')
+                ->paginate($this->pagination);
+        }
+       if ($this->customer_id){
+          
+              $salesLists = Sale::join('customers as c', 'c.id', 'sales.customer_id')
+                //Search replace by user_id from selected_id
+                ->join('users as u', 'u.id', 'sales.user_id')
+                ->select('sales.*', 'c.name as cliente', 'u.name as cajero')
+                ->where('sales.customer_id', $this->customer_id)
+                ->orderBy('cliente', 'asc')
+                ->paginate($this->pagination);
+            }
+            //Separate user id query only fi & ff 
+            /*if($fi && $ff && $user_id){
                 $salesLists = Sale::join('users as u', 'u.id', 'sales.user_id')
-            ->join('customers as cliente', 'cliente.id', 'sales.customer_id' )
-            ->where('sales.status', 'Paid')
-            ->where('cliente.id', $customer)
-            ->where('user_id', $this->user_id)
-            ->whereBetween('sales.created_at', [$fi, $ff])
-            ->select('sales.id as s_id','sales.total as total','sales.cash as cash',
-            'sales.created_at as fecha',
-            'cliente.name as cliente',
-            'u.name as user'
+                ->select('sales.*', 'c.name as cliente', 'u.name as cajero')
+                ->where('sales.created_at', [$fi, $ff])
+                ->Orwhere('sales.customer_id', $this->customer_id)
+                ->orderBy('cliente', 'asc')
+                ->paginate($this->pagination);
             )
             ->orderBy('s_id','asc')
             ->where('sales.status', 'Paid')
@@ -90,24 +94,11 @@ class ManageInvoiceComponent extends Component
             ->orderBy('s_id','asc')
             ->where('sales.status', 'Paid')
             ->paginate();
-            if($user_id){
-                $salesLists = Sale::join('users as u', 'u.id', 'sales.user_id')
-                ->join('customers as cliente', 'cliente.id', 'sales.customer_id' )
-                ->where('sales.status', 'Paid')
-                ->where('u.id', $user_id)
-                ->whereBetween('sales.created_at', [$fi, $ff])
-                ->select('sales.id as s_id','sales.total as total','sales.cash as cash',
-                'sales.created_at as fecha',
-                'cliente.name as cliente',
-                'u.name as user'
-                )
-                ->orderBy('s_id','asc')
-                ->where('sales.status', 'Paid')
-                ->paginate();
+          
             }
-            }
-        }
-        if($user_id){
+            */
+     
+       /* if($user_id){
         $salesLists = Sale::join('users as u', 'u.id', 'sales.user_id')
         ->join('customers as cliente', 'cliente.id', 'sales.customer_id' )
         ->where('sales.status', 'Paid')
@@ -120,7 +111,7 @@ class ManageInvoiceComponent extends Component
         ->orderBy('s_id','asc')
          ->where('sales.status', 'Paid')
         ->paginate();
-        }
+        } */
          $products = Product::join('categories as c', 'c.id', 'products.category_id')
         ->select('products.*', 'c.name as category')
         ->orderBy('products.id', 'desc')
@@ -134,7 +125,7 @@ class ManageInvoiceComponent extends Component
             ->extends('layouts.theme.app')
             ->section('content');
           
-        }
+        }  
 
   
 

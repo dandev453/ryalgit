@@ -19,7 +19,6 @@ class ProductsComponent extends Component
     private $pagination = 5;
     public $perPage = 6;
     public bool $perPageAll = true;
-  
 
     public function paginationView()
     {
@@ -34,7 +33,7 @@ class ProductsComponent extends Component
     }
     public function render()
     {
-       $pagination = $this->pagination;
+        $pagination = $this->pagination;
         if (strlen($this->search) > 0) {
             $products = Product::join('categories as c', 'c.id', 'products.category_id')
                 ->select('products.*', 'c.name as category')
@@ -57,14 +56,20 @@ class ProductsComponent extends Component
             ->section('content');
     }
 
-   public function pagiante1(){
-         $this->perPage = $this->perPage + 5;
-   }
-
-   public function pagiante2(){
-        $this->perPage = $this->perPage +  15;
+    public function refresh()
+    {
+        return;
     }
 
+    public function pagiante1()
+    {
+        $this->perPage = $this->perPage + 5;
+    }
+
+    public function pagiante2()
+    {
+        $this->perPage = $this->perPage + 15;
+    }
 
     public function Store()
     {

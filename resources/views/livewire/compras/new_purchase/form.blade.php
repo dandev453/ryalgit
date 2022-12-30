@@ -1,4 +1,4 @@
-<form class="" method="post" id="guardar_cliente" name="guardar_cliente">
+<div>
     <div class="modal fade" id="supliers_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

@@ -1,4 +1,4 @@
-<div class="content" wire:ignore >
+<div class="content"  >
     <!-- <div class="col-md-12"> -->
     @include('livewire.compras.new_purchase.form')
     <!-- Default box -->
@@ -10,7 +10,6 @@
                     data-original-title="Collapse"><i class="fa fa-minus"></i></button>
                 <button class="btn btn-default btn-sm" data-widget="remove" data-toggle="tooltip" title=""
                     data-original-title="Remove"><i class="fa fa-times"></i></button>
-
             </div>
         </div>
         <div class="box-body">
@@ -189,9 +188,9 @@
     </div><!-- /.box -->
     <!-- </div> -->
     <!-- modal -->
-    <div class="modal   fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog"
+    <div wire:ignore.self class="modal   fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog"
         aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div wire:ignore.self class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span

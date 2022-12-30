@@ -28,7 +28,7 @@
         <div class="row">
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title"> {{ $componentName }} | {{ $pageTitle }}  </h3>
+                    <h3 class="box-title"> {{ $componentName }} | {{ $pageTitle }} </h3>
                     <div class="box-tools pull-right">
                         <!--    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>    -->
                         <!--    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>  -->
@@ -44,18 +44,18 @@
                             <tbody>
                                 <tr>
                                     <!-- <th>ID</th> -->
-                                    <th  class="text-center">ID </th>
+                                    <th class="text-center">ID </th>
                                     <!-- <th>Nº de productos</th> -->
-                                    <th  class="text-center">REGISTRO FISCAL #</th>
-                                    <th  class="text-center">CLIENTE</th>
-                                    <th  class="text-center">DIRECCIÓN</th>
-                                    <th  class="text-center">AGREGADO</th>
-                                    <th  class="text-center"></th>
+                                    <th class="text-center">REGISTRO FISCAL #</th>
+                                    <th class="text-center">CLIENTE</th>
+                                    <th class="text-center">DIRECCIÓN</th>
+                                    <th class="text-center">AGREGADO</th>
+                                    <th class="text-center"></th>
                                 </tr>
-                                @foreach($data as $customer)
+                                @foreach ($data as $customer)
                                     <tr>
                                         <!-- <td>2</td> -->
-                                        <td  class="text-center"> {{ $customer->id }} </td>
+                                        <td class="text-center"> {{ $customer->id }} </td>
                                         <td class="text-center">
                                             {{ $customer->registro_fiscal }}
                                         </td>
@@ -65,40 +65,35 @@
                                         <td class="text-center">{{ $customer->address }} </td>
                                         <td class="text-center">{{ $customer->created_at }}</td>
                                         <td>
-                                            <div class="btn-group">
-                                                <a href="javascript:void(0)"
-                                                    wire:click.prevent="Edit({{ $customer->id }})"
-                                                    class="btn btn-default" title="Edit"><span>
-                                                        <i class="fa fa-edit"></i></span> EDITAR
-                                                </a>
-                                                <!-- /<a href="/edit_product"
-                                    class="btn btn-default" title="Edit"><span>
-                                    <i class="fas fa-edit"></i></span> EDITAR
-                                </a>-->
-                                                <a href="javascript:void(0)" onclick="Confirm('{{ $customer->id }}')"
-                                                    class="btn btn-default" title="Delete">
-                                                    <span> <i class="fa fa-trash"></i></span> ELIMINAR
-                                                </a>
+                                            <div class="dropdown">
+                                                <button class="btn btn-default dropdown-toggle" type="button"
+                                                    id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="true">
+                                                    Acciones
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="javascript::void()"
+                                                            wire:click.prevent="Edit({{ $customer->id }})">Edit <span><i
+                                                                    class="fa fa-carret-down"></i></span></a></li>
+                                                    <li><a href="javascript::void()"
+                                                            onclick="Confirm('{{ $customer->id }}')">Borraar</a></li>
+
+                                                </ul>
                                             </div>
                                         </td>
-                                </tr>
-                                @endforeach
-                                <tr>
-                                    <td colspan="9">
-                                      de registros
-                                    </td>
-                                </tr>
+                                     
+                                    </tr>
+                                   @endforeach
                             </tbody>
                         </table>
                         <div style="margin: 5px;">
                             {{ $data->links() }}
                         </div>
                     </div>
-                   
-                    <!-- /<div class="box-footer">
-        </div>-->
-                    <!-- /.box-footer -->
+                    
                 </div><!-- /.box -->
+                
                 <!-- MODAL CREATE & EDIT -->
                 <!--  END MODAL -->
             </div><!-- row -->
@@ -120,7 +115,7 @@
                 $('.er').css('display', 'none')
             });
         });
-  
+
         function Confirm(id, products) {
             if (products > 0) {
                 swal('No se puede eliminar la categoria porque tiene productos relacionados.')
@@ -143,5 +138,4 @@
             });
         }
     </script>
-  </article><!-- /.content -->
-  
+</article><!-- /.content -->

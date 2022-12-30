@@ -53,7 +53,7 @@ class UsersComponent extends Component
             'name' => "required|min:3|unique:products,name,{$this->selected_id}",
             'email' => 'required',
             'profile' => 'required',
-            'status' => 'required'
+            'status' => 'required',
         ];
         $messages = [
             'name.required' => 'Nombre del producto es requerido',
@@ -71,7 +71,7 @@ class UsersComponent extends Component
             'name' => $this->name,
             'email' => $this->email,
             'profile' => $this->profile,
-            'status' => $this->status
+            'status' => $this->status,
         ]);
 
         if ($this->image) {

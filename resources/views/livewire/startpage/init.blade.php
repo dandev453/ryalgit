@@ -15,7 +15,8 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <!-- MODEL CHARTS -->
-                                <div class="chart"><canvas id="myChart"></canvas>
+                                <div class="chart">
+                                    <canvas id="myChart"></canvas>
                                 </div>
                                 <!-- END CHARTS -->
                             </div><!-- /.col -->

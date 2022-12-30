@@ -67,30 +67,23 @@
                                             {{ $suplier->created_at }}
                                         </td>
                                         <td class="text-center">
-                                            <div class="btn-group">
-                                                <a href="javascript:void(0)"
-                                                    wire:click.prevent="Edit({{ $suplier->id }})"
-                                                    class="btn btn-default" title="Edit"><span>
-                                                        <i class="fa fa-edit"></i></span> EDITAR
-                                                </a>
-                                                <!-- /<a href="/edit_product"
-                                class="btn btn-default" title="Edit"><span>
-                                <i class="fas fa-edit"></i></span> EDITAR
-                            </a>-->
-                                                <a href="javascript:void(0)" onclick="Confirm('{{ $suplier->id }}')"
-                                                    class="btn btn-default" title="Delete">
-                                                    <span> <i class="fa fa-trash"></i></span> ELIMINAR
-                                                </a>
+                                               <div class="dropdown">
+                                                <button class="btn btn-default dropdown-toggle" type="button"
+                                                    id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="true">
+                                                    Acciones
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="javascript::void()"  wire:click.prevent="Edit({{ $suplier->id }})">Edit <span><i class="fa fa-carret-down"></i></span></a></li>
+                                                    <li><a href="javascript::void()"  onclick="Confirm('{{ $suplier->id }}')">Borraar</a></li>
+                                                   
+                                                </ul>
                                             </div>
                                         </td>
 
                                     </tr>
                                 @endforeach
-                                <tr>
-                                    <td colspan="9">
-                                        de registros
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                         <div style="margin: 5px;">
@@ -99,10 +92,11 @@
                     </div>
 
                     <!-- /<div class="box-footer">
-        </div>-->
+                    </div>-->
                     <!-- /.box-footer -->
                 </div><!-- /.box -->
                 <!-- MODAL CREATE & EDIT -->
+                @include('livewire.proveedores.form')
                 <!--  END MODAL -->
             </div><!-- row -->
     </section>

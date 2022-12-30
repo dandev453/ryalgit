@@ -50,7 +50,8 @@
                                     <!-- <th>ID</th> -->
                                     <th class="text-center">Categoría </th>
                                     <!-- <th>Nº de productos</th> -->
-                                    <th>
+                                    <th class="text-center">
+                                        Imagen
                                     </th>
                                     <th class="text-center">Estado</th>
                                     <th class="text-center">Agregado</th>
@@ -70,75 +71,78 @@
                                         <td class="text-center">
                                             <span class="label label-success">Activo</span>
                                         </td>
-                                        <td class="text-center">{{ \Carbon\Carbon::parse($category->created_at)->format('Y-m-d') }}</td>
+                                        <td class="text-center">
+                                            {{ \Carbon\Carbon::parse($category->created_at)->format('Y-m-d') }}</td>
                                         <td>
-                                            <div class="btn-group">
-                                                <a href="javascript:void(0)" wire:click="Edit({{ $category->id }})"
-                                                    class="btn btn-default" title="Edit"><span>
-                                                        <i class="fa fa-edit"></i></span> EDITAR
-                                                </a>
-                                                <a href="javascript:void(0)"
-                                                    onclick="Confirm('{{ $category->id }}', '{{ $category->products->count() }}')"
-                                                    class="btn btn-default" title="Delete">
-                                                    <span> <i class="fa fa-trash"></i></span> ELIMINAR
-                                                </a>
-                                            </div>
-                    </div><!-- /btn-group -->
-                    </td>
-                    </tr>
-                    @endforeach
-                    <tr>
-                        <td colspan="6">
-                            Mostrando {{ $categories->count() }} de {{ $categories->count() }} de registros
-                            {{ $categories->links() }}
-                        </td>
-                    </tr>
-                    </tbody>
-                    </table>
-                </div>
-            </div>
-            @include('livewire.category.form')
-            <!--/<div class="box-footer">
-        </div>-->
-            <!-- /.box-footer -->
-        </div><!-- /.box -->
-    </section>
-        <!-- MODAL CREATE & EDIT -->
-        <!--  END MODAL -->
-        
-        <script type="text/javascript">
-            document.addEventListener('DOMContentLoaded', function() {
-                window.livewire.on('show-modal', msg => {
-                    $('#theModal').modal('show');
-                });
-                window.livewire.on('category-added', msg => {
-                    $('#theModal').modal('hide');
-                });
-                window.livewire.on('category-updated', msg => {
-                    $('#theModal').modal('hide');
-                });
-            });
+                                            <div class="dropdown">
+                                                <button class="btn btn-default dropdown-toggle" type="button"
+                                                    id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="true">
+                                                    Acciones
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                    <li><a href="javascript::void()"
+                                                            wire:click.prevent="Edit({{ $category->id }})">Edit <span><i
+                                                                    class="fa fa-carret-down"></i></span></a></li>
+                                                    <li><a href="javascript::void()"
+                                                            onclick="Confirm('{{ $category->id }}')">Borraar</a></li>
 
-            function Confirm(id, products) {
-                if (products > 0) {
-                    swal('No se puede eliminar la categoria porque tiene productos relacionados.')
-                    return;
-                }
-                swal({
-                    title: 'CONFIRMAR',
-                    text: '¿CONFIRMAS ELIMINAR EL REGISTRO?',
-                    type: 'warning',
-                    showCancelButton: true,
-                    cancelButtonText: 'Cerrar',
-                    cancelButtonColor: '#fff',
-                    confirmButtonText: 'Aceptar',
-                    confirmButtonColor: '#3B3F5C'
-                }).then(function(result) {
-                    if (result.value) {
-                        window.livewire.emit('deleteRow', id)
-                        swal.close()
-                    }
-                });
+                                                </ul>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                <tr>
+                                    <td colspan="6">
+                                        {{ $categories->links() }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                @include('livewire.category.form')
+           
+            </div><!-- /.box -->
+    </section>
+    <!-- MODAL CREATE & EDIT -->
+    <!--  END MODAL -->
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            window.livewire.on('show-modal', msg => {
+                $('#theModal').modal('show');
+            });
+            window.livewire.on('category-added', msg => {
+                $('#theModal').modal('hide');
+            });
+            window.livewire.on('category-updated', msg => {
+                $('#theModal').modal('hide');
+            });
+        });
+
+        function Confirm(id, products) {
+            if (products > 0) {
+                swal('No se puede eliminar la categoria porque tiene productos relacionados.')
+                return;
             }
-        </script>
+            swal({
+                title: 'CONFIRMAR',
+                text: '¿CONFIRMAS ELIMINAR EL REGISTRO?',
+                type: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'Cerrar',
+                cancelButtonColor: '#fff',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#3B3F5C'
+            }).then(function(result) {
+                if (result.value) {
+                    window.livewire.emit('deleteRow', id)
+                    swal.close()
+                }
+            });
+        }
+    </script>
 </article><!-- /.content -->

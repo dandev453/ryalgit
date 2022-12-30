@@ -3,7 +3,7 @@
     <!--  component css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pos/components.css') }}">
     <form id="guardar_cliente">
-        <div wire:ignore.self class="modal fade" id="cliente_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="cliente_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -139,7 +139,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                        <button type="button" wire:click.prevent="Store()" class="btn btn-primary close-modal">
+                        <button type="button" class="btn btn-primary close-modal">
                             GUARDAR
                         </button>
                     </div>
@@ -172,14 +172,14 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="list-group">
-                            <a href="javascript:void(0)" id="cash" onclick="paymentType(1);"
+                        <div class="list-group" >
+                            <a href="javascript:void(0)" id="cash" 
                                 class="list-group-item ">
                                 Efectivo
                             </a>
-                            <a href="javascript:void(0)" id="check" onclick="paymentType(2); "
+                            <a href="javascript:void(0)" id="check" 
                                 class="list-group-item">Cheque</a>
-                            <a href="javascript:void(0)" id="card" onclick="paymentType(3);"
+                            <a href="javascript:void(0)" id="card" 
                                 class="list-group-item">Tarjeta</a>
                             <input type="hidden" id="typeDocument" value="1">
                         </div>
@@ -193,7 +193,7 @@
                         <br>
                         <div class="input-group">
                             <span class="input-group-addon" id="basic-addon3">Pago $ </span>
-                            <input type="text" placeholder="0.0" class="form-control" id="payment"
+                            <input type="text" placeholder="0.0"  class="form-control" id="payment"
                                 aria-describedby="basic-addon3"   oninput="$(this).calculateChange();">
                         </div>
                         <hr>
@@ -273,7 +273,7 @@
                     </div>
                 </div>
             </div>
-            <form method="post" name="save_sale" id="save_sale">
+            <form >
                 <div class="modal-footer">
                     <div class="btn btn-primary btn-block btn-lg waves-effect waves-light">Cambio $<span
                             id="change"></span> </div>
@@ -281,8 +281,9 @@
                         class="btn btn-primary btn-block btn-lg waves-effect waves-light"
                         style="display: none;">Confirmar</button>
                 </div>
+                </form>
         </div><!-- /.modal-content -->
-        </form>
+        
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <script type="text/javascript">
