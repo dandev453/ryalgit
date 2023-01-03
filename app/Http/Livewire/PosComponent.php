@@ -117,8 +117,10 @@ class PosComponent extends Component
     ];
    public function ScanCode($barcode, $cant = 1)
     {
-        $cant = '';
-        $quantity = $this->quantityOnScan;
+        //dd($barcode);
+       
+      
+        // $quantityOnScan = $this->quantityOnScan;
        // dd($barcode); //** LLega el barcode OK!!
         $product = Product::where('barcode', $barcode)->first();
         //dd($product); //Producto encontrado!
@@ -134,19 +136,16 @@ class PosComponent extends Component
                 $this->emit('no-stock', 'Stock insuficiente');
                 return;
             }
-             if ($product->stock < $quantity) {
-                $this->emit('no-stock', 'Stock insuficiente');
-                $this->resetQuantityUI();
-                return;
+            if($this->quantityOnScan){
+                $cant = $this->quantityOnScan;
             }
-
-            Cart::add($product->id, $product->name, $quantity, $product->price, $cant, $product->image);
+            Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
             /*$carro = Cart::getContent();
              dd($carro);*/
 
             $this->total = Cart::getTotal();
             $this->itemsQuantity = Cart::getTotalQuantity();
-
+            $this->resetQuantityUI();
             $this->emit('scan-ok', 'Producto agregado');
         }
     }
@@ -271,6 +270,7 @@ class PosComponent extends Component
             $title = 'Producto agregada';
         }
 
+
         if ($product->stock < $cant + $exist->quantity) {
             $this->emit('no-stock', 'Stock insuficiente');
             return;
@@ -356,8 +356,7 @@ class PosComponent extends Component
                 'cash' => $this->efectivo,
                 'change' => $this->change,
                 'user_id' => Auth()->user()->id,
-                'customer_id' => $this->customer_id,
-                //Add Supliers
+                'customer_id' => $this->customer_id
             ]);
             if ($sale) {
                 $items = Cart::getContent();
